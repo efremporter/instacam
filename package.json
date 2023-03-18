@@ -1,5 +1,7 @@
 {
   "name": "instacam",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "webpack": "^5.76.2"
+  }
 }
