@@ -30,13 +30,14 @@ function SignUpForm() {
 
   const handleSubmit = () => {
     if (isValidEmail(email) && isValidPassword(password) && name.length >= 1) {
-      console.log('valid')
       signUp({email, name, password})
     } else console.log('invalid');
   };
 
   return (
     <div className="session-form-container">
+      <div className="splash-page-logo">Instagram</div>
+      <div className="splash-page-caption">Sign up to see photos and videos from your friends.</div>
       <form className="session-form" onSubmit={handleSubmit}>
         <input className="session-form-input"
           onChange={e => setEmail(e.target.value)}

@@ -1,0 +1,64 @@
+.splash-page-logo {
+  font-family: 'Grand Hotel', cursive;
+  font-size: 54px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-top: 50px;
+  margin-bottom: 31px;
+}
+
+.splash-page-caption {
+  color: #8E8E8E;
+  font-size: 17px;
+  font-family: 'Figtree', sans-serif;
+  width: 260px;
+  margin: auto;
+  font-weight: 500;
+}
+
+.session-form-container {
+  margin: auto;
+  width: 350px;
+  height: 700px;
+  background-color: #FFFFFF;
+  text-align: center;
+  margin-top: 13px;
+  border-radius: .5px;
+  outline: 1px solid #DBDBDB;
+}
+
+.session-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.session-form-input {
+  width: 270px;
+  height: 37px;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  background-color: #FAFAFA;
+  padding: 7.5px 0 7.5px 10px;
+}
+
+.session-form-input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #8E8E8E;
+  opacity: 1;
+  /* Firefox */
+}
+
+.session-form-input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #8E8E8E;
+}
+
+.session-form-input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #8E8E8E;
+}
