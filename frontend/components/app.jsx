@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util';
+import SessionForm from './greeting/session_form';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
         <ProtectedRoute />
       </Switch> */}
       <div>Instacam</div>
+      <SessionForm />
     </>
   )
 }
