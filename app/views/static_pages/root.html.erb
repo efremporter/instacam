@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    # <link rel="preconnect" href="https://fonts.googleapis.com">
+    # <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Instacam</title>
+    <% if logged_in? %>
+    <script type="text/javascript">
+        window.currentUser = <%= render(
+            "api/users/user.json.jbuilder",
+            "user": current_user
+        ).html_safe %>
+    </script>
+    <% end %>
+</head>
+<body id="document-body">
+    <main id='root'>React is broken</main>
+</body>
+</html>
