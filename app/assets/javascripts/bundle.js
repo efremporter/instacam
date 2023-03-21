@@ -2090,21 +2090,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _utils_route_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/route_util */ "./frontend/utils/route_util.jsx");
-/* harmony import */ var _greeting_session_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./greeting/session_form */ "./frontend/components/greeting/session_form.jsx");
+/* harmony import */ var _greeting_sign_up_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./greeting/sign_up_form */ "./frontend/components/greeting/sign_up_form.jsx");
 
 
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Instacam"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_greeting_session_form__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Instacam"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_greeting_sign_up_form__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
 /***/ }),
 
-/***/ "./frontend/components/greeting/session_form.jsx":
+/***/ "./frontend/components/greeting/sign_up_form.jsx":
 /*!*******************************************************!*\
-  !*** ./frontend/components/greeting/session_form.jsx ***!
+  !*** ./frontend/components/greeting/sign_up_form.jsx ***!
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2115,6 +2115,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -2123,25 +2125,56 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-function SessionForm() {
+
+
+function SignUpForm() {
+  // This line below gives me access to the redux store
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state;
   });
-  console.log(state);
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  // This line below is replacing my the mapDispatchToProps portion of my previous container files
+  var _bindActionCreators = (0,redux__WEBPACK_IMPORTED_MODULE_3__.bindActionCreators)(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__, dispatch),
+    signUp = _bindActionCreators.signUp,
+    signIn = _bindActionCreators.signIn;
+  // These lines below are replacing my the mapStateToProps portion of my previous container files
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
-    name = _useState2[0],
-    setName = _useState2[1];
+    email = _useState2[0],
+    setEmail = _useState2[1];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState4 = _slicedToArray(_useState3, 2),
-    email = _useState4[0],
-    setEmail = _useState4[1];
+    name = _useState4[0],
+    setName = _useState4[1];
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState6 = _slicedToArray(_useState5, 2),
     password = _useState6[0],
     setPassword = _useState6[1];
+  var isValidEmail = function isValidEmail(email) {
+    // General email regex found online
+    var emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return email.length && String(email).toLowerCase().match(emailFormat);
+  };
+  var isValidPassword = function isValidPassword(password) {
+    // Regex found on stackOverflow, validates that user includes on number and one special character
+    var passwordFormat = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,30}$/;
+    return password.length > 6 && String(password).match(passwordFormat);
+  };
+  var handleSubmit = function handleSubmit() {
+    if (isValidEmail(email) && isValidPassword(password) && name.length >= 1) {
+      console.log('valid');
+      signUp({
+        email: email,
+        name: name,
+        password: password
+      });
+    } else console.log('invalid');
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "session-form-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    className: "session-form",
+    onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: "session-form-input",
     onChange: function onChange(e) {
@@ -2164,10 +2197,13 @@ function SessionForm() {
     value: password,
     placeholder: "Password",
     type: "password"
-  }));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "session-form-submit",
+    type: "submit"
+  }, "Submit")));
 }
 ;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SessionForm);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SignUpForm);
 
 /***/ }),
 
@@ -2246,7 +2282,7 @@ var UsersReducer = function UsersReducer() {
   var nextState = Object.assign({}, state);
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
-      return Object.assign(nextState, _defineProperty({}, action.data.user.id, action.data.user));
+      return Object.assign(nextState, _defineProperty({}, action.data.id, action.data));
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.SIGN_OUT_CURRENT_USER:
       return {};
     default:
@@ -2309,7 +2345,7 @@ var SessionReducer = function SessionReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
       return Object.assign(nextState, {
-        id: action.data.user.id
+        id: action.data.id
       });
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.SIGN_OUT_CURRENT_USER:
       return {
