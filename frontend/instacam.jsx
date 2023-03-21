@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import myconfigureStore from './store/store';
+import myConfigureStore from './store/store';
 import Root from './components/root';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
   delete window.currentUser;
-  const store = myconfigureStore(preloadedState);
+  const store = myConfigureStore(preloadedState);
   ReactDOM.render(<Root store={store} state={store.getState()} />, root);
 })
