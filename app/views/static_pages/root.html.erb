@@ -7,7 +7,7 @@
     # <link rel="preconnect" href="https://fonts.googleapis.com">
     # <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Instacam</title>
-    <% if logged_in? %>
+    <% if signed_in? %>
     <script type="text/javascript">
         window.currentUser = <%= render(
             "api/users/user.json.jbuilder",
