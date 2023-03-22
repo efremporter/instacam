@@ -8,7 +8,7 @@ function Home() {
   const dispatch = useDispatch();
   const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
   return (
-    <div>
+    <div className="home-container">
       <div>Home page coming soon</div>
       <button onClick={signOut}>Logout</button>
     </div>

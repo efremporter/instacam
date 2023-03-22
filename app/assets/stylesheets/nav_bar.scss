@@ -1,0 +1,63 @@
+.nav-bar-container {
+  width: 240px;
+  border-radius: 1px solid white;
+  background-color: #000000;
+  color: #F5F5F5;
+  height: 100vh;
+  position: relative;
+}
+
+.nav-bar-logo {
+  font-family: 'Grand Hotel', cursive;
+  cursor: pointer;
+  font-size: 30px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-top: 40px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.nav-bar-ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 420px;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.nav-bar-li {
+  width: 180px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.nav-bar-li:hover {
+  background-color: #1e1e1e
+}
+
+.nav-bar-icon {
+  margin-left: 10px;
+}
+
+.nav-bar-label {
+  margin-left: 15px;
+}
+
+#nav-bar-more {
+  @media screen and (max-height: 575px) {
+    display: none;
+  }
+  margin-left: 10px;
+  font-size: 16px;
+  position: absolute;
+  bottom: 20px;
+}
