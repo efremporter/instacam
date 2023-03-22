@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 import * as sessionActionCreators from '../../actions/session_actions';
 
 function SignInForm() {
+  // This line below gives me access to the redux store
+  const state = useSelector(state => state);
   const dispatch = useDispatch();
   const { signUp, signIn } = bindActionCreators(sessionActionCreators, dispatch);
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
@@ -19,12 +21,22 @@ function SignInForm() {
     } else console.log('invalid');
   };
 
+  const handleDemoUser = () => {
+    signUp({
+      email: "demo@user.com",
+      name: "Demo User",
+      username: "demouser",
+      password: "password123!"
+    });
+    // signIn({username: "demouser", password: "password123!"});
+  };
+
   return (
     <div className="sign-up-page-outer-container">
       <div className="sign-up-page-inner-container" id="sign-in-page-inner-container">
         <div className="sign-up-form-container">
           <div className="sign-up-page-logo">Instacam</div>
-          <form className="sign-up-form" id="sign-in-form" onSubmit={handleSubmit}>
+          <form className="sign-up-form" id="sign-in-form">
             <input className="sign-up-form-input"
               onChange={e => setUsernameOrEmail(e.target.value)}
               value={usernameOrEmail}
@@ -37,8 +49,18 @@ function SignInForm() {
               type="password"
             ></input>
           </form>
-          <button className="sign-up-form-submit" id="sign-up-form-submit">Log in</button>
-          <button className="sign-up-form-submit" id="sign-up-demo-user">Demo User</button>
+          <button 
+            className="sign-up-form-submit"
+            id="sign-up-form-submit"
+            onClick={handleSubmit}>
+              Log in
+          </button>
+          <button
+            className="sign-up-form-submit"
+            id="sign-up-demo-user"
+            onClick={handleDemoUser}>
+              Demo User
+          </button>
         </div>
         <div className="sign-in-form-reroute-container">
           Don't have an account?

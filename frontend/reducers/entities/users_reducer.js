@@ -6,6 +6,7 @@ const UsersReducer = (state={}, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
+      console.log(action.data.id)
       return Object.assign(nextState, { [action.data.id]: action.data });
 
     case SIGN_OUT_CURRENT_USER:

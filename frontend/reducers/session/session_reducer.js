@@ -2,7 +2,7 @@ import { RECEIVE_CURRENT_USER, SIGN_OUT_CURRENT_USER } from "../../actions/sessi
 
 const SessionReducer = (state={id: null}, action) => {
   Object.freeze(state);
-  let nextState = Object.assign({}, state);
+  const nextState = Object.assign({}, state);
 
   switch(action.type) {
 

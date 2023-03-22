@@ -2023,6 +2023,7 @@ var SIGN_OUT_CURRENT_USER = 'SIGN_OUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 var REMOVE_SESSION_ERRORS = 'REMOVE_SESSION_ERRORS';
 var receiveCurrentUser = function receiveCurrentUser(user) {
+  console.log(user);
   return {
     type: RECEIVE_CURRENT_USER,
     data: user
@@ -2089,6 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _utils_route_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/route_util */ "./frontend/utils/route_util.jsx");
 /* harmony import */ var _greeting_sign_in_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./greeting/sign_in_form */ "./frontend/components/greeting/sign_in_form.jsx");
 /* harmony import */ var _greeting_sign_up_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./greeting/sign_up_form */ "./frontend/components/greeting/sign_up_form.jsx");
@@ -2104,7 +2106,9 @@ var App = function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils_route_util__WEBPACK_IMPORTED_MODULE_1__.AuthRoute, {
     path: "/",
     component: _greeting_sign_in_form__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+    path: "/"
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
@@ -2138,6 +2142,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function SignInForm() {
+  // This line below gives me access to the redux store
+  var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state;
+  });
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   var _bindActionCreators = (0,redux__WEBPACK_IMPORTED_MODULE_3__.bindActionCreators)(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__, dispatch),
     signUp = _bindActionCreators.signUp,
@@ -2162,6 +2170,16 @@ function SignInForm() {
       });
     } else console.log('invalid');
   };
+  var handleDemoUser = function handleDemoUser() {
+    signUp({
+      email: "demo@user.com",
+      name: "Demo User",
+      username: "demouser",
+      password: "password123!"
+    });
+    // signIn({username: "demouser", password: "password123!"});
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "sign-up-page-outer-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2173,8 +2191,7 @@ function SignInForm() {
     className: "sign-up-page-logo"
   }, "Instacam"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
     className: "sign-up-form",
-    id: "sign-in-form",
-    onSubmit: handleSubmit
+    id: "sign-in-form"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: "sign-up-form-input",
     onChange: function onChange(e) {
@@ -2192,10 +2209,12 @@ function SignInForm() {
     type: "password"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "sign-up-form-submit",
-    id: "sign-up-form-submit"
+    id: "sign-up-form-submit",
+    onClick: handleSubmit
   }, "Log in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "sign-up-form-submit",
-    id: "sign-up-demo-user"
+    id: "sign-up-demo-user",
+    onClick: handleDemoUser
   }, "Demo User")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "sign-in-form-reroute-container"
   }, "Don't have an account?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
@@ -2238,15 +2257,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function SignUpForm() {
-  // This line below gives me access to the redux store
-  var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-    return state;
-  });
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   // This line below is replacing my the mapDispatchToProps portion of my previous container files
   var _bindActionCreators = (0,redux__WEBPACK_IMPORTED_MODULE_3__.bindActionCreators)(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__, dispatch),
-    signUp = _bindActionCreators.signUp,
-    signIn = _bindActionCreators.signIn;
+    signUp = _bindActionCreators.signUp;
   // These lines below are replacing my the mapStateToProps portion of my previous container files
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
@@ -2437,6 +2451,7 @@ var UsersReducer = function UsersReducer() {
   var nextState = Object.assign({}, state);
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
+      console.log(action.data.id);
       return Object.assign(nextState, _defineProperty({}, action.data.id, action.data));
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.SIGN_OUT_CURRENT_USER:
       return {};

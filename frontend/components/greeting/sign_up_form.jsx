@@ -5,11 +5,9 @@ import { bindActionCreators } from "redux";
 import * as sessionActionCreators from '../../actions/session_actions';
 
 function SignUpForm() {
-  // This line below gives me access to the redux store
-  const state = useSelector(state => state);
   const dispatch = useDispatch();
   // This line below is replacing my the mapDispatchToProps portion of my previous container files
-  const { signUp, signIn } = bindActionCreators(sessionActionCreators, dispatch);
+  const { signUp } = bindActionCreators(sessionActionCreators, dispatch);
   // These lines below are replacing my the mapStateToProps portion of my previous container files
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');

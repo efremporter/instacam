@@ -9,9 +9,9 @@ const App = () => {
     <>
       <AuthRoute path="/signup" component={SignUpForm} />
       <AuthRoute path="/" component={SignInForm} />
-      {/* <Switch>
-        <ProtectedRoute />
-      </Switch> */}
+      <Switch>
+        <ProtectedRoute path="/" />
+      </Switch>
       {/* <SignUpForm /> */}
     </>
   )
