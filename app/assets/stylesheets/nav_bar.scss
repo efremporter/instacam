@@ -5,6 +5,9 @@
   color: #F5F5F5;
   height: 100vh;
   position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  // font-weight: 1000; OnFocus, set weight to 1000
 }
 
 .nav-bar-logo {
@@ -28,7 +31,6 @@
   justify-content: space-evenly;
   height: 420px;
   margin-left: 10px;
-  font-size: 16px;
 }
 
 .nav-bar-li {
