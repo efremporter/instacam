@@ -1,4 +1,4 @@
-.test {
+.sign-up-page-outer-container {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -6,10 +6,10 @@
   align-items: center;
 }
 
-.sign-up-page-container {
+.sign-up-page-inner-container {
   display: flex;
   flex-direction: column;
-  height: 630px;
+  height: 600px;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -61,6 +61,11 @@
   padding: 7.5px 0 7.5px 10px;
 }
 
+.sign-up-form-input:focus {
+  outline: none;
+  border: 1px solid #aaaaaa;
+}
+
 .sign-up-form-input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #8E8E8E;
@@ -105,7 +110,7 @@
 }
 
 .sign-in-form-reroute-container {
-    height: 80px;
+    height: 70px;
     width: 350px;
     background-color: #FFFFFF;
     text-align: center;
@@ -123,4 +128,22 @@
   margin-left: 3px;
   color: #0095F6;
   cursor: pointer;
+}
+
+#sign-in-page-inner-container {
+  height: 455px;
+}
+
+#sign-in-form {
+    height: 85px;
+}
+
+#sign-up-form-submit {
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+#sign-up-demo-user {
+  margin-bottom: 30px;
+  padding: 0;
 }

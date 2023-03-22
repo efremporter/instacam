@@ -57,13 +57,12 @@ function SignUpForm() {
   };
 
   return (
-    <div className="test">
-      <div className="sign-up-page-container">
+    <div className="sign-up-page-outer-container">
+      <div className="sign-up-page-inner-container">
         <div className="sign-up-form-container">
           <div className="sign-up-page-logo">Instacam</div>
           <div className="sign-up-page-caption">Sign up to see photos and videos from your friends.</div>
-          <div className="sign-up-page-"></div>
-          <form className="sign-up-form" onSubmit={handleSubmit}>
+          <form className="sign-up-form">
             <input className="sign-up-form-input"
               onChange={e => setEmail(e.target.value)}
               value={email}
@@ -93,7 +92,7 @@ function SignUpForm() {
         </div>
         <div className="sign-in-form-reroute-container">
           Have an account?
-          <span className="sign-in-form-reroute" onClick={() => history.push('/signin')}>Log In</span>
+          <span className="sign-in-form-reroute" onClick={() => history.push('/')}>Log in</span>
         </div>
       </div>
     </div>
