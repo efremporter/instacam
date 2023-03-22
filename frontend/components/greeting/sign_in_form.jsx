@@ -37,7 +37,7 @@ function SignInForm() {
               type="password"
             ></input>
           </form>
-          <button className="sign-up-form-submit" id="sign-up-form-submit">Sign Up</button>
+          <button className="sign-up-form-submit" id="sign-up-form-submit">Log in</button>
           <button className="sign-up-form-submit" id="sign-up-demo-user">Demo User</button>
         </div>
         <div className="sign-in-form-reroute-container">

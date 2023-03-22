@@ -28,7 +28,7 @@ function SignUpForm() {
   const isValidUsername = username => {
     if (username.length < 1 || username.length > 30) return false;
     const validChars = "abcdefghijklmnopqrstuvwxyz1234567890_."
-    usernameArray = username.toLowerCase().split("");
+    const usernameArray = username.toLowerCase().split("");
     let i = 0;
     while (i < usernameArray.length) {
       if (!validChars.includes(usernameArray[i])) {

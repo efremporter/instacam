@@ -2193,7 +2193,7 @@ function SignInForm() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "sign-up-form-submit",
     id: "sign-up-form-submit"
-  }, "Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, "Log in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "sign-up-form-submit",
     id: "sign-up-demo-user"
   }, "Demo User")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2273,7 +2273,7 @@ function SignUpForm() {
   var isValidUsername = function isValidUsername(username) {
     if (username.length < 1 || username.length > 30) return false;
     var validChars = "abcdefghijklmnopqrstuvwxyz1234567890_.";
-    usernameArray = username.toLowerCase().split("");
+    var usernameArray = username.toLowerCase().split("");
     var i = 0;
     while (i < usernameArray.length) {
       if (!validChars.includes(usernameArray[i])) {
