@@ -1,5 +1,5 @@
 import * as UserAPIUtil from "../utils/user_util";
-import { receiveCurrentUser, signOutCurrentUser } from "./session_actions";
+import { receiveCurrentUser, signOutCurrentUser } from "../session/session_actions";
 
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const RECEIVE_USER = 'RECEIVE_USER';

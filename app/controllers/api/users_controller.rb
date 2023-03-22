@@ -1,15 +1,18 @@
 class Api::UsersController < ApplicationController
-  # before_action :require_logged_in, only: [:update]
+  # before_action :require_signed_in, only: [:update]
 
   def create
     @user = User.new(user_params)
     if @user.save
       sign_in!(@user)
-      # render "api/users/_user.json.jbuilder"
+      render "api/users/_user.json.jbuilder"
     else
       errors = []
-      if User.exists?(email: params[:user][:email]) 
+      if User.exists?(email: params[:user][:email])
         errors.push('Email already exists')
+      end
+      if User.exists?(username: params[:user][:username])
+        errors.push('Username already exists')
       end
       if (params[:user][:password].length < 6 || params[:user][:password].length > 30) 
         errors.push('Password must be between 6 and 30 characters')
@@ -43,6 +46,6 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:email, :name, :username, :password)
   end
 end
