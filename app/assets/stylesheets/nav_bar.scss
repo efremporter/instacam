@@ -7,7 +7,6 @@
   position: relative;
   font-size: 16px;
   font-weight: 500;
-  // font-weight: 1000; OnFocus, set weight to 1000
 }
 
 .nav-bar-logo {
@@ -33,7 +32,7 @@
   margin-left: 10px;
 }
 
-.nav-bar-li {
+.nav-bar-ul li {
   width: 180px;
   height: 50px;
   display: flex;
@@ -42,7 +41,7 @@
   cursor: pointer;
 }
 
-.nav-bar-li:hover {
+.nav-bar-ul li:hover {
   background-color: #1e1e1e
 }
 
@@ -54,6 +53,10 @@
   margin-left: 15px;
 }
 
+.nav-bar-li-selected {
+  font-weight: 700;
+}
+
 #nav-bar-more {
   @media screen and (max-height: 575px) {
     display: none;
@@ -62,4 +65,14 @@
   font-size: 16px;
   position: absolute;
   bottom: 20px;
+  width: 180px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#nav-bar-more:hover {
+    background-color: #1e1e1e
 }

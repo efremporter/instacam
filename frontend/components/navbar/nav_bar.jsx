@@ -25,57 +25,70 @@ function NavBar() {
       history.push(newPath)
   }
 
+  const getCorrectClassName = pathName => {
+    const currentPathName = history.location.pathname;
+    if (pathName === currentPathName) return "nav-bar-li-selected";
+  };
+
+  const isSelected = pathname => {
+    const currentPathName = history.location.pathname;
+    if (pathname === currentPathName) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="nav-bar-container" id="content">
       <div className="nav-bar-logo">Instacam</div>
       <ul className="nav-bar-ul">
-        <li className="nav-bar-li"
+        <li className={isSelected('/') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/')}
         >
-          <AiOutlineHome
-            className="nav-bar-icon"
-            fill="white"
-            size="25px"
-          />
+          {isSelected('/') ?
+            <AiFillHome className="nav-bar-icon" fill="white" size="25px" /> :
+            <AiOutlineHome className="nav-bar-icon" fill="white" size="25px" />
+          }
           <span className="nav-bar-label">Home</span>
         </li>
-        <li className="nav-bar-li"
+        <li className={isSelected('/search') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/search')}
         >
-          <RiSearchLine 
-            className="nav-bar-icon"
-            size="25px"
-          />  
+          { isSelected('/search') ?
+            <RiSearchFill className="nav-bar-icon" size="25px"/> :
+            <RiSearchLine className="nav-bar-icon" size="25px"/>
+          }
           <span className="nav-bar-label">Search</span>
         </li>
-        <li className="nav-bar-li"
+        <li className={isSelected('/explore') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/explore')}
         >
-          <MdOutlineExplore 
-            className="nav-bar-icon"
-            size="25px"
-          />
+          {isSelected('/explore') ?
+            <MdExplore className="nav-bar-icon" size="25px" /> :
+            <MdOutlineExplore className="nav-bar-icon" size="25px" />
+          }
           <span className="nav-bar-label">Explore</span>
         </li>
-        <li className="nav-bar-li"
+        <li className={isSelected('/messages') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/messages')}
         >
-          <TbMessageCircle2
-            className="nav-bar-icon"
-            size="25px"
-          />
+          {isSelected('/messages') ?
+            <TbMessageCircle2Filled className="nav-bar-icon" size="25px" /> : 
+            <TbMessageCircle2 className="nav-bar-icon" size="25px" />
+          }
           <span className="nav-bar-label">Messages</span>
         </li>
-        <li className="nav-bar-li"
+        <li className={isSelected('/create') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/create')}
         >
-          <TbSquareRoundedPlus
-            className="nav-bar-icon"
-            size="25px"
-          />
+          {isSelected('/create') ?
+            <TbSquareRoundedPlusFilled className="nav-bar-icon" size="25px" /> :
+            <TbSquareRoundedPlus className="nav-bar-icon" size="25px" />
+          }
           <span className="nav-bar-label">Create</span>
         </li>
-        <li className="nav-bar-li"
+        <li className={isSelected(`/profile/${currentUserId}`) ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute(`/profile/${currentUserId}`)}
         >
           <ImSphere
@@ -85,7 +98,7 @@ function NavBar() {
           <span className="nav-bar-label">Profile</span>
         </li>
       </ul>
-      <div className="nav-bar-li"
+      <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
         id="nav-bar-more"
         onClick={() => handleReroute('/more')}
       >
