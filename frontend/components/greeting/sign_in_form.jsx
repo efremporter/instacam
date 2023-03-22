@@ -22,13 +22,7 @@ function SignInForm() {
   };
 
   const handleDemoUser = () => {
-    signUp({
-      email: "demo@user.com",
-      name: "Demo User",
-      username: "demouser",
-      password: "password123!"
-    });
-    // signIn({username: "demouser", password: "password123!"});
+    signIn({username: "demouser", password: "password123!"});
   };
 
   return (

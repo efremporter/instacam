@@ -37,6 +37,7 @@ class Api::UsersController < ApplicationController
       # destroy posts associated with user
       # destroy follows associated with user
       # destroy likes associated with user
+      sign_out!(user)
       user.delete
       render json: ["User deleted"], status: 200
     else
