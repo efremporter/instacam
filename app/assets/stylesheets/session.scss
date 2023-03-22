@@ -1,4 +1,28 @@
-.splash-page-logo {
+.test {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-up-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 630px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.sign-up-form-container {
+  width: 350px;
+  background-color: #FFFFFF;
+  text-align: center;
+  border-radius: .5px;
+  outline: 1px solid #DBDBDB;
+}
+
+.sign-up-page-logo {
   font-family: 'Grand Hotel', cursive;
   font-size: 54px;
   -webkit-touch-callout: none;
@@ -11,54 +35,92 @@
   margin-bottom: 31px;
 }
 
-.splash-page-caption {
+.sign-up-page-caption {
   color: #8E8E8E;
   font-size: 17px;
-  font-family: 'Figtree', sans-serif;
   width: 260px;
   margin: auto;
   font-weight: 500;
+  margin-bottom: 20px;
 }
 
-.session-form-container {
-  margin: auto;
-  width: 350px;
-  height: 700px;
-  background-color: #FFFFFF;
-  text-align: center;
-  margin-top: 13px;
-  border-radius: .5px;
-  outline: 1px solid #DBDBDB;
-}
-
-.session-form {
+.sign-up-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 170px;
+  justify-content: space-between;
 }
 
-.session-form-input {
+.sign-up-form-input {
   width: 270px;
-  height: 37px;
+  height: 20px;
   border: 1px solid #DBDBDB;
   border-radius: 3px;
   background-color: #FAFAFA;
   padding: 7.5px 0 7.5px 10px;
 }
 
-.session-form-input::placeholder {
+.sign-up-form-input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #8E8E8E;
   opacity: 1;
   /* Firefox */
 }
 
-.session-form-input:-ms-input-placeholder {
+.sign-up-form-input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: #8E8E8E;
 }
 
-.session-form-input::-ms-input-placeholder {
+.sign-up-form-input::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #8E8E8E;
+}
+
+.sign-up-form-warning {
+  color: #8E8E8E;
+  margin: auto;
+  width: 285px;
+  font-size: 13.3px;
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+.sign-up-form-submit {
+  width: 270px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  color: #FFFFFF;
+  background-color: #0095F6;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.sign-up-form-submit:hover {
+  cursor: pointer;
+  background-color: #1977F3;
+}
+
+.sign-in-form-reroute-container {
+    height: 80px;
+    width: 350px;
+    background-color: #FFFFFF;
+    text-align: center;
+    border-radius: .5px;
+    outline: 1px solid #DBDBDB;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+.sign-in-form-reroute {
+  margin-left: 3px;
+  color: #0095F6;
+  cursor: pointer;
 }
