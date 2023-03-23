@@ -1,12 +1,13 @@
 .nav-bar-container {
+  position: absolute;
   width: 240px;
   border-radius: 1px solid white;
   background-color: #000000;
   color: #EFEFEF;
   height: 100vh;
-  position: relative;
   font-size: 17px;
   font-weight: 500;
+  z-index: 1;
 }
 
 .nav-bar-logo {

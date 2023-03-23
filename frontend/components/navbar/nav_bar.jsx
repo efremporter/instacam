@@ -39,7 +39,7 @@ function NavBar() {
   };
 
   return (
-    <div className="nav-bar-container" id="content">
+    <div className="nav-bar-container">
       <div className="nav-bar-logo">Instacam</div>
       <ul className="nav-bar-ul">
         <li className={isSelected('/') ? "nav-bar-li-selected" : null}
