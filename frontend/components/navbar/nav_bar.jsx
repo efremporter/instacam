@@ -25,11 +25,6 @@ function NavBar() {
       history.push(newPath)
   }
 
-  const getCorrectClassName = pathName => {
-    const currentPathName = history.location.pathname;
-    if (pathName === currentPathName) return "nav-bar-li-selected";
-  };
-
   const isSelected = pathname => {
     const currentPathName = history.location.pathname;
     if (pathname === currentPathName) {
@@ -55,7 +50,7 @@ function NavBar() {
         <li className={isSelected('/search') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/search')}
         >
-          { isSelected('/search') ?
+          {isSelected('/search') ?
             <RiSearchFill className="nav-bar-icon" size="25px"/> :
             <RiSearchLine className="nav-bar-icon" size="25px"/>
           }
@@ -100,7 +95,7 @@ function NavBar() {
       </ul>
       <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
         id="nav-bar-more"
-        onClick={() => handleReroute('/more')}
+        // onClick={}
       >
         <FaBars
           className="nav-bar-icon"
