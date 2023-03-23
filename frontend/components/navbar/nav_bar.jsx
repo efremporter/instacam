@@ -1,6 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import * as ModalActionCreators from "../../actions/modal_actions";
 import { AiOutlineHome, AiFillHome } from 'react-icons/ai';
 import { RiSearchLine, RiSearchFill } from "react-icons/ri";
 import { MdOutlineExplore, MdExplore } from "react-icons/md";
@@ -16,7 +18,9 @@ import { ImSphere } from "react-icons/im"; // Delete later, replace w/ profile p
 function NavBar() {
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const currentUserId = useSelector(state => state.session.id);
+  const { openModal } = bindActionCreators(ModalActionCreators, dispatch);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path
@@ -95,11 +99,11 @@ function NavBar() {
       </ul>
       <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
         id="nav-bar-more"
-        // onClick={}
+        onClick={() => openModal('more')}
       >
         <FaBars
           className="nav-bar-icon"
-          size="25px"
+          size="23px"
         />
         <span className="nav-bar-label">More</span>
       </div>
