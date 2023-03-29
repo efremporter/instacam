@@ -4,8 +4,8 @@ class Api::SessionsController < ApplicationController
   def create
     if params[:user][:email]
       @user = User.find_by_credentials(params[:user][:email], params[:user][:password])
-    elsif params[:user][:username]
-      user = User.find_by(username: params[:user][:username])
+    elsif params[:user][:handle]
+      user = User.find_by(handle: params[:user][:handle])
       if user
         @user = User.find_by_credentials(user[:email], params[:user][:password])
       end

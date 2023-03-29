@@ -30,7 +30,7 @@ function ProfileInfo() {
       </div>
       <div className='profile-info-bottom'>
         <div className='profile-info-name'>{profileUser.name}</div>
-        <div>Interpolate user's bio</div>
+        <div className='profile-info-bio'>{profileUser.bio}</div>
       </div>
     </div>
   );
