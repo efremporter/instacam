@@ -1,0 +1,24 @@
+.post-index-container {
+  width: 935px;
+  background-color: blue;
+}
+
+.post-index-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: black;
+  flex-wrap: wrap;
+}
+
+.post-index-item {
+  width: 309px;
+  height: 309px;
+  margin-top: 1px;
+}
+
+.post-index-item:hover {
+  cursor: pointer;
+  box-shadow: inset 10px 10px 5px black;
+  opacity: 80%;
+}

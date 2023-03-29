@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :username, presence: true, uniqueness: true, length: { minimum: 1, maximum: 30, allow_nil: false }
+  validates :handle, presence: true, uniqueness: true, length: { minimum: 1, maximum: 30, allow_nil: false }
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, maximum: 30, allow_nil: true }
 
   # has_many :posts
   # has_many :follows
+  has_one_attached :profile_photo
 
   attr_reader :password
   after_initialize :ensure_session_token

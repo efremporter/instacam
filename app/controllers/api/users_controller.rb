@@ -11,7 +11,7 @@ class Api::UsersController < ApplicationController
       if User.exists?(email: params[:user][:email])
         errors.push('Email already exists')
       end
-      if User.exists?(username: params[:user][:username])
+      if User.exists?(handle: params[:user][:handle])
         errors.push('Username already exists')
       end
       if (params[:user][:password].length < 6 || params[:user][:password].length > 30) 
@@ -47,6 +47,6 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :name, :username, :password)
+    params.require(:user).permit(:email, :name, :handle, :password)
   end
 end

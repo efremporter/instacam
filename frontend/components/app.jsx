@@ -6,6 +6,7 @@ import SignUpForm from './greeting/sign_up_form';
 import Home from './home/home';
 import Modal from './modal/modal';
 import NavBar from './navbar/nav_bar';
+import Profile from './profile/profile';
 
 const App = () => {
   return (
@@ -14,9 +15,9 @@ const App = () => {
       <AuthRoute path="/" component={SignInForm} />
       <ProtectedRoute path="/" component={NavBar}/>
       <ProtectedRoute path="/" component={Modal} />
-      {/* <ProtectedRoute path="/" component={Home} /> */}
       <Switch>
-        {/* <ProtectedRoute path="/" component={Home} /> */}
+        <ProtectedRoute exact path="/" component={Profile} />
+        {/* <ProtectedRoute exact path="/profile/:userId" component={Profile} /> */}
       </Switch>
     </>
   )

@@ -11,7 +11,7 @@ function SignUpForm() {
   // These lines below are replacing my the mapStateToProps portion of my previous container files
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
+  const [handle, setHandle] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
 
@@ -23,13 +23,13 @@ function SignUpForm() {
       .match(emailFormat);
   };
 
-  const isValidUsername = username => {
-    if (username.length < 1 || username.length > 30) return false;
+  const isValidHandle = handle => {
+    if (handle.length < 1 || handle.length > 30) return false;
     const validChars = "abcdefghijklmnopqrstuvwxyz1234567890_."
-    const usernameArray = username.toLowerCase().split("");
+    const handleArray = handle.toLowerCase().split("");
     let i = 0;
-    while (i < usernameArray.length) {
-      if (!validChars.includes(usernameArray[i])) {
+    while (i < handleArray.length) {
+      if (!validChars.includes(handleArray[i])) {
         return false;
       };
       i++;
@@ -47,10 +47,10 @@ function SignUpForm() {
     const isValidName = name.length >= 1;
     if (
       isValidEmail(email) && 
-      isValidUsername(username) && 
+      isValidHandle(handle) && 
       isValidPassword(password) &&
       isValidName) {
-      signUp({email, name, username, password})
+      signUp({email, name, handle, password})
     } else console.log('invalid');
   };
 
@@ -72,8 +72,8 @@ function SignUpForm() {
               placeholder="Full Name"
             ></input>
             <input className="sign-up-form-input"
-              onChange={e => setUsername(e.target.value)}
-              value={username}
+              onChange={e => setHandle(e.target.value)}
+              value={handle}
               placeholder="Username"
             ></input>
             <input className="sign-up-form-input"

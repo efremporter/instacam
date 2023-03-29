@@ -9,20 +9,20 @@ function SignInForm() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
   const { signUp, signIn } = bindActionCreators(sessionActionCreators, dispatch);
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
+  const [handleOrEmail, setHandleOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
 
   const handleSubmit = () => {
-    if (usernameOrEmail.length > 0 && password.length > 6) {
-      usernameOrEmail.includes('@') ?
-        signIn({ email: usernameOrEmail, password }) :
-        signIn({ username: usernameOrEmail, password });
+    if (handleOrEmail.length > 0 && password.length > 6) {
+      handleOrEmail.includes('@') ?
+        signIn({ email: handleOrEmail, password }) :
+        signIn({ handle: handleOrEmail, password });
     } else console.log('invalid');
   };
 
   const handleDemoUser = () => {
-    signIn({username: "demouser", password: "password123!"});
+    signIn({handle: "demouser", password: "password123!"});
   };
 
   return (
@@ -32,8 +32,8 @@ function SignInForm() {
           <div className="sign-up-page-logo">Instacam</div>
           <form className="sign-up-form" id="sign-in-form">
             <input className="sign-up-form-input"
-              onChange={e => setUsernameOrEmail(e.target.value)}
-              value={usernameOrEmail}
+              onChange={e => setHandleOrEmail(e.target.value)}
+              value={handleOrEmail}
               placeholder="Username or email"
             ></input>
             <input className="sign-up-form-input"
