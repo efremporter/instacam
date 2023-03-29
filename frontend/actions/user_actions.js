@@ -44,7 +44,7 @@ export const fetchUser = id => dispatch => {
   return UserAPIUtil.fetchUser(id)
     .then(user => dispatch(receiveUser(user)))
     .catch(() => dispatch(receiveUserErrors(errors.responseJSON)));
-}
+};
 
 export const updateUser = user => dispatch => {
   return UserAPIUtil.updateUser(user)
@@ -55,8 +55,8 @@ export const updateUser = user => dispatch => {
 export const deleteUser = id => dispatch => {
   return UserAPIUtil.deleteUser(id)
     .then(() => dispatch(signOutCurrentUser()));
-}
+};
 
 export const clearUsersErrors = () => dispatch => {
-  dispatch(removeUserErrors())
-}
+  dispatch(removeUserErrors());
+};
