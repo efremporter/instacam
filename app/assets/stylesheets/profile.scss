@@ -1,7 +1,7 @@
 .profile-background {
   background-color: #000000;
   min-height: 100vh;
-  color: white;
+  color: green;
   margin-left: 240px;
   display: flex;
   align-items: center;
@@ -9,13 +9,129 @@
 }
 
 .profile-container {
-  width: 935px;
   min-height: 100vh;
-  background-color: rgb(182, 182, 182);
+  margin-bottom: 130px;
+  margin-top: 30px;
+  // background-color: yellow;
 }
 
 .profile-header {
-  background-color: rgb(68, 68, 68);
+  background-color: rgb(86, 38, 38);
+  width: 100%;
+  height: 360px;
+}
+
+.profile-header-top {
+  width: 100%;
+  height: 154px;
+  background-color: green;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-header-photo-container {
+  width: 292px;
+  height: 154px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-header-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border-color: 1px solid white;
+}
+
+.profile-info {
+  color: white;
+  width: 613px;
+  height: 154px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-weight: 500;
+}
+
+.profile-info-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile-info-handle {
+  margin-right: 20px;
+}
+
+.profile-info-edit-button {
+  width: 105px;
+  height: 32px;
+  background-color: #EFEFEF;
+  color: #000000;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-info-edit-button:hover {
+  cursor: pointer;
+  background-color: #d9d9d9;
+}
+
+.profile-info-settings-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 6px;
+}
+
+.profile-info-settings-button:hover {
+  cursor: pointer;
+}
+
+
+
+
+.profile-info-middle {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 17px;
+}
+
+.profile-info-count {
+  font-weight: 600;
+}
+
+.profile-info-follow {
+  margin-left: 40px;
+}
+
+
+
+
+
+.profile-info-bottom {
+
+}
+
+.profile-info-name {
+  font-weight: 600;
+}
+
+
+.profile-divider {
+  height: 1px;
   width: 935px;
-  height: 410px;
+  background-color: #262626;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }

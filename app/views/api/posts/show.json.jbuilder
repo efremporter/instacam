@@ -4,7 +4,7 @@ json.set! @post.id do
   @post.images.each do |image|
     images << url_for(image)
   end
-  json.photoUrls do 
+  json.imageUrls do 
     json.array! images
   end
 end

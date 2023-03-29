@@ -16,8 +16,8 @@ const App = () => {
       <ProtectedRoute path="/" component={NavBar}/>
       <ProtectedRoute path="/" component={Modal} />
       <Switch>
-        <ProtectedRoute exact path="/" component={Home} />
-        <ProtectedRoute exact path="/profile/:userId" component={Profile} />
+        <ProtectedRoute exact path="/" component={Profile} />
+        {/* <ProtectedRoute exact path="/profile/:userId" component={Profile} /> */}
       </Switch>
     </>
   )

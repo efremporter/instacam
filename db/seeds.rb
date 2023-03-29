@@ -9,9 +9,11 @@
 demo_user = User.create({
   email: "demo@user.com",
   name: "Demo User",
-  username: "demouser",
+  handle: "demouser",
   password: "password123!"
 })
+
+demo_user.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
 
 post_1 = Post.create({author_id: 1, caption: 'check out this melon', location: 'istanbul'})
 post_1.images.attach(io: File.open("app/assets/images/post_1_melon.png"), filename: "square.webp")

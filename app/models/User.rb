@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   # has_many :posts
   # has_many :follows
+  has_one_attached :profile_photo
 
   attr_reader :password
   after_initialize :ensure_session_token
