@@ -34,5 +34,5 @@ bundle.js.map
 /log
 /log/development.log
 .DS_Store
-/config/credentials.yml
+/config/credentials.yml.enc
 /public/assets
