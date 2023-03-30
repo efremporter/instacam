@@ -31,6 +31,8 @@ function Modal() {
     case 'more':
       component = <MoreModal />;
       break;
+    case 'createPost':
+      component = <MoreModal />;
     default:
       return null;
   };
