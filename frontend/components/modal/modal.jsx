@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as ModalActionCreators from '../../actions/modal_actions';
 import MoreModal from '../navbar/more_modal';
+import CreatePostModal from '../posts/create_post_modal';
 
 function Modal() {
   const dispatch = useDispatch();
@@ -32,7 +33,8 @@ function Modal() {
       component = <MoreModal />;
       break;
     case 'createPost':
-      component = <MoreModal />;
+      component = <CreatePostModal />;
+      break;
     default:
       return null;
   };
