@@ -41,6 +41,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  cursor: default;
 }
 
 .create-post-modal-divider {
@@ -69,6 +70,7 @@
   color: white;
   font-size: 20px;
   margin-top: -5px;
+  cursor: default;
 }
 
 .create-post-modal-button {
@@ -80,4 +82,22 @@
   font-weight: 600;
   border: none;
   border-radius: 7px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-post-modal-button:hover {
+  cursor: pointer;
+  background-color: #1677F2;
+}
+
+input[type="file"] {
+  display: none;
 }
