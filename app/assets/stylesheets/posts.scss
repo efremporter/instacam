@@ -24,11 +24,14 @@
 }
 
 .create-post-modal-container {
+  @media screen and (min-width: 830px) {
+    width: 460px;
+  }
+  overflow-y: scroll;
   background-color: #262626;
-  min-width: 32vw;
-  width: 460px;
-  min-height: 50vh;
-  height: 505px;
+  min-width: 350px;
+  width: 55vw;
+  height: 75vh;
   border-radius: 10px;
 }
 
@@ -50,15 +53,23 @@
   background-color: #383838;
 }
 
-.create-post-modal-body-container {
-  height: 465px;
+.create-post-modal-body-outer-container {
+  @media screen and (max-height: 430px) {
+    min-height: 285px;
+  }
+  height: 92%;
   border-radius: 10px;
+}
+
+.create-post-modal-body-inner-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .create-post-modal-body {
-  height: 180px;
+  height: 190px;
   width: 100%;
   display: flex;
   flex-direction: column;
