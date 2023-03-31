@@ -35,15 +35,16 @@ function CreatePostModal() {
     setImagePreviews(imagesPreviewUrlsCopy);
   };
 
-  console.log(imagesPreviewUrls[0]);
-
-  const content = uploaded ? (
+  const content =!uploaded ? (
     <div className='create-post-modal-share-container'>
-      <div className='create-post-modal-header'>Create new post</div>
+      <div className='create-post-modal-header'>Create new post
+        <div className='create-post-modal-share-button'>Share</div>
+      </div>
       <div className='create-post-modal-divider'></div>
       <div className='create-post-modal-image-preview-container'>
         <div className='create-post-modal-image-preview'></div>
         {/* <img className='create-post-modal-image-preview' src={imagesPreviewUrls[0]}/> */}
+        {/* <div className='create-post-modal-image-preview-info'></div> */}
       </div>
     </div>
   ) : (

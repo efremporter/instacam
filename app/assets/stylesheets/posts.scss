@@ -53,7 +53,7 @@
 .create-post-modal-divider {
   height: 1px;
   width: 100%;
-  background-color: #383838;
+  background-color: #454545;
 }
 
 .create-post-modal-body-outer-container {
@@ -117,29 +117,64 @@
 .create-post-modal-share-container {
   @media screen and (min-width: 830px) and (max-width: 1440px) {
     width: 800px;
-  };
-  @media screen and (max-height: 680px) {
     height: 505px;
+  };
+  @media screen and (max-width: 830px) {
+    background-color: red;
+    width: 96vw;
+    height: 61vw;
   }
-  background-color: red;
-  width: 70vw;
-  height: 770px;
+  background-color: #262626;
+  min-width: 685px;
+  max-height: 770px;
+  min-height: 390px;
+  border-radius: 12px;
 };
 
+.create-post-modal-share-button {
+  color: #0095F6;
+  position: absolute;
+  right: 15px;
+  font-size: 14px;
+  font-weight: 100px;
+}
+
+.create-post-modal-share-button:hover {
+  color: white;
+  cursor: pointer;
+}
+
 .create-post-modal-image-preview-container {
-  
+  @media screen and (min-width: 830px) {
+    width: 464px;
+    height: 100px;
+  }
+  height: 68vh;
+  width: 56vw;
+  display: flex;
+  min-width: 345px;
+  min-height: 345px;
+  max-width: 635px;
 };
 
 .create-post-modal-image-preview {
-  max-width: 730px;
-  max-height: 730px;
-  position: relative;
-  bottom: 0;
+  // @media screen and (max-width: 830px) {
+  //   width: 60%;
+  //   height: 10%;
+  // }
+  // height: 464px;
+  // width: 464px;
+  // min-width: 345px;
+  // min-height: 345px;
+  background-color: #8b8b8b;
+  height: 100%;
+  width: 100%;
+  // align-self: center;
+}
 
-  //Delete below after styling
-  width: 730px;
-  height: 730px;
-  background-color: rgb(88, 88, 88);
+.create-post-modal-image-preview-info {
+  width: 339px;
+  background-color: gray;
 }
 
 
