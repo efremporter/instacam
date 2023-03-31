@@ -164,11 +164,30 @@
   background-color: #8b8b8b;
   height: 100%;
   width: 100%;
+  position: relative;
+  border-radius: 0 0 0 12px;
+}
+
+.create-post-modal-image-preview-add-photos-icon-container {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #202F48;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-post-modal-image-preview-add-photos-icon-container:hover {
+  cursor: pointer;
+  background-color: #2984F9;
 }
 
 .create-post-modal-image-preview-info-outer-container {
   width: 339px;
-  background-color: orange;
   display: flex;
   justify-content: center;
   height: auto;
@@ -176,14 +195,12 @@
 
 .create-post-modal-image-preview-info-inner-container {
   width: 90%;
-  background-color: red;
 }
 
 .create-post-modal-image-preview-info-header {
   height: 80px;
   display: flex;
   align-items: center;
-  background-color: blue;
 }
 
 .create-post-modal-image-preview-info-avatar {
@@ -202,7 +219,6 @@
 .create-post-modal-image-preview-info-input-container {
   height: 230px;
   width: 100%;
-  background-color: rgb(130, 231, 83);
   display: flex;
   justify-self: flex-start;
   align-items: flex-start;
@@ -212,7 +228,7 @@
   width: 100%;
   max-width: 300px;
   height: 100%;
-  background-color: black;
+  background-color: #262626;
   color: white;
   display: flex;
   justify-content: flex-start;
@@ -234,13 +250,32 @@
 
 .create-post-modal-image-preview-info-location-container {
   height: 50px;
-  background-color: pink;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-top: 1px solid #454545;
+  border-bottom: 1px solid #454545;;
+}
+
+#create-post-modal-image-preview-info-input {
+  height: 48px;
+}
+
+#create-post-modal-image-preview-info-input::placeholder {
+  font-size: 16px;
+  font-weight: 300;
+  color: #8D8D8D;
+}
+
+.create-post-modal-image-preview-info-location-icon {
+  padding-left: 20px;
+  border: none;
+}
+
+.create-post-modal-image-preview-info-location-cancel {
+  cursor: pointer;
 }
 
 input[type="file"] {
   display: none;
-};
-
-input[type="text"] {
-  // display: none;
 };
