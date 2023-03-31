@@ -24,13 +24,16 @@
 }
 
 .create-post-modal-container {
-  @media screen and (min-width: 830px) {
-    width: 460px;
-  }
+  @media screen and (min-width: 830px) and (max-width: 1440px) {
+    min-width: 460px;
+  };
+  @media screen and (min-width: 831px) {
+    width: 40vw;
+    max-width: 725px;
+  };
+  min-width: 350px;
   overflow-y: scroll;
   background-color: #262626;
-  min-width: 350px;
-  width: 55vw;
   height: 75vh;
   border-radius: 10px;
 }
@@ -107,8 +110,28 @@
 .create-post-modal-button:hover {
   cursor: pointer;
   background-color: #1677F2;
-}
+};
+
+// -------------------------------------------
+
+.create-post-modal-share-container {
+  @media screen and (min-width: 830px) and (max-width: 1440px) {
+    width: 800px;
+  };
+  @media screen and (max-height: 680px) {
+    height: 505px;
+  }
+  background-color: red;
+  width: 70vw;
+};
+
+.create-post-modal-image-preview-container {
+  width: 100px;
+};
+
+
+
 
 input[type="file"] {
   display: none;
-}
+};

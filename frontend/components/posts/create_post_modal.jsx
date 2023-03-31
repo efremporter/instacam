@@ -3,6 +3,8 @@ import { IoImagesOutline } from 'react-icons/io5'
 
 function CreatePostModal() {
   const [images, setImages] = useState([]);
+  const [imagesPreviewUrls, setImagePreviews] = useState([]);
+
   let uploaded = images.length > 0;
 
   function handleImage(e) {
@@ -25,11 +27,21 @@ function CreatePostModal() {
     };
     // Line below clears the input field after 
     document.getElementById("upload-image-input").value = "";
-  }
-  
+    // Below creates image preview for "share" screen
+    const imagesPreviewUrlsCopy = imagesPreviewUrls.slice();
+    imagesCopy.forEach(image => {
+      imagesPreviewUrlsCopy.push(URL.createObjectURL(image));
+    });
+    setImagePreviews(imagesPreviewUrlsCopy);
+  };
+
+  console.log(imagesPreviewUrls[0]);
+
   const content = uploaded ? (
-    <div>
-      {/* <img src={images[0]}/> */}
+    <div className='create-post-modal-share-container'>
+      <div className='create-post-modal-image-preview-container'>
+        <img className='create-post-modal-image-preview-container' src={imagesPreviewUrls[0]}/>
+      </div>
     </div>
   ) : (
     <div className='create-post-modal-container'>
