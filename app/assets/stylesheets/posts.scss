@@ -142,41 +142,104 @@
   cursor: pointer;
 }
 
+.create-post-modal-body-container {
+  display: flex;
+}
+
 .create-post-modal-image-preview-container {
   height: 68vh;
   width: 464px;
   height: 464px;
-  display: flex;
-  min-width: 350px;
-  min-height: 350px;
+  min-width: 367px;
+  min-height: 367px;
   max-width: 635px;
 @media screen and (max-width: 830px) {
     width: 56vw;
     height: 55vw;
-  }
+  };
 };
 
 .create-post-modal-image-preview {
-  // @media screen and (max-width: 830px) {
-  //   width: 60%;
-  //   height: 10%;
-  // }
-  // height: 464px;
-  // width: 464px;
-  // min-width: 345px;
-  // min-height: 345px;
   background-color: #8b8b8b;
   height: 100%;
   width: 100%;
-  align-self: center;
 }
 
-.create-post-modal-image-preview-info {
+.create-post-modal-image-preview-info-outer-container {
   width: 339px;
-  background-color: gray;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  height: auto;
 }
 
+.create-post-modal-image-preview-info-inner-container {
+  width: 90%;
+  background-color: red;
+}
+
+.create-post-modal-image-preview-info-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: blue;
+}
+
+.create-post-modal-image-preview-info-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.create-post-modal-image-preview-info-handle {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.create-post-modal-image-preview-info-input-container {
+  height: 230px;
+  width: 100%;
+  background-color: rgb(130, 231, 83);
+  display: flex;
+  justify-self: flex-start;
+  align-items: flex-start;
+}
+
+.create-post-modal-image-preview-info-textarea {
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  resize: none;
+  border: none;
+  cursor: default;
+}
+
+.create-post-modal-image-preview-info-textarea::placeholder {
+  font-size: 15px;
+  color: #666666;
+  font-family: 'Figtree', sans-serif;
+}
+
+.create-post-modal-image-preview-info-textarea:focus {
+  outline: none;
+}
+
+.create-post-modal-image-preview-info-location-container {
+  height: 50px;
+  background-color: pink;
+}
 
 input[type="file"] {
   display: none;
+};
+
+input[type="text"] {
+  // display: none;
 };

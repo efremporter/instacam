@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IoImagesOutline } from 'react-icons/io5'
+import { useSelector } from 'react-redux';
 
 function CreatePostModal() {
   const [images, setImages] = useState([]);
   const [imagesPreviewUrls, setImagePreviews] = useState([]);
-
-  let uploaded = images.length > 0;
+  const [caption, setCaption] = useState('');
+  const currentUserId = useSelector((state) => state.session.id)
+  const currentUserHandle= useSelector((state) => state.entities.users[currentUserId].handle)
+  const profilePhotoUrl = useSelector((state) => state.entities.users[currentUserId].profilePhotoUrl);
 
   function handleImage(e) {
     const uploadedFiles = Array.from(e.target.files);
@@ -35,16 +38,38 @@ function CreatePostModal() {
     setImagePreviews(imagesPreviewUrlsCopy);
   };
 
-  const content = uploaded ? (
+  let uploaded = images.length > 0;
+  const content = !uploaded ? (
     <div className='create-post-modal-share-container'>
       <div className='create-post-modal-header'>Create new post
         <div className='create-post-modal-share-button'>Share</div>
       </div>
       <div className='create-post-modal-divider'></div>
-      <div className='create-post-modal-image-preview-container'>
-        {/* <div className='create-post-modal-image-preview'></div> */}
-        <img className='create-post-modal-image-preview' src={imagesPreviewUrls[0]}/>
-        {/* <div className='create-post-modal-image-preview-info'></div> */}
+      <div className='create-post-modal-body-container'>
+        <div className='create-post-modal-image-preview-container'>
+          <div className='create-post-modal-image-preview'></div>
+          {/* <img className='create-post-modal-image-preview' src={imagesPreviewUrls[0]}/> */}
+        </div>
+        <div className='create-post-modal-image-preview-info-outer-container'>
+          <div className='create-post-modal-image-preview-info-inner-container'>
+            <div className='create-post-modal-image-preview-info-header'>
+              <img className='create-post-modal-image-preview-info-avatar' src={profilePhotoUrl} />
+              <div className='create-post-modal-image-preview-info-handle'>{currentUserHandle}</div>
+            </div>
+            <div className='create-post-modal-image-preview-info-input-container'>
+              <textarea
+                className='create-post-modal-image-preview-info-textarea'
+                placeholder='Write a caption...'
+                onChange={e => setCaption(e.target.value)}
+                value={caption}
+                
+              />
+            </div>
+            <div className='create-post-modal-image-preview-info-location-container'>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   ) : (
