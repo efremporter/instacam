@@ -115,14 +115,12 @@
 // -------------------------------------------
 
 .create-post-modal-share-container {
-  @media screen and (min-width: 830px) and (max-width: 1440px) {
+  @media screen and (min-width: 831px) and (max-width: 1440px) {
     width: 800px;
     height: 505px;
   };
   @media screen and (max-width: 830px) {
-    background-color: red;
     width: 96vw;
-    height: 61vw;
   }
   background-color: #262626;
   min-width: 685px;
@@ -145,16 +143,17 @@
 }
 
 .create-post-modal-image-preview-container {
-  @media screen and (min-width: 830px) {
-    width: 464px;
-    height: 100px;
-  }
   height: 68vh;
-  width: 56vw;
+  width: 464px;
+  height: 464px;
   display: flex;
-  min-width: 345px;
-  min-height: 345px;
+  min-width: 350px;
+  min-height: 350px;
   max-width: 635px;
+@media screen and (max-width: 830px) {
+    width: 56vw;
+    height: 55vw;
+  }
 };
 
 .create-post-modal-image-preview {
@@ -169,7 +168,7 @@
   background-color: #8b8b8b;
   height: 100%;
   width: 100%;
-  // align-self: center;
+  align-self: center;
 }
 
 .create-post-modal-image-preview-info {
