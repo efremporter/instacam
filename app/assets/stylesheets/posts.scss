@@ -123,13 +123,24 @@
   }
   background-color: red;
   width: 70vw;
+  height: 770px;
 };
 
 .create-post-modal-image-preview-container {
-  width: 100px;
+  
 };
 
+.create-post-modal-image-preview {
+  max-width: 730px;
+  max-height: 730px;
+  position: relative;
+  bottom: 0;
 
+  //Delete below after styling
+  width: 730px;
+  height: 730px;
+  background-color: rgb(88, 88, 88);
+}
 
 
 input[type="file"] {
