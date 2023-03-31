@@ -24,5 +24,222 @@
 }
 
 .create-post-modal-container {
+  @media screen and (min-width: 830px) and (max-width: 1440px) {
+    min-width: 460px;
+  };
+  @media screen and (min-width: 831px) {
+    width: 40vw;
+    max-width: 725px;
+  };
+  min-width: 350px;
+  overflow-y: scroll;
   background-color: #262626;
+  height: 75vh;
+  border-radius: 10px;
 }
+
+.create-post-modal-header {
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  cursor: default;
+}
+
+.create-post-modal-divider {
+  height: 1px;
+  width: 100%;
+  background-color: #454545;
+}
+
+.create-post-modal-body-outer-container {
+  @media screen and (max-height: 430px) {
+    min-height: 285px;
+  }
+  height: 92%;
+  border-radius: 10px;
+}
+
+.create-post-modal-body-inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.create-post-modal-body {
+  height: 190px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.create-post-modal-message {
+  color: white;
+  font-size: 20px;
+  margin-top: -5px;
+  cursor: default;
+}
+
+.create-post-modal-button {
+  width: 180px;
+  height: 32px;
+  color: white;
+  background-color: #0095F6;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 7px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-post-modal-button:hover {
+  cursor: pointer;
+  background-color: #1677F2;
+};
+
+// -------------------------------------------
+
+.create-post-modal-share-container {
+  @media screen and (min-width: 831px) and (max-width: 1440px) {
+    width: 800px;
+    height: 505px;
+  };
+  @media screen and (max-width: 830px) {
+    width: 96vw;
+  }
+  background-color: #262626;
+  min-width: 685px;
+  max-height: 770px;
+  min-height: 390px;
+  border-radius: 12px;
+};
+
+.create-post-modal-share-button {
+  color: #0095F6;
+  position: absolute;
+  right: 15px;
+  font-size: 14px;
+  font-weight: 100px;
+}
+
+.create-post-modal-share-button:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.create-post-modal-body-container {
+  display: flex;
+}
+
+.create-post-modal-image-preview-container {
+  height: 68vh;
+  width: 464px;
+  height: 464px;
+  min-width: 367px;
+  min-height: 367px;
+  max-width: 635px;
+@media screen and (max-width: 830px) {
+    width: 56vw;
+    height: 55vw;
+  };
+};
+
+.create-post-modal-image-preview {
+  background-color: #8b8b8b;
+  height: 100%;
+  width: 100%;
+}
+
+.create-post-modal-image-preview-info-outer-container {
+  width: 339px;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.create-post-modal-image-preview-info-inner-container {
+  width: 90%;
+  background-color: red;
+}
+
+.create-post-modal-image-preview-info-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: blue;
+}
+
+.create-post-modal-image-preview-info-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.create-post-modal-image-preview-info-handle {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.create-post-modal-image-preview-info-input-container {
+  height: 230px;
+  width: 100%;
+  background-color: rgb(130, 231, 83);
+  display: flex;
+  justify-self: flex-start;
+  align-items: flex-start;
+}
+
+.create-post-modal-image-preview-info-textarea {
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  resize: none;
+  border: none;
+  cursor: default;
+}
+
+.create-post-modal-image-preview-info-textarea::placeholder {
+  font-size: 15px;
+  color: #666666;
+  font-family: 'Figtree', sans-serif;
+}
+
+.create-post-modal-image-preview-info-textarea:focus {
+  outline: none;
+}
+
+.create-post-modal-image-preview-info-location-container {
+  height: 50px;
+  background-color: pink;
+}
+
+input[type="file"] {
+  display: none;
+};
+
+input[type="text"] {
+  // display: none;
+};
