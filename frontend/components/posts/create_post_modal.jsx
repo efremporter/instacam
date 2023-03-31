@@ -5,8 +5,19 @@ function CreatePostModal() {
   const [images, setImages] = useState([]);
 
   function handleImage(e) {
-    images.push(...e.target.files);
-    setImages(images);
+    const files = Array.from(e.target.files);
+    if (images.length + files.length > 10) {
+      // Instagram only allows 10 photos per post at this time
+      const overflow = 10 - (images.length + files.length);
+      if (overflow > 0) {
+        images.push(...files.slice(0, overflow));
+        setImages(images);
+      };
+      console.log(`Some files were not uploaded. You can only choose 10 or fewer files.`)
+    } else {
+      images.push(...files);
+      setImages(images);
+    };
     // Line below clears the input field after 
     document.getElementById("upload-image-input").value = "";
   }
@@ -23,7 +34,13 @@ function CreatePostModal() {
           <div className='create-post-modal-message'>Drag photos here to upload</div>
           <label className='create-post-modal-button'>
              Select from computer
-            <input id="upload-image-input" type="file" accept="image/*" onChange={handleImage}/>
+            <input 
+              id="upload-image-input"
+              type="file"
+              accept="image/*"
+              multiple="multiple"
+              limit="2"
+              onChange={handleImage}/>
           </label>
         </div>
       </div>
