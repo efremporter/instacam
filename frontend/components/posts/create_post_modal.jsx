@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoImagesOutline } from 'react-icons/io5'
 
 function CreatePostModal() {
@@ -8,24 +8,30 @@ function CreatePostModal() {
   function handleImage(e) {
     const uploadedFiles = Array.from(e.target.files);
     if (uploadedFiles.length < 1) return;
-    if (images.length + uploadedFiles.length > 10) {
+    // Must make a shallow copy of state, otherwise I will be sending
+    // the same array to setImages, which won't trigger a re-render
+    const imagesCopy = images.slice();
+    if (imagesCopy.length + uploadedFiles.length > 10) {
       // Instagram only allows 10 photos per post at this time
-      const overflow = 10 - (images.length + uploadedFiles.length);
+      const overflow = 10 - (imagesCopy.length + uploadedFiles.length);
       if (overflow > 0) {
-        images.push(...uploadedFiles.slice(0, overflow));
-        setImages(images);
+        imagesCopy.push(...uploadedFiles.slice(0, overflow));
+        setImages(imagesCopy);
       };
       console.log("Some files were not uploaded. You can only choose 10 or fewer files.")
     } else {
-      images.push(...uploadedFiles);
-      setImages(images);
+      imagesCopy.push(...uploadedFiles);
+      setImages(imagesCopy);
     };
     // Line below clears the input field after 
     document.getElementById("upload-image-input").value = "";
-
   }
   
-  const content = uploaded ? 1 : (
+  const content = uploaded ? (
+    <div>
+      {/* <img src={images[0]}/> */}
+    </div>
+  ) : (
     <div className='create-post-modal-container'>
       <div className='create-post-modal-header'>
         Create new post
@@ -44,7 +50,9 @@ function CreatePostModal() {
                 accept="image/*"
                 multiple="multiple"
                 limit="2"
-                onChange={handleImage} />
+                onChange={handleImage}
+                // onChange={e => setImages(e.target.files[0])} 
+                />
             </label>
           </div>
         </div>
