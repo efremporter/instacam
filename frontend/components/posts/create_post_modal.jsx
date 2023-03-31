@@ -39,7 +39,7 @@ function CreatePostModal() {
   };
 
   let uploaded = images.length > 0;
-  const content = !uploaded ? (
+  const content = uploaded ? (
     <div className='create-post-modal-share-container'>
       <div className='create-post-modal-header'>Create new post
         <div className='create-post-modal-share-button'>Share</div>
