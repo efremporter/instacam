@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { IoImagesOutline } from 'react-icons/io5';
 import { GoLocation } from 'react-icons/go';
 import { RxCross1 } from 'react-icons/rx';
+import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { HiOutlineSquare2Stack } from 'react-icons/hi2';
 import { useSelector } from 'react-redux';
 
 function CreatePostModal() {
   const [images, setImages] = useState([]);
   const [imagesPreviewUrls, setImagePreviews] = useState([]);
+  const [imageIndex, setImageIndex] = useState(0);
   const [caption, setCaption] = useState('');
   const [postLocation, setPostLocation] = useState('');
-  const currentUserId = useSelector((state) => state.session.id)
-  const currentUserHandle= useSelector((state) => state.entities.users[currentUserId].handle)
+  const currentUserId = useSelector((state) => state.session.id);
+  const currentUserHandle = useSelector((state) => state.entities.users[currentUserId].handle);
   const profilePhotoUrl = useSelector((state) => state.entities.users[currentUserId].profilePhotoUrl);
 
   function handleImage(e) {
@@ -52,8 +54,45 @@ function CreatePostModal() {
     };
   };
 
+  function handleImageIndex(direction) {
+    if (direction === 'previous') {
+      if (imageIndex > 0) {
+        setImageIndex(imageIndex - 1);
+      } else {
+        setImageIndex(images.length - 1);
+      };
+    } else if (direction === 'next') {
+      if (imageIndex < images.length - 1) {
+        setImageIndex(imageIndex + 1);
+      } else {
+        setImageIndex(0);
+      };
+    };
+  };
+
+  function getArrowsIcon() {
+    if (images.length > 1) {
+      return (
+        <>
+          <div className='create-post-modal-image-preview-icon'
+            id="previous-icon"
+            onClick={() => handleImageIndex('previous')}  
+          >
+              <AiOutlineLeft size={16} color='white' />
+          </div>
+          <div className='create-post-modal-image-preview-icon' 
+            id="next-icon"
+            onClick={() => handleImageIndex('next')}  
+          >
+            <AiOutlineRight size={16} color='white' />
+          </div>
+        </>
+      );
+    } else return null;
+  };
+
   let uploaded = images.length > 0;
-  const content = !uploaded ? (
+  const content = uploaded ? (
     <div className='create-post-modal-share-container'>
       <div className='create-post-modal-header'>Create new post
         <div className='create-post-modal-share-button'>Share</div>
@@ -61,15 +100,25 @@ function CreatePostModal() {
       <div className='create-post-modal-divider'></div>
       <div className='create-post-modal-body-container'>
         <div className='create-post-modal-image-preview-container'>
-          <div className='create-post-modal-image-preview'>
-            <div className='create-post-modal-image-preview-add-photos-icon-container'>
-              <HiOutlineSquare2Stack 
-                color='white'
-                size={16} 
-              />
-            </div>
+          <img className='create-post-modal-image-preview' src={imagesPreviewUrls[imageIndex]}/>
+          {getArrowsIcon()}
+          <div className='create-post-modal-image-preview-add-photos-icon-container'
+            onClick={() => {
+              document.getElementById("upload-image-input").click();
+            }}>
+            <HiOutlineSquare2Stack
+              color='white'
+              size={16}
+            />
+            <input
+              id="upload-image-input"
+              type="file"
+              accept="image/*"
+              multiple="multiple"
+              limit="10"
+              onChange={handleImage}
+            />
           </div>
-          {/* <img className='create-post-modal-image-preview' src={imagesPreviewUrls[0]}/> */}
         </div>
         <div className='create-post-modal-image-preview-info-outer-container'>
           <div className='create-post-modal-image-preview-info-inner-container'>
@@ -117,9 +166,8 @@ function CreatePostModal() {
                 type="file"
                 accept="image/*"
                 multiple="multiple"
-                limit="2"
+                limit="10"
                 onChange={handleImage}
-                // onChange={e => setImages(e.target.files[0])} 
                 />
             </label>
           </div>

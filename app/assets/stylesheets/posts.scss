@@ -154,6 +154,7 @@
   min-width: 367px;
   min-height: 367px;
   max-width: 635px;
+  position: relative;
 @media screen and (max-width: 830px) {
     width: 56vw;
     height: 55vw;
@@ -166,7 +167,7 @@
   width: 100%;
   position: relative;
   border-radius: 0 0 0 12px;
-}
+};
 
 .create-post-modal-image-preview-add-photos-icon-container {
   width: 32px;
@@ -183,7 +184,36 @@
 
 .create-post-modal-image-preview-add-photos-icon-container:hover {
   cursor: pointer;
-  background-color: #2984F9;
+  background-color: #234A75;
+}
+
+.create-post-modal-image-preview-icon {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  opacity: 50%;
+  border-radius: 50%;
+  bottom: 0;
+  top: 0;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.create-post-modal-image-preview-icon:hover {
+  cursor: pointer;
+  opacity: 30%;
+}
+
+#previous-icon {
+  left: 10px;
+}
+
+#next-icon {
+  right: 10px;
 }
 
 .create-post-modal-image-preview-info-outer-container {
