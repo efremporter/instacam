@@ -56,9 +56,9 @@ class Api::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     if post
-      # if post.images.attached?
-      #   post.images.purge
-      # end
+      if post.images.attached?
+        post.images.purge
+      end
       # post.likes.each { |like| like.delete}
       # post.comments.each { |comment| comment.delete}
       post.delete

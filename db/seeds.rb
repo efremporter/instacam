@@ -10,7 +10,7 @@ demo_user = User.create({
   email: "demo@user.com",
   name: "Demo User",
   handle: "demouser",
-  bio: "Hey I'm the demo user, welcome to my profile"
+  bio: "Hey I'm the demo user, welcome to my profile",
   password: "password123!"
 })
 

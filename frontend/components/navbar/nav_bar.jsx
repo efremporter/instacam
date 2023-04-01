@@ -79,7 +79,7 @@ function NavBar() {
           <span className="nav-bar-label">Messages</span>
         </li>
         <li className={isSelected('/create') ? "nav-bar-li-selected" : null}
-          onClick={openModal('createPost')}
+          onClick={() => openModal('createPost')}
         >
           {isSelected('/create') ?
             <TbSquareRoundedPlusFilled className="nav-bar-icon" size="25px" /> :
