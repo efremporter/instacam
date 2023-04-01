@@ -23,9 +23,20 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
+    @post = Post.new({
+      author_id: params[:post][:author_id],
+      location: params[:post][:location],
+      caption: params[:post][:caption]
+    })
     if @post.save
-      # Attach photos
+      images = params[:post][:images]
+      if images
+        i = 0
+        while i < images.keys.length
+          @post.images.attach(io: images["#{i}"], filename:"#{@post.id}-#{i}")
+          i += 1
+        end
+      end
       render :show
     else
       render json: ["Could not create post"], status: 400
@@ -58,6 +69,6 @@ class Api::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:author_id, :caption, :location)
+    params.require(:post).permit(:author_id, :caption, :location, :images)
   end
 end

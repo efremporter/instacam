@@ -7,10 +7,10 @@ import PostIndexItem from "./post_index_item";
 function PostIndex() {
   const dispatch = useDispatch();
   const posts = Object.values(useSelector((state) => state.entities.posts));
-  const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
-
+  const { fetchPosts, fetchPost } = bindActionCreators(postActionCreators, dispatch);
   useEffect(() => {
     fetchPosts()
+    // fetchPost(21)
   }, [])
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change

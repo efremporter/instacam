@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as postActionCreators from '../../actions/post_actions';
 import { IoImagesOutline } from 'react-icons/io5';
 import { GoLocation } from 'react-icons/go';
 import { RxCross1 } from 'react-icons/rx';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { HiOutlineSquare2Stack } from 'react-icons/hi2';
-import { useSelector } from 'react-redux';
+
 
 function CreatePostModal() {
   const [images, setImages] = useState([]);
@@ -15,6 +18,8 @@ function CreatePostModal() {
   const currentUserId = useSelector((state) => state.session.id);
   const currentUserHandle = useSelector((state) => state.entities.users[currentUserId].handle);
   const profilePhotoUrl = useSelector((state) => state.entities.users[currentUserId].profilePhotoUrl);
+  const dispatch = useDispatch();
+  const { createPost } = bindActionCreators(postActionCreators, dispatch);
 
   function handleImage(e) {
     const uploadedFiles = Array.from(e.target.files);
@@ -97,11 +102,32 @@ function CreatePostModal() {
     };
   };
 
+  function handlePostLocation(content) {
+    if (content.length <= 150) {
+      setPostLocation(location);
+    };
+  };
+
+  function handleSubmit() {
+    let postFormData = new FormData();
+    postFormData.append("post[author_id]", currentUserId);
+    postFormData.append("post[caption]", caption);
+    postFormData.append("post[location]", postLocation);
+    for (let i = 0; i < images.length; i++) {
+      postFormData.append(`post[images][${i}]`, images[i]);
+    };
+    createPost(postFormData)
+    .then(() => console.log('success'))
+    .catch(() => console.log('failure'))
+  };
+
   let uploaded = images.length > 0;
-  const content = !uploaded ? (
+  const content = uploaded ? (
     <div className='create-post-modal-share-container'>
       <div className='create-post-modal-header'>Create new post
-        <div className='create-post-modal-share-button'>Share</div>
+        <div className='create-post-modal-share-button'
+          onClick={handleSubmit} 
+        >Share</div>
       </div>
       <div className='create-post-modal-divider'></div>
       <div className='create-post-modal-body-container'>
@@ -129,7 +155,9 @@ function CreatePostModal() {
         <div className='create-post-modal-image-preview-info-outer-container'>
           <div className='create-post-modal-image-preview-info-inner-container'>
             <div className='create-post-modal-image-preview-info-header'>
-              <img className='create-post-modal-image-preview-info-avatar' src={profilePhotoUrl} />
+              <img className='create-post-modal-image-preview-info-avatar'
+                draggable={false}
+                src={profilePhotoUrl} />
               <div className='create-post-modal-image-preview-info-handle'>{currentUserHandle}</div>
             </div>
             <div className='create-post-modal-image-preview-info-input-container'>
@@ -148,7 +176,7 @@ function CreatePostModal() {
                 className='create-post-modal-image-preview-info-textarea'
                 id='create-post-modal-image-preview-info-input'
                 placeholder=' Add location'
-                onChange={e => setPostLocation(e.target.value)}
+                onChange={e => handlePostLocation(e.target.value)}
                 value={postLocation}
               />
               <div className='create-post-modal-image-preview-info-location-icon'>
