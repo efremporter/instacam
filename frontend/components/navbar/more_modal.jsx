@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from "redux";
-import * as ModalActionCreators from '../../actions/modal_actions';
-import * as SessionActionCreators from '../../actions/session_actions';
+import * as modalActionCreators from '../../actions/modal_actions';
+import * as sessionActionCreators from '../../actions/session_actions';
 import { MdOutlineSettings } from 'react-icons/md';
 import { useHistory } from "react-router-dom";
 
 function MoreModal() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { closeModal } = bindActionCreators(ModalActionCreators, dispatch);
-  const { signOut } = bindActionCreators(SessionActionCreators, dispatch);
+  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
+  const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path
