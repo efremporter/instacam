@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as postActionCreators from '../../actions/post_actions';
+import * as modalActionCreators from '../../actions/modal_actions';
 import { IoImagesOutline } from 'react-icons/io5';
 import { GoLocation } from 'react-icons/go';
 import { RxCross1 } from 'react-icons/rx';
@@ -20,6 +21,8 @@ function CreatePostModal() {
   const profilePhotoUrl = useSelector((state) => state.entities.users[currentUserId].profilePhotoUrl);
   const dispatch = useDispatch();
   const { createPost } = bindActionCreators(postActionCreators, dispatch);
+  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
+
 
   function handleImage(e) {
     const uploadedFiles = Array.from(e.target.files);
@@ -117,7 +120,9 @@ function CreatePostModal() {
       postFormData.append(`post[images][${i}]`, images[i]);
     };
     createPost(postFormData)
-    .then(() => console.log('success'))
+    .then(() => {
+      closeModal()
+    })
     .catch(() => console.log('failure'))
   };
 
