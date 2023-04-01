@@ -91,8 +91,14 @@ function CreatePostModal() {
     } else return null;
   };
 
+  function handleCaption(content) {
+    if (content.length <= 2200) {
+      setCaption(content)
+    };
+  };
+
   let uploaded = images.length > 0;
-  const content = uploaded ? (
+  const content = !uploaded ? (
     <div className='create-post-modal-share-container'>
       <div className='create-post-modal-header'>Create new post
         <div className='create-post-modal-share-button'>Share</div>
@@ -130,9 +136,12 @@ function CreatePostModal() {
               <textarea
                 className='create-post-modal-image-preview-info-textarea'
                 placeholder='Write a caption...'
-                onChange={e => setCaption(e.target.value)}
+                onChange={e => handleCaption(e.target.value)}
                 value={caption}
               />
+            </div>
+            <div className='create-post-modal-image-preview-info-caption-length'>
+              {caption.length.toLocaleString()}/2,200
             </div>
             <div className='create-post-modal-image-preview-info-location-container'>
               <input type='text'

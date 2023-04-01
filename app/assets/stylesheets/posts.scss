@@ -128,6 +128,12 @@
   max-height: 770px;
   min-height: 390px;
   border-radius: 12px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 };
 
 .create-post-modal-share-button {
@@ -155,6 +161,12 @@
   min-height: 367px;
   max-width: 635px;
   position: relative;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 @media screen and (max-width: 830px) {
     width: 56vw;
     height: 55vw;
@@ -247,7 +259,7 @@
 }
 
 .create-post-modal-image-preview-info-input-container {
-  height: 230px;
+  height: 190px;
   width: 100%;
   display: flex;
   justify-self: flex-start;
@@ -265,7 +277,16 @@
   align-items: flex-start;
   resize: none;
   border: none;
-  cursor: default;
+}
+
+.create-post-modal-image-preview-info-caption-length {
+  height: 44px;
+  font-size: 12px;
+  color: #737373;
+  display: flex;
+  justify-content: flex-end;
+  right: 0;
+  align-items: center;
 }
 
 .create-post-modal-image-preview-info-textarea::placeholder {
