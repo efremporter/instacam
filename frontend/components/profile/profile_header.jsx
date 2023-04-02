@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import ProfileInfo from './profile_info';
 
 function ProfileHeader() {
-  const currentUserId = useSelector((state) => state.session.id)
+  const currentUserId = useSelector((state) => state.session.id);
   const profilePhotoUrl = useSelector((state) => state.entities.users[currentUserId].profilePhotoUrl);
-
+  
   return (
     <div className='profile-header'>
       <div className='profile-header-top'>

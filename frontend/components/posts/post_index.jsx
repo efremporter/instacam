@@ -20,7 +20,7 @@ function PostIndex() {
       <ul className="post-index-ul">
         {posts.map(post => {
           return <li className="post-index-li" key={post.id}>
-            <PostIndexItem post={posts[0]}/>
+            <PostIndexItem post={post}/>
           </li>
         })}
       </ul>

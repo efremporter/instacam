@@ -1,3 +1,4 @@
+// ProfilePostIndex
 .post-index-container {
   width: 935px;
   background-color: blue;
@@ -114,6 +115,7 @@
 };
 
 // -------------------------------------------
+// CreatePostModal
 
 .create-post-modal-share-container {
   @media screen and (min-width: 831px) and (max-width: 1440px) {
@@ -331,6 +333,20 @@
   cursor: pointer;
 }
 
+// -------------------------------------------
+// PostShow
+
+.post-show-modal-container {
+  width: 1140px;
+  height: 640px;
+  background-color: red;
+}
+
+
+
+
+
 input[type="file"] {
   display: none;
 };
+

@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as ModalActionCreators from '../../actions/modal_actions';
 import MoreModal from '../navbar/more_modal';
 import CreatePostModal from '../posts/create_post_modal';
+import PostShowModal from '../posts/post_show_modal';
 
 function Modal() {
   const dispatch = useDispatch();
@@ -39,6 +40,9 @@ function Modal() {
       break;
     case 'createPost':
       component = <CreatePostModal />;
+      break;
+    case 'postShow':
+      component = <PostShowModal />;
       break;
     default:
       return null;
