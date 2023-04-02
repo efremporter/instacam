@@ -26,6 +26,11 @@ function Modal() {
     };
   };
 
+  const isCreateModal = () => {
+    if (modal == 'createPost') return 'create-post-drag-and-drop';
+    return null;
+  };
+
   if (!modal) return null;
   let component;
   switch (modal) {
@@ -40,8 +45,8 @@ function Modal() {
   };
 
   return (
-    <div className={getClassName('modal-background')} onClick={closeModal}>
-      <div className={getClassName('modal-child')} onClick={e => e.stopPropagation()}>
+    <div id={isCreateModal()} className={getClassName('modal-background')} onClick={closeModal}>
+      <div id={isCreateModal()} className={getClassName('modal-child')} onClick={e => e.stopPropagation()}>
         {component}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as postActionCreators from '../../actions/post_actions';
@@ -22,10 +22,22 @@ function CreatePostModal() {
   const dispatch = useDispatch();
   const { createPost } = bindActionCreators(postActionCreators, dispatch);
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
+  useEffect(() => {
+    const dragDrop = document.getElementById('create-post-drag-and-drop');
+    dragDrop.addEventListener('dragover', e => {
+      e.preventDefault();
+    });
+    dragDrop.addEventListener('drop', e => {
+      e.preventDefault();
+      handleImages(e, 'drop');
+    });
+  }, []);
 
+  function handleImages(e, type) {
+    const uploadedFiles = type === 'drop' ?
+     Array.from(e.dataTransfer.files) :
+     Array.from(e.target.files);
 
-  function handleImage(e) {
-    const uploadedFiles = Array.from(e.target.files);
     if (uploadedFiles.length < 1) return;
     // Must make a shallow copy of state, otherwise I will be sending
     // the same array to setImages, which won't trigger a re-render
@@ -37,13 +49,17 @@ function CreatePostModal() {
         imagesCopy.push(...uploadedFiles.slice(0, overflow));
         setImages(imagesCopy);
       };
-      console.log("Some files were not uploaded. You can only choose 10 or fewer files.")
+      console.log("Some files were not uploaded. You can only choose 10 or fewer files.");
     } else {
       imagesCopy.push(...uploadedFiles);
       setImages(imagesCopy);
     };
+    
     // Line below clears the input field after 
-    document.getElementById("upload-image-input").value = "";
+    type === 'drop' ? 
+      document.getElementById("create-post-drag-and-drop").value = "" : 
+      document.getElementById("upload-image-input").value = "";
+
     // Below creates image preview for "share" screen
     const imagesPreviewUrlsCopy = imagesPreviewUrls.slice();
     imagesCopy.forEach(image => {
@@ -126,6 +142,10 @@ function CreatePostModal() {
     .catch(() => console.log('failure'))
   };
 
+  function getDragoverStatus() {
+
+  }
+
   let uploaded = images.length > 0;
   const content = uploaded ? (
     <div className='create-post-modal-share-container'>
@@ -135,7 +155,7 @@ function CreatePostModal() {
         >Share</div>
       </div>
       <div className='create-post-modal-divider'></div>
-      <div className='create-post-modal-body-container'>
+      <div id={getDragoverStatus()} className='create-post-modal-body-container'>
         <div className='create-post-modal-image-preview-container'>
           <img className='create-post-modal-image-preview' src={imagesPreviewUrls[imageIndex]}/>
           {getArrowsIcon()}
@@ -153,7 +173,7 @@ function CreatePostModal() {
               accept="image/*"
               multiple="multiple"
               limit="10"
-              onChange={handleImage}
+              onChange={handleImages}
             />
           </div>
         </div>
@@ -198,8 +218,8 @@ function CreatePostModal() {
       <div className='create-post-modal-divider'></div>
       <div className='create-post-modal-body-outer-container'>
         <div className='create-post-modal-body-inner-container'>
-          <div className='create-post-modal-body'>
-            <IoImagesOutline size={65} color="white" />
+          <div id={getDragoverStatus()} className='create-post-modal-body'>
+            <IoImagesOutline id={getDragoverStatus()} size={65} color="white" />
             <div className='create-post-modal-message'>Drag photos here to upload</div>
             <label className='create-post-modal-button'>
               Select from computer
@@ -209,7 +229,7 @@ function CreatePostModal() {
                 accept="image/*"
                 multiple="multiple"
                 limit="10"
-                onChange={handleImage}
+                onChange={handleImages}
                 />
             </label>
           </div>

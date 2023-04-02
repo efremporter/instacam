@@ -29,7 +29,7 @@
   };
   @media screen and (min-width: 831px) {
     width: 40vw;
-    max-width: 725px;
+    max-width: 635px;
   };
   min-width: 350px;
   width: 67vh;
@@ -151,6 +151,10 @@
 
 .create-post-modal-body-container {
   display: flex;
+}
+
+#drop {
+  background-color: red;
 }
 
 .create-post-modal-image-preview-container {
