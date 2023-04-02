@@ -16,9 +16,9 @@ function PostIndex() {
   useEffect(() => {
     fetchPosts()
     .then(() => {
-      history.push(`/posts/${1}`)
-      openModal('postShow');
-      // openModal('createPost')
+      // history.push(`/posts/${1}`)
+      // openModal('postShow');
+      // Lines above are here for styling, delete once complete
     });
     // fetchPost(21)
   }, [])
