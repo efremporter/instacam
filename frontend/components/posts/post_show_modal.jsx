@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IoChevronForwardCircle, IoChevronBackCircle } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 
 function PostShowModal() {
   const posts = useSelector(state => state.entities.posts);
@@ -74,7 +75,21 @@ function PostShowModal() {
         </div>
         <div className='create-post-modal-divider'></div>
         <div className='post-show-modal-comments-container'>
-          <div className='post-show-modal-comments'></div>
+          <div className='post-show-modal-comments'>
+            <div className='post-show-modal-comments-caption-container'>
+              <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
+              <div className='post-show-modal-right-side-caption-date-container'>
+                <div className='post-show-modal-right-side-handle-caption-container'>
+                  <div className='post-show-modal-handle'>{postOwner.handle}</div>
+                  <div className='post-show-modal-caption'>{post.caption}</div>
+                </div>
+                <div className='post-show-modal-created-at'>{new Date(post.createdAt).toLocaleDateString('en-US', {
+                  month: '2-digit', day: '2-digit', year: 'numeric'
+                })}</div>
+              </div>
+              <AiOutlineHeart className='post-show-modal-comments-like-icon' size={14} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
