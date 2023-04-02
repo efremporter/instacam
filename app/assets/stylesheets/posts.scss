@@ -345,7 +345,6 @@
   min-height: 350px;
   max-height: 90vh;
   background-color: #000000;
-  background-color: pink;
   border: 1px solid rgb(33, 33, 33);
   display: flex;
   border-radius: 10px;
@@ -354,8 +353,6 @@
 .post-show-modal-left-side {
   @media screen and (min-width: 1169px) {
     width: 56%;
-    // height: 640px;
-    // height: 60vh;
   };
   width: 56.3%;
   position: relative;
@@ -397,10 +394,8 @@
   @media screen and (min-width: 1300px) {
     min-width: 500px;
     width: 44%;
-    // height: 640px;
   };
   height: 100%;
-  background-color: red;
   position: relative;
   width: 43.7%;
   display: flex;
@@ -470,7 +465,6 @@
   display: flex;
   justify-content: center;
   border-top: 1px solid #454545;
-  background-color: blue;
 }
 
 .post-show-modal-comments {
@@ -521,18 +515,55 @@
   color: rgb(197, 197, 197);
 }
 
-.post-show-modal-right-side-bottom-container {
+.post-show-modal-right-side-bottom-outer-container {
   height: 160px;
   position: absolute;
   z-index: 1;
-  background-color: orange;
   width: 95%;
   margin: auto;
   bottom: 0;
   left: 0;
   right: 0;
-      // margin-left: auto;
-      // margin-right: auto;
+  color: white;
+}
+
+.post-show-modal-right-side-bottom-inner-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-show-modal-right-side-bottom-icons-container {
+  display: flex;
+  align-items: center;
+  height: 55px;
+}
+
+.post-show-modal-post-like-icon-container {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #F5F5F5;
+}
+
+.post-show-modal-post-like-icon-container:hover {
+  cursor: pointer;
+  opacity: 50%;
+}
+
+#post-like-icon {
+  margin-left: 0px;
+}
+
+#post-comment-icon-container {
+  margin-left: 5px;
+}
+
+#post-comment-icon {
+  margin-left: 0px;
 }
 
 input[type="file"] {

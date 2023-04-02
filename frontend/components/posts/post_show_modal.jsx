@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { IoChevronForwardCircle, IoChevronBackCircle } from 'react-icons/io5';
+import { IoChevronForwardCircle, IoChevronBackCircle,
+  IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 
@@ -90,7 +91,25 @@ function PostShowModal() {
             </div>
           </div>
         </div>
-        <div className='post-show-modal-right-side-bottom-container'></div>
+        <div className='post-show-modal-right-side-bottom-outer-container'>
+          <div className='post-show-modal-right-side-bottom-inner-container'>
+              <div className='post-show-modal-right-side-bottom-icons-container'>
+                <div className='post-show-modal-post-like-icon-container'>
+                  <AiOutlineHeart id="post-like-icon"
+                    className='post-show-modal-comments-like-icon'
+                    size={32} />
+                </div>
+                <div id="post-comment-icon-container"
+                  className='post-show-modal-post-like-icon-container'>
+                  <IoChatbubbleOutline id="post-comment-icon" 
+                    className='post-show-modal-comments-like-icon'
+                    size={32} />
+                </div>
+              </div>
+              <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
+              <div className='post-show-modal-right-side-bottom-add-comment-container'>Add a comment</div>
+          </div>
+        </div>
       </div>
     </div>
   );
