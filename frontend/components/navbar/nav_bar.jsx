@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import * as ModalActionCreators from "../../actions/modal_actions";
+import * as modalActionCreators from "../../actions/modal_actions";
 import { AiOutlineHome, AiFillHome } from 'react-icons/ai';
 import { RiSearchLine, RiSearchFill } from "react-icons/ri";
 import { MdOutlineExplore, MdExplore } from "react-icons/md";
@@ -20,7 +20,7 @@ function NavBar() {
   const history = useHistory();
   const dispatch = useDispatch();
   const currentUserId = useSelector(state => state.session.id);
-  const { openModal } = bindActionCreators(ModalActionCreators, dispatch);
+  const { openModal } = bindActionCreators(modalActionCreators, dispatch);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path

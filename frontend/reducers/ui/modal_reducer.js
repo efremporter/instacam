@@ -8,6 +8,7 @@ const ModalReducer = (state = null, action) => {
     case OPEN_MODAL:
       return action.data
 
+
     case CLOSE_MODAL:
       return null
 

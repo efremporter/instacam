@@ -4,7 +4,9 @@ import { MdOutlineSettings } from 'react-icons/md';
 
 function ProfileInfo() {
   const profileUser = useSelector((state) => Object.values(state.entities.users)[0])
+  const postCount = useSelector((state) => Object.values(state.entities.posts).length);
   // const profileUser = useContext() <-- update to this soon
+  
   return (
     <div className='profile-info'>
       <div className='profile-info-top'>
@@ -19,7 +21,7 @@ function ProfileInfo() {
       </div>
       <div className='profile-info-middle'>
         <div>
-          <span className='profile-info-count'>41</span> posts
+          <span className='profile-info-count'>{postCount}</span> posts
         </div>
         <div className='profile-info-follow'>
           <span className='profile-info-count'>100</span> followers

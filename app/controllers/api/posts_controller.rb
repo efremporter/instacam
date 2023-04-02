@@ -5,6 +5,7 @@ class Api::PostsController < ApplicationController
       @posts = Post.where(author_id: params[:post][:author_id])
     else
       @posts = Post.all
+      puts @posts
     end
     if @posts.length > 0
       render :index
