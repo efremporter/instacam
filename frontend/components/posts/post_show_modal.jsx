@@ -73,7 +73,6 @@ function PostShowModal() {
             <BiDotsHorizontalRounded size={24} className='post-show-modal-more-icon'/>
           </div>
         </div>
-        <div className='create-post-modal-divider'></div>
         <div className='post-show-modal-comments-container'>
           <div className='post-show-modal-comments'>
             <div className='post-show-modal-comments-caption-container'>
@@ -91,6 +90,7 @@ function PostShowModal() {
             </div>
           </div>
         </div>
+        <div className='post-show-modal-right-side-bottom-container'></div>
       </div>
     </div>
   );
