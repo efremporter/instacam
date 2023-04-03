@@ -1,5 +1,5 @@
 json.set! @post.id do
-  json.extract! @post, :id, :author_id :caption, :location, :created_at
+  json.extract! @post, :id, :author_id, :caption, :location, :created_at
   images = []
   @post.images.each do |image|
     images << url_for(image)

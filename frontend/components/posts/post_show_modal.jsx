@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { IoChevronForwardCircle, IoChevronBackCircle,
@@ -26,13 +26,6 @@ function PostShowModal() {
   if (!postOwner) {
     fetchUser(post.authorId);
   };
-
-  useEffect(() => {
-    const modalBackground = document.getElementsByClassName('modal-background')[0];
-    modalBackground.addEventListener('click', () => {
-      history.replace(`/profile/${postOwner.id}`);
-    });
-  }, []);
 
   function getArrowsIcon() {
     if (postPhotoUrls.length > 1) {

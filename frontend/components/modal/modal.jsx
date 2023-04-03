@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { bindActionCreators } from "redux";
-import * as ModalActionCreators from '../../actions/modal_actions';
+import * as modalActionCreators from '../../actions/modal_actions';
+import * as postActionCreators from '../../actions/post_actions';
+import * as userActionCreators from '../../actions/user_actions';
 import MoreModal from '../navbar/more_modal';
 import CreatePostModal from '../posts/create_post_modal';
 import PostShowModal from '../posts/post_show_modal';
 
 function Modal() {
-  const history = useHistory();
   const modal = useSelector(state => state.ui.modal) // Either null or modalType
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { closeModal } = bindActionCreators(ModalActionCreators, dispatch);
-
+  const location = useLocation();
+  const posts = useSelector(state => state.entities.posts);
+  const [authorId, setAuthorId] = useState();
+  useEffect(() => {
+    if (modal === 'postShow') {
+      const locationArray = location.pathname.split('/');
+      const postId = locationArray[locationArray.length - 1];
+      if (postId) {
+        const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
+        fetchPost(postId)
+        .then(() => {
+          const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
+          const authorId = posts[postId].authorId;
+          fetchUser(authorId);
+          setAuthorId(authorId);
+        });
+      };
+    };
+  }, [modal])
+  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
+  
   const getClassName = type => {
     if (type === 'modal-background') {
       if (modal === 'more') {
@@ -53,11 +74,14 @@ function Modal() {
     <div id={isCreateModal()} className={getClassName('modal-background')} onClick={e => {
       e.preventDefault();
       closeModal();
-      // if (modal === 'postShow') {
-      //   history.replace(`/profile`);
-      // };
+      if (modal === 'postShow') {
+        history.replace(`/profile/${authorId}`);
+      };
     }}>
-      <div id={isCreateModal()} className={getClassName('modal-child')} onClick={e => e.stopPropagation()}>
+      <div id={isCreateModal()} className={getClassName('modal-child')}
+        onClick={e => {
+        e.stopPropagation()}}
+      >
         {component}
       </div>
     </div>
