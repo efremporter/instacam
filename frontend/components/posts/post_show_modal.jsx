@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import { bindActionCreators } from 'redux';
+import * as modalActionCreators from '../../actions/modal_actions';
+import * as userActionCreators from '../../actions/user_actions';
 
 function PostShowModal() {
   const posts = useSelector(state => state.entities.posts);
-  const location = useLocation();
   const [postImageIndex, setPostImageIndex] = useState(0);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
+  const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
+  const location = useLocation();
   const locationArray = location.pathname.split('/');
   const postId = locationArray[locationArray.length - 1];
   const post = posts[postId]
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
-  const postOwner = useSelector(state => state.entities.users[currentUserId])
+  const postOwner = useSelector(state => state.entities.users[post.authorId])
+  if (!postOwner) {
+    fetchUser(post.authorId);
+    console.log('after fetch')
+  };
 
   function getArrowsIcon() {
     if (postPhotoUrls.length > 1) {
@@ -68,7 +79,12 @@ function PostShowModal() {
           <div className='post-show-modal-right-side-header'>
             <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
             <div className='post-show-modal-handle-location-container'>
-              <div className='post-show-modal-handle'>{postOwner.handle}</div>
+              <div className='post-show-modal-handle'
+                onClick={() => {
+                  closeModal();
+                  history.push(`/profile/${postOwner.id}`)
+                }}
+              >{postOwner.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
             </div>
             <BiDotsHorizontalRounded size={24} className='post-show-modal-more-icon'/>
@@ -87,7 +103,7 @@ function PostShowModal() {
                   month: '2-digit', day: '2-digit', year: 'numeric'
                 })}</div>
               </div>
-              <AiOutlineHeart className='post-show-modal-comments-like-icon' size={14} />
+              <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} />
             </div>
           </div>
         </div>

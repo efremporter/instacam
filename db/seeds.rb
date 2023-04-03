@@ -14,6 +14,14 @@ demo_user = User.create({
   password: "password123!"
 })
 
+sample_user_1 = User.create({
+  email: "sample1@user.com",
+  name: "Arnold Poole",
+  handle: "ap",
+  bio: "Yoooooo go dubs",
+  password: "easy123"
+})
+
 demo_user.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
 
 post_1 = Post.create({author_id: 1, caption: 'check out this melon', location: 'istanbul'})

@@ -438,13 +438,18 @@
 
 .post-show-modal-handle {
   color: #F5F5F5;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
+}
+
+.post-show-modal-handle:hover {
+  cursor: pointer;
+  color: #a2a2a2;
 }
 
 .post-show-modal-location {
   color: #F5F5F5;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 5px;
 }
 
@@ -492,7 +497,7 @@
 
 .post-show-modal-right-side-handle-caption-container {
   color: #F5F5F5;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
 }
 
@@ -502,7 +507,7 @@
 
 .post-show-modal-created-at {
   color: #F5F5F5;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .post-show-modal-comments-like-icon {
