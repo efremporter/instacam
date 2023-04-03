@@ -335,14 +335,15 @@
   @media screen and (min-width: 731px)  {
     height: 54.5vw;
   };
-  @media screen and (max-width: 730px) {
-    display: flex;
-    flex-direction: column;
-    width: 330px;
-    height: 515px;
-  }
+  // @media screen and (max-width: 730px) {
+  //   display: flex;
+  //   flex-direction: column;
+  //   width: 330px;
+  //   height: 515px;
+  // } // This is mobile styling, fix later
   width: 87.4vw;
-  min-height: 350px;
+  min-width: 575px;
+  height: 400px;
   max-height: 90vh;
   background-color: #000000;
   border: 1px solid rgb(33, 33, 33);
