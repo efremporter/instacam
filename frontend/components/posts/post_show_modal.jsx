@@ -25,8 +25,14 @@ function PostShowModal() {
   const postOwner = useSelector(state => state.entities.users[post.authorId])
   if (!postOwner) {
     fetchUser(post.authorId);
-    console.log('after fetch')
   };
+
+  useEffect(() => {
+    const modalBackground = document.getElementsByClassName('modal-background')[0];
+    modalBackground.addEventListener('click', () => {
+      history.replace(`/profile/${postOwner.id}`);
+    });
+  }, []);
 
   function getArrowsIcon() {
     if (postPhotoUrls.length > 1) {
@@ -66,7 +72,7 @@ function PostShowModal() {
   };
 
   return (
-    <div className='post-show-modal-container'>
+    <div id="post-show-modal-container" className='post-show-modal-container'>
       <div className='post-show-modal-left-side'>
           <img className='post-show-modal-image'
             src={postPhotoUrls[postImageIndex]} 
@@ -82,7 +88,7 @@ function PostShowModal() {
               <div className='post-show-modal-handle'
                 onClick={() => {
                   closeModal();
-                  history.push(`/profile/${postOwner.id}`)
+                  history.replace(`/profile/${postOwner.id}`)
                 }}
               >{postOwner.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
@@ -96,7 +102,12 @@ function PostShowModal() {
               <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
-                  <div className='post-show-modal-handle'>{postOwner.handle}</div>
+                  <div className='post-show-modal-handle'
+                    onClick={() => {
+                      closeModal();
+                      history.replace(`/profile/${postOwner.id}`)
+                    }}
+                  >{postOwner.handle}</div>
                   <div className='post-show-modal-caption'>{post.caption}</div>
                 </div>
                 <div className='post-show-modal-created-at'>{new Date(post.createdAt).toLocaleDateString('en-US', {

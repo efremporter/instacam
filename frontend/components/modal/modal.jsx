@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from "redux";
 import * as ModalActionCreators from '../../actions/modal_actions';
 import MoreModal from '../navbar/more_modal';
@@ -7,8 +8,9 @@ import CreatePostModal from '../posts/create_post_modal';
 import PostShowModal from '../posts/post_show_modal';
 
 function Modal() {
-  const dispatch = useDispatch();
+  const history = useHistory();
   const modal = useSelector(state => state.ui.modal) // Either null or modalType
+  const dispatch = useDispatch();
   const { closeModal } = bindActionCreators(ModalActionCreators, dispatch);
 
   const getClassName = type => {
@@ -47,9 +49,14 @@ function Modal() {
     default:
       return null;
   };
-
   return (
-    <div id={isCreateModal()} className={getClassName('modal-background')} onClick={closeModal}>
+    <div id={isCreateModal()} className={getClassName('modal-background')} onClick={e => {
+      e.preventDefault();
+      closeModal();
+      // if (modal === 'postShow') {
+      //   history.replace(`/profile`);
+      // };
+    }}>
       <div id={isCreateModal()} className={getClassName('modal-child')} onClick={e => e.stopPropagation()}>
         {component}
       </div>
