@@ -28,9 +28,13 @@ function PostIndex() {
   return (
     <div className="post-index-container">
       <ul className="post-index-ul">
-        {posts.map(post => {
-          return <li className="post-index-li" key={post.id}>
-            <PostIndexItem post={post}/>
+        {posts.map((post, i) => {
+          const isLastPost = i === posts.length - 1
+          return <li className="post-index-li"
+            key={post.id}
+            id={isLastPost ? 'last-post' : null}
+          >
+            <PostIndexItem post={post} isLastPost={isLastPost}/>
           </li>
         })}
       </ul>

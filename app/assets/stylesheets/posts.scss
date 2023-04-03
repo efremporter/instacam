@@ -1,12 +1,17 @@
 // ProfilePostIndex
 .post-index-container {
-  width: 935px;
+  width: 936px;
+  background-color: red;
 }
 
 .post-index-ul {
+  // background-color: blue;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-content: flex-start;
+  column-gap: 4px;
+  row-gap: 1px;
   background-color: black;
   flex-wrap: wrap;
 }
@@ -14,7 +19,14 @@
 .post-index-item {
   width: 309px;
   height: 309px;
-  margin-top: 1px;
+  // margin-left: 1px;
+}
+
+#last-post { 
+  justify-self: flex-start;
+  align-self: flex-start;
+  // position: absolute;
+  // margin: auto;
 }
 
 .post-index-item:hover {

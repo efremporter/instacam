@@ -80,8 +80,8 @@ function Modal() {
     }}>
       <div id={isCreateModal()} className={getClassName('modal-child')}
         onClick={e => {
-        e.stopPropagation()}}
-      >
+        e.stopPropagation();
+      }}>
         {component}
       </div>
     </div>

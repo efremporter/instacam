@@ -4,10 +4,10 @@ import * as modalActionCreators from "../../actions/modal_actions";
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 
-function PostIndexItem({ post }) {
+function PostIndexItem({ post, isLastPost }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  
+  console.log(isLastPost)
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
 
   function handlePostClick() {
