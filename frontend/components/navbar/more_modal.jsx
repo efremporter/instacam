@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as sessionActionCreators from '../../actions/session_actions';
 import { MdOutlineSettings } from 'react-icons/md';
-import { useHistory } from "react-router-dom";
+import { BiLogOut } from 'react-icons/bi';
 
 function MoreModal() {
   const dispatch = useDispatch();
@@ -28,11 +29,11 @@ function MoreModal() {
             handleReroute('/settings')
           }}
         >
-          <span>Settings</span>
+          Settings
           <MdOutlineSettings
             className="more-modal-settings-icon"
-            size={30}
-            fill='white'/>
+            size="30px"
+            fill="white"/>
         </li>
         <li className="more-modal-li"
           onClick={() => {

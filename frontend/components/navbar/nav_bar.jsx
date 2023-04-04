@@ -13,7 +13,7 @@ import {
   TbSquareRoundedPlus,
   TbSquareRoundedPlusFilled
 } from "react-icons/tb";
-import { ImSphere } from "react-icons/im"; // Delete later, replace w/ profile pic of currentUser
+import { ImSphere } from "react-icons/im";
 
 function NavBar() {
 
@@ -114,14 +114,14 @@ function NavBar() {
         </li>
       </ul>
       <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
-        id="nav-bar-more"
+        id="nav-bar-more-icon-container"
         onClick={() => openModal('more')}
       >
         <FaBars
           className="nav-bar-icon"
-          size="23px"
+          size="25px"
         />
-        <span id={getCorrectNavBarSize()} className="nav-bar-label">More</span>
+        <span id={getCorrectNavBarSize()} className="nav-bar-label-more-span">More</span>
       </div>
     </div>
   );
