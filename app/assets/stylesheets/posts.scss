@@ -1,9 +1,19 @@
 // ProfilePostIndex
 .post-index-container {
+  @media screen and (max-width: 1045px) {
+    width: 88vw;
+  }
+  min-width: 710px;
   width: 936px;
 }
 
 .post-index-ul {
+  @media screen and (max-width: 1045px) {
+    width: 88vw;
+    margin-left: 5px;
+    background-color: blue;
+  }
+  min-width: 710px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -15,6 +25,12 @@
 }
 
 .post-index-item {
+  @media screen and (max-width: 1045px) {
+    width: 29vw;
+    height: 29vw;
+    min-width: 230px;
+    min-height: 230px;
+  }
   width: 309px;
   height: 309px;
 }

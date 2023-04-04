@@ -1,4 +1,7 @@
 .profile-background {
+  @media screen and (max-width: 1399px) {
+    margin-left: 73px;
+  }
   background-color: #000000;
   min-height: 100vh;
   margin-left: 240px;
@@ -92,9 +95,6 @@
   cursor: pointer;
 }
 
-
-
-
 .profile-info-middle {
   display: flex;
   flex-direction: row;
@@ -114,14 +114,6 @@
   cursor: pointer;
 }
 
-
-
-
-
-.profile-info-bottom {
-
-}
-
 .profile-info-name {
   font-weight: 600;
 }
@@ -130,11 +122,13 @@
   margin-top: 4px;
 }
 
-
-
 .profile-divider {
+  @media screen and (max-width: 1045px) {
+    width: 88.5vw;
+  }
   height: 1px;
   width: 935px;
+  min-width: 703px;
   background-color: #262626;
   margin-top: 50px;
   margin-bottom: 50px;

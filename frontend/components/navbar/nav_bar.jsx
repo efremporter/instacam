@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -13,7 +13,7 @@ import {
   TbSquareRoundedPlus,
   TbSquareRoundedPlusFilled
 } from "react-icons/tb";
-import { ImSphere } from "react-icons/im"; // Delete later, replace w/ profile pic of currentUser
+import { ImSphere } from "react-icons/im";
 
 function NavBar() {
 
@@ -21,6 +21,7 @@ function NavBar() {
   const dispatch = useDispatch();
   const currentUserId = useSelector(state => state.session.id);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
+  const [smallNavBar, setSmallNavBar] = useState(false);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path
@@ -37,17 +38,20 @@ function NavBar() {
       return false;
     }
   };
-
+  
   return (
     <div className="nav-bar-container">
-      <div className="nav-bar-logo">Instacam</div>
+      <div id="nav-bar-logo-full" className="nav-bar-logo">Instacam</div>
+      <div className="nav-bar-logo">
+        <img className="nav-bar-logo-mini" src={window.navBarMiniLogo}/>
+      </div> 
       <ul className="nav-bar-ul">
         <li className={isSelected('/') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/')}
         >
           {isSelected('/') ?
-            <AiFillHome className="nav-bar-icon" fill="white" size="25px" /> :
-            <AiOutlineHome className="nav-bar-icon" fill="white" size="25px" />
+            <AiFillHome className="nav-bar-icon" fill="white" size="30px" /> :
+            <AiOutlineHome className="nav-bar-icon" fill="white" size="30px" />
           }
           <span className="nav-bar-label">Home</span>
         </li>
@@ -55,8 +59,8 @@ function NavBar() {
           onClick={() => handleReroute('/search')}
         >
           {isSelected('/search') ?
-            <RiSearchFill className="nav-bar-icon" size="25px"/> :
-            <RiSearchLine className="nav-bar-icon" size="25px"/>
+            <RiSearchFill className="nav-bar-icon" size="30px"/> :
+            <RiSearchLine className="nav-bar-icon" size="30px"/>
           }
           <span className="nav-bar-label">Search</span>
         </li>
@@ -64,8 +68,8 @@ function NavBar() {
           onClick={() => handleReroute('/explore')}
         >
           {isSelected('/explore') ?
-            <MdExplore className="nav-bar-icon" size="25px" /> :
-            <MdOutlineExplore className="nav-bar-icon" size="25px" />
+            <MdExplore className="nav-bar-icon" size="30px" /> :
+            <MdOutlineExplore className="nav-bar-icon" size="30px" />
           }
           <span className="nav-bar-label">Explore</span>
         </li>
@@ -73,8 +77,8 @@ function NavBar() {
           onClick={() => handleReroute('/messages')}
         >
           {isSelected('/messages') ?
-            <TbMessageCircle2Filled className="nav-bar-icon" size="25px" /> : 
-            <TbMessageCircle2 className="nav-bar-icon" size="25px" />
+            <TbMessageCircle2Filled className="nav-bar-icon" size="30px" /> : 
+            <TbMessageCircle2 className="nav-bar-icon" size="30px" />
           }
           <span className="nav-bar-label">Messages</span>
         </li>
@@ -82,8 +86,8 @@ function NavBar() {
           onClick={() => openModal('createPost')}
         >
           {isSelected('/create') ?
-            <TbSquareRoundedPlusFilled className="nav-bar-icon" size="25px" /> :
-            <TbSquareRoundedPlus className="nav-bar-icon" size="25px" />
+            <TbSquareRoundedPlusFilled className="nav-bar-icon" size="30px" /> :
+            <TbSquareRoundedPlus className="nav-bar-icon" size="30px" />
           }
           <span className="nav-bar-label">Create</span>
         </li>
@@ -92,20 +96,20 @@ function NavBar() {
         >
           <ImSphere
             className="nav-bar-icon"
-            size="25px"
+            size="30px"
           />
           <span className="nav-bar-label">Profile</span>
         </li>
       </ul>
       <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
-        id="nav-bar-more"
+        id="nav-bar-more-icon-container"
         onClick={() => openModal('more')}
       >
         <FaBars
           className="nav-bar-icon"
-          size="23px"
+          size="25px"
         />
-        <span className="nav-bar-label">More</span>
+        <span className="nav-bar-label-more-span">More</span>
       </div>
     </div>
   );
