@@ -1,11 +1,22 @@
 class Api::UsersController < ApplicationController
   # before_action :require_signed_in, only: [:update]
 
+  def show
+    @user = User.find(params[:id])
+    if @user
+      render "api/users/_show.json.jbuilder"
+    else
+      errors = []
+      errors.push('User not found')
+      render json: errors, status: 404
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
       sign_in!(@user)
-      render "api/users/_user.json.jbuilder"
+      render "api/users/_show.json.jbuilder"
     else
       errors = []
       if User.exists?(email: params[:user][:email])

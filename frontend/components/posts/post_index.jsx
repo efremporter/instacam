@@ -2,16 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as postActionCreators from '../../actions/post_actions';
-import * as modalActionCreators from '../../actions/modal_actions';
 import PostIndexItem from "./post_index_item";
 import { useHistory } from "react-router-dom";
 
 function PostIndex() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const posts = Object.values(useSelector((state) => state.entities.posts));
-  const { fetchPosts, fetchPost } = bindActionCreators(postActionCreators, dispatch);
-  const { openModal } = bindActionCreators(modalActionCreators, dispatch);
+  const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
 
   useEffect(() => {
     fetchPosts()
@@ -30,7 +27,7 @@ function PostIndex() {
       <ul className="post-index-ul">
         {posts.map(post => {
           return <li className="post-index-li" key={post.id}>
-            <PostIndexItem post={post}/>
+            <PostIndexItem post={post} />
           </li>
         })}
       </ul>

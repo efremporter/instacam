@@ -123,7 +123,7 @@ function CreatePostModal() {
 
   function handlePostLocation(content) {
     if (content.length <= 150) {
-      setPostLocation(location);
+      setPostLocation(content);
     };
   };
 

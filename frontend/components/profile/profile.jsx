@@ -5,11 +5,11 @@ import ProfileHeader from './profile_header';
 import { useLocation } from 'react-router-dom';
 
 function Profile() {
-  const currentUserId = useSelector((state) => state.session.id)
+  const currentUserId = useSelector((state) => state.session.id);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
   const profileUserId = locationArray[locationArray.length - 1];
-  const isMyProfile = currentUserId == profileUserId
+  const isMyProfile = currentUserId == profileUserId;
 
   return (
     <div className='profile-background'>

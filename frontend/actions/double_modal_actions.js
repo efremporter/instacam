@@ -1,16 +1,16 @@
-export const OPEN_MODAL = "OPEN_MODAL";
-export const CLOSE_MODAL = "CLOSE_MODAL";
+export const OPEN_DOUBLE_MODAL = "OPEN_MODAL";
+export const CLOSE_DOUBLE_MODAL = "CLOSE_MODAL";
 
 const receiveModal = modalType => {
   return {
-    type: OPEN_MODAL,
+    type: OPEN_DOUBLE_MODAL,
     data: modalType
   };
 };
 
 const collapseModal = () => {
   return {
-    type: CLOSE_MODAL
+    type: CLOSE_DOUBLE_MODAL
   };
 };
 

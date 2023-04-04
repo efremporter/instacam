@@ -1,12 +1,15 @@
 // ProfilePostIndex
 .post-index-container {
-  width: 935px;
+  width: 936px;
 }
 
 .post-index-ul {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-content: flex-start;
+  column-gap: 4px;
+  row-gap: 1px;
   background-color: black;
   flex-wrap: wrap;
 }
@@ -14,13 +17,22 @@
 .post-index-item {
   width: 309px;
   height: 309px;
-  margin-top: 1px;
+}
+
+.post-index-item-container {
+  position: relative;
 }
 
 .post-index-item:hover {
   cursor: pointer;
   box-shadow: inset 10px 10px 5px black;
   opacity: 80%;
+}
+
+.post-index-item-multiple-images-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 .create-post-modal-container {
@@ -335,14 +347,15 @@
   @media screen and (min-width: 731px)  {
     height: 54.5vw;
   };
-  @media screen and (max-width: 730px) {
-    display: flex;
-    flex-direction: column;
-    width: 330px;
-    height: 515px;
-  }
+  // @media screen and (max-width: 730px) {
+  //   display: flex;
+  //   flex-direction: column;
+  //   width: 330px;
+  //   height: 515px;
+  // } // This is mobile styling, fix later
   width: 87.4vw;
-  min-height: 350px;
+  min-width: 575px;
+  height: 400px;
   max-height: 90vh;
   background-color: #000000;
   border: 1px solid rgb(33, 33, 33);
