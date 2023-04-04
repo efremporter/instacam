@@ -33,7 +33,11 @@ function CreatePostModal() {
     });
   }, []);
 
-  function handleImages(e, type) {
+  useEffect(() => {
+    console.log(imagesPreviewUrls)
+  }, [imagesPreviewUrls])
+
+  const handleImages = (e, type) => {
     const uploadedFiles = type === 'drop' ?
      Array.from(e.dataTransfer.files) :
      Array.from(e.target.files);
@@ -52,6 +56,7 @@ function CreatePostModal() {
       console.log("Some files were not uploaded. You can only choose 10 or fewer files.");
     } else {
       imagesCopy.push(...uploadedFiles);
+      console.log(imagesCopy)
       setImages(imagesCopy);
     };
     
@@ -62,13 +67,13 @@ function CreatePostModal() {
 
     // Below creates image preview for "share" screen
     const imagesPreviewUrlsCopy = imagesPreviewUrls.slice();
-    imagesCopy.forEach(image => {
+    uploadedFiles.forEach(image => {
       imagesPreviewUrlsCopy.push(URL.createObjectURL(image));
     });
-    setImagePreviews(imagesPreviewUrlsCopy);
+    setImagePreviews(imagesPreviewUrlsCopy)
   };
 
-  function getLocationIcon() {
+  const getLocationIcon = () => {
     if (postLocation.length >= 1) {
       return (<RxCross1 size={16} color="white"
         className='create-post-modal-image-preview-info-location-cancel'
@@ -78,7 +83,7 @@ function CreatePostModal() {
     };
   };
 
-  function handleImageIndex(direction) {
+  const handleImageIndex = direction => {
     if (direction === 'previous') {
       if (imageIndex > 0) {
         setImageIndex(imageIndex - 1);
@@ -94,7 +99,7 @@ function CreatePostModal() {
     };
   };
 
-  function getArrowsIcon() {
+  const getArrowsIcon = () => {
     if (images.length > 1) {
       return (
         <>
@@ -115,19 +120,19 @@ function CreatePostModal() {
     } else return null;
   };
 
-  function handleCaption(content) {
+  const handleCaption = content => {
     if (content.length <= 2200) {
       setCaption(content)
     };
   };
 
-  function handlePostLocation(content) {
+  const handlePostLocation = content => {
     if (content.length <= 150) {
       setPostLocation(content);
     };
   };
 
-  function handleSubmit() {
+  const handleSubmit = () => {
     let postFormData = new FormData();
     postFormData.append("post[author_id]", currentUserId);
     postFormData.append("post[caption]", caption);
@@ -142,10 +147,6 @@ function CreatePostModal() {
     .catch(() => console.log('failure'))
   };
 
-  function getDragoverStatus() {
-
-  }
-
   let uploaded = images.length > 0;
   const content = uploaded ? (
     <div className='create-post-modal-share-container'>
@@ -155,7 +156,7 @@ function CreatePostModal() {
         >Share</div>
       </div>
       <div className='create-post-modal-divider'></div>
-      <div id={getDragoverStatus()} className='create-post-modal-body-container'>
+      <div className='create-post-modal-body-container'>
         <div className='create-post-modal-image-preview-container'>
           <img className='create-post-modal-image-preview' src={imagesPreviewUrls[imageIndex]}/>
           {getArrowsIcon()}
@@ -218,8 +219,8 @@ function CreatePostModal() {
       <div className='create-post-modal-divider'></div>
       <div className='create-post-modal-body-outer-container'>
         <div className='create-post-modal-body-inner-container'>
-          <div id={getDragoverStatus()} className='create-post-modal-body'>
-            <IoImagesOutline id={getDragoverStatus()} size={65} color="white" />
+          <div className='create-post-modal-body'>
+            <IoImagesOutline size={65} color="white" />
             <div className='create-post-modal-message'>Drag photos here to upload</div>
             <label className='create-post-modal-button'>
               Select from computer

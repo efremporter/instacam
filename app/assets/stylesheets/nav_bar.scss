@@ -1,18 +1,30 @@
 .nav-bar-container {
+  @media screen and (max-width: 1399px) {
+    width: 73px;
+  }
   width: 240px;
   border-right: 1px solid rgb(41, 41, 41);
   background-color: #000000;
   color: #EFEFEF;
   height: 100vh;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 500;
   position: fixed;
   top: 0px;
   z-index: 2;
 }
 
-.nav-bar-logo {
+#nav-bar-logo-full {
+  @media screen and (max-width: 1399px) {
+    display: none;
+  };
   font-family: 'Grand Hotel', cursive;
+  padding-top: 40px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.nav-bar-logo {
   cursor: pointer;
   font-size: 30px;
   -webkit-touch-callout: none;
@@ -21,9 +33,15 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  padding-top: 40px;
-  margin-bottom: 20px;
-  margin-left: 20px;
+}
+
+.nav-bar-logo-mini {
+  @media screen and (min-width: 1399px) {
+    display: none;
+  }
+  width: 34px;
+  height: 34px;
+  margin: 40px 0 11px 17px
 }
 
 .nav-bar-ul {
@@ -35,6 +53,11 @@
 }
 
 .nav-bar-ul li {
+  @media screen and (max-width: 1399px) {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
   width: 180px;
   height: 50px;
   display: flex;
@@ -52,16 +75,32 @@
 }
 
 .nav-bar-label {
+  @media screen and (max-width: 1399px) {
+    display: none;
+  }
   margin-left: 15px;
+}
+
+.nav-bar-label-more-span {
+  @media screen and (max-width: 1399px) {
+    display: none;
+  }
+  font-size: 18px;
+  margin-left: 22px;
 }
 
 .nav-bar-li-selected {
   font-weight: 700;
 }
 
-#nav-bar-more {
+#nav-bar-more-icon-container {
   @media screen and (max-height: 575px) {
     display: none;
+  }
+  @media screen and (max-width: 1399px) {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
   }
   margin-left: 10px;
   font-size: 16px;
