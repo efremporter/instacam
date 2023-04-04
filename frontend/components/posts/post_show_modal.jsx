@@ -112,7 +112,7 @@ function PostShowModal() {
       <div className='post-show-modal-left-side'>
           <img className='post-show-modal-image'
             src={postPhotoUrls[postImageIndex]} 
-            draggable={false}  
+            draggable="false" 
           />
         {getImageArrowsIcon()}
       </div>
