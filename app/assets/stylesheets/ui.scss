@@ -6,7 +6,6 @@
   left: 0;
   background: rgba(0, 0, 0, 0.7);
   z-index: 10;
-  background-color: red;
 }
 
 .modal-child {
@@ -17,15 +16,18 @@
 }
 
 .more-modal-background {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
 }
 
-.more-modal-div {
+.more-modal-container {
+  @media screen and (max-width: 1399px) {
+    width: 60px;
+  }
   position: absolute;
   width: 232px;
   height: 100px;
@@ -45,6 +47,9 @@
 }
 
 .more-modal-li {
+  @media screen and (max-width: 1399px) {
+    padding: none;
+  }
   height: 90px;
   display: flex;
   align-items: center;
@@ -55,6 +60,12 @@
 
 .more-modal-li:hover {
   background-color: #363636;
+}
+
+.more-modal-span {
+  @media screen and (max-width: 1399px) {
+    display: none;
+  }
 }
 
 .more-modal-settings-icon {

@@ -1,5 +1,5 @@
 .profile-background {
-  @media screen and (max-width: 1260px) {
+  @media screen and (max-width: 1399px) {
     margin-left: 73px;
   }
   background-color: #000000;
@@ -95,9 +95,6 @@
   cursor: pointer;
 }
 
-
-
-
 .profile-info-middle {
   display: flex;
   flex-direction: row;
@@ -117,14 +114,6 @@
   cursor: pointer;
 }
 
-
-
-
-
-.profile-info-bottom {
-
-}
-
 .profile-info-name {
   font-weight: 600;
 }
@@ -132,8 +121,6 @@
 .profile-info-bio {
   margin-top: 4px;
 }
-
-
 
 .profile-divider {
   height: 1px;

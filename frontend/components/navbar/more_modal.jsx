@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -12,6 +12,7 @@ function MoreModal() {
   const history = useHistory();
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
   const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
+  const [smallNavBar, setSmallNavBar] = useState(false);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path
@@ -21,7 +22,7 @@ function MoreModal() {
   };
 
   return (
-    <div className="more-modal-div">
+    <div className="more-modal-container">
       <ul className="more-modal-ul">
         <li className="more-modal-li"
           onClick={() => {
@@ -29,7 +30,7 @@ function MoreModal() {
             handleReroute('/settings')
           }}
         >
-          Settings
+          <span className="more-modal-span">Settings</span>
           <MdOutlineSettings
             className="more-modal-settings-icon"
             size="30px"
@@ -40,7 +41,13 @@ function MoreModal() {
             closeModal();
             signOut();
           }}  
-        >Logout</li>
+        >
+          <BiLogOut
+            className="more-modal-settings-icon"
+            size="30px"
+          />
+          <span className="more-modal-span">Logout</span>
+        </li>
       </ul>
     </div>
   );
