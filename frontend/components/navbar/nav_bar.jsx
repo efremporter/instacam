@@ -21,6 +21,7 @@ function NavBar() {
   const dispatch = useDispatch();
   const currentUserId = useSelector(state => state.session.id);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
+  const [smallNavBar, setSmallNavBar] = useState(false);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path
@@ -40,71 +41,76 @@ function NavBar() {
 
   const getCorrectNavBarSize = () => {
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1400) {
+      if (window.innerWidth > 1260) {
+        if (smallNavBar) setSmallNavBar(false);
         return "nav-bar-label"
       } else {
+        if (!smallNavBar) setSmallNavBar(true);
         return "nav-bar-label-hidden"
-      }
-    })
-  }
+      };
+    });
+  };
   
   return (
-    <div id={getCorrectNavBarSize()} className="nav-bar-container">
-      <div className="nav-bar-logo">Instacam</div>
+    <div className="nav-bar-container">
+      <div id="nav-bar-logo-full" className="nav-bar-logo">Instacam</div>
+      <div className="nav-bar-logo">
+        <img className="nav-bar-logo-mini" src={window.navBarMiniLogo}/>
+      </div> 
       <ul className="nav-bar-ul">
         <li className={isSelected('/') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/')}
         >
           {isSelected('/') ?
-            <AiFillHome className="nav-bar-icon" fill="white" size="25px" /> :
-            <AiOutlineHome className="nav-bar-icon" fill="white" size="25px" />
+            <AiFillHome className="nav-bar-icon" fill="white" size="30px" /> :
+            <AiOutlineHome className="nav-bar-icon" fill="white" size="30px" />
           }
-          <span className="nav-bar-label">Home</span>
+          <span id={getCorrectNavBarSize()} className="nav-bar-label">Home</span>
         </li>
         <li className={isSelected('/search') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/search')}
         >
           {isSelected('/search') ?
-            <RiSearchFill className="nav-bar-icon" size="25px"/> :
-            <RiSearchLine className="nav-bar-icon" size="25px"/>
+            <RiSearchFill className="nav-bar-icon" size="30px"/> :
+            <RiSearchLine className="nav-bar-icon" size="30px"/>
           }
-          <span className="nav-bar-label">Search</span>
+          <span id={getCorrectNavBarSize()} className="nav-bar-label">Search</span>
         </li>
         <li className={isSelected('/explore') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/explore')}
         >
           {isSelected('/explore') ?
-            <MdExplore className="nav-bar-icon" size="25px" /> :
-            <MdOutlineExplore className="nav-bar-icon" size="25px" />
+            <MdExplore className="nav-bar-icon" size="30px" /> :
+            <MdOutlineExplore className="nav-bar-icon" size="30px" />
           }
-          <span className="nav-bar-label">Explore</span>
+          <span id={getCorrectNavBarSize()} className="nav-bar-label">Explore</span>
         </li>
         <li className={isSelected('/messages') ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute('/messages')}
         >
           {isSelected('/messages') ?
-            <TbMessageCircle2Filled className="nav-bar-icon" size="25px" /> : 
-            <TbMessageCircle2 className="nav-bar-icon" size="25px" />
+            <TbMessageCircle2Filled className="nav-bar-icon" size="30px" /> : 
+            <TbMessageCircle2 className="nav-bar-icon" size="30px" />
           }
-          <span className="nav-bar-label">Messages</span>
+          <span id={getCorrectNavBarSize()} className="nav-bar-label">Messages</span>
         </li>
         <li className={isSelected('/create') ? "nav-bar-li-selected" : null}
           onClick={() => openModal('createPost')}
         >
           {isSelected('/create') ?
-            <TbSquareRoundedPlusFilled className="nav-bar-icon" size="25px" /> :
-            <TbSquareRoundedPlus className="nav-bar-icon" size="25px" />
+            <TbSquareRoundedPlusFilled className="nav-bar-icon" size="30px" /> :
+            <TbSquareRoundedPlus className="nav-bar-icon" size="30px" />
           }
-          <span className="nav-bar-label">Create</span>
+          <span id={getCorrectNavBarSize()} className="nav-bar-label">Create</span>
         </li>
         <li className={isSelected(`/profile/${currentUserId}`) ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute(`/profile/${currentUserId}`)}
         >
           <ImSphere
             className="nav-bar-icon"
-            size="25px"
+            size="30px"
           />
-          <span className="nav-bar-label">Profile</span>
+          <span id={getCorrectNavBarSize()} className="nav-bar-label">Profile</span>
         </li>
       </ul>
       <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
@@ -115,7 +121,7 @@ function NavBar() {
           className="nav-bar-icon"
           size="23px"
         />
-        <span className="nav-bar-label">More</span>
+        <span id={getCorrectNavBarSize()} className="nav-bar-label">More</span>
       </div>
     </div>
   );

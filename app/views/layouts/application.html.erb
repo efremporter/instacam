@@ -9,6 +9,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <script type="text/javascript">
+    window.navBarMiniLogo = "<%= image_url('mini-logo.png') %>";
+  </script>
+
   <body>
     <%= yield %>
   </body>
