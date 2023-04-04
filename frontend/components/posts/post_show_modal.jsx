@@ -10,8 +10,8 @@ import * as modalActionCreators from '../../actions/modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
 
 function PostShowModal() {
-  const posts = useSelector(state => state.entities.posts);
-  const [postImageIndex, setPostImageIndex] = useState(0);
+  const postsObject = useSelector(state => state.entities.posts);
+  const postsArray = Object.values(postsObject);
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
@@ -19,7 +19,8 @@ function PostShowModal() {
   const location = useLocation();
   const locationArray = location.pathname.split('/');
   const postId = locationArray[locationArray.length - 1];
-  const post = posts[postId]
+  const post = postsObject[postId]
+  const [postImageIndex, setPostImageIndex] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
   const postOwner = useSelector(state => state.entities.users[post.authorId])
@@ -27,21 +28,42 @@ function PostShowModal() {
     fetchUser(post.authorId);
   };
 
-  function getArrowsIcon() {
+  function getImageArrowsIcon() {
     if (postPhotoUrls.length > 1) {
       return (
         <>
-          <IoChevronBackCircle id="post-show-modal-previous-icon"
+          <IoChevronBackCircle id="post-show-modal-previous-image-icon"
             className='post-show-modal-image-icon'
             size={30}
             color="white"
             onClick={() => handleImageIndex('previous')}
           />
-          <IoChevronForwardCircle id="post-show-modal-next-icon"
+          <IoChevronForwardCircle id="post-show-modal-next-image-icon"
             className='post-show-modal-image-icon'
             size={30}
             color="white"
             onClick={() => handleImageIndex('next')}
+          />
+        </>
+      );
+    } else return null;
+  };
+
+  function getPostArrowsIcon() {
+    if (postsArray.length > 1) {
+      return (
+        <>
+          <IoChevronBackCircle id="post-show-modal-previous-post-icon"
+            className='post-show-modal-post-icon'
+            size={45}
+            color="white"
+            onClick={() => handlePostIndex('previous')}
+          />
+          <IoChevronForwardCircle id="post-show-modal-next-post-icon"
+            className='post-show-modal-post-icon'
+            size={45}
+            color="white"
+            onClick={() => handlePostIndex('next')}
           />
         </>
       );
@@ -64,14 +86,35 @@ function PostShowModal() {
     };
   };
 
+  function handlePostIndex(direction) {
+    const postIndex = postsArray.indexOf(post)
+    let newPostIndex;
+    if (direction === 'previous') {
+      if (postIndex > 0) {
+        newPostIndex = postIndex - 1;
+      } else {
+        newPostIndex = postsArray.length - 1;
+      };
+    } else if (direction === 'next') {
+      if (postIndex < postsArray.length - 1) {
+        newPostIndex = postIndex + 1;
+      } else {
+        newPostIndex = 0;
+      };
+    };
+    history.replace(`/posts/${postsArray[newPostIndex].id}`);
+  };
+
+
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
+      {getPostArrowsIcon()}
       <div className='post-show-modal-left-side'>
           <img className='post-show-modal-image'
             src={postPhotoUrls[postImageIndex]} 
             draggable={false}  
           />
-        {getArrowsIcon()}
+        {getImageArrowsIcon()}
       </div>
       <div className='post-show-modal-right-side'>
         <div className='post-show-modal-right-side-header-container'>
@@ -123,7 +166,7 @@ function PostShowModal() {
                   className='post-show-modal-post-like-icon-container'>
                   <IoChatbubbleOutline id="post-comment-icon" 
                     className='post-show-modal-comments-like-icon'
-                    size={32} />
+                    size={30} />
                 </div>
               </div>
               <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
