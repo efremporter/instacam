@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -38,8 +38,18 @@ function NavBar() {
     }
   };
 
+  const getCorrectNavBarSize = () => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1400) {
+        return "nav-bar-label"
+      } else {
+        return "nav-bar-label-hidden"
+      }
+    })
+  }
+  
   return (
-    <div className="nav-bar-container">
+    <div id={getCorrectNavBarSize()} className="nav-bar-container">
       <div className="nav-bar-logo">Instacam</div>
       <ul className="nav-bar-ul">
         <li className={isSelected('/') ? "nav-bar-li-selected" : null}
