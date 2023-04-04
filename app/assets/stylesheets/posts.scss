@@ -1,11 +1,9 @@
 // ProfilePostIndex
 .post-index-container {
   width: 936px;
-  background-color: red;
 }
 
 .post-index-ul {
-  // background-color: blue;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -19,20 +17,22 @@
 .post-index-item {
   width: 309px;
   height: 309px;
-  // margin-left: 1px;
 }
 
-#last-post { 
-  justify-self: flex-start;
-  align-self: flex-start;
-  // position: absolute;
-  // margin: auto;
+.post-index-item-container {
+  position: relative;
 }
 
 .post-index-item:hover {
   cursor: pointer;
   box-shadow: inset 10px 10px 5px black;
   opacity: 80%;
+}
+
+.post-index-item-multiple-images-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 .create-post-modal-container {
