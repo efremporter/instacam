@@ -10,7 +10,7 @@ import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import getDateDifference from "./post_functions";
 
-function PostIndexItem({ post, isProfile, postOwner }) {
+function PostIndexItem({ post, isProfile, postAuthor }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
@@ -85,11 +85,14 @@ function PostIndexItem({ post, isProfile, postOwner }) {
         <div className="feed-post-index-item-header">
           <div className="feed-post-index-item-avatar-container">
             <img className="feed-post-index-item-avatar"
-              src={postOwner.profilePhotoUrl} 
+              src={postAuthor.profilePhotoUrl} 
+              onClick={() => history.push(`/profile/${postAuthor.id}`)}
             />
           </div>
-          <div className="feed-post-index-item-handle">
-            {postOwner.handle}
+          <div className="feed-post-index-item-handle"
+            onClick={() => history.push(`/profile/${postAuthor.id}`)}
+          >
+            {postAuthor.handle}
           </div>
           <span className="feed-post-index-dot-divider">•</span>
           <div className='feed-post-index-item-date'>
@@ -106,14 +109,14 @@ function PostIndexItem({ post, isProfile, postOwner }) {
         <img className={getCorrectClassName() + '-post-index-item'}
           src={postPhotoUrls[postImageIndex]}
           draggable="false"
-          onClick={handlePostClick}
+          onClick={isProfile ? handlePostClick : null}
         />
       ) : 
       <div className='feed-post-index-item-img-and-arrows-container'>
           <img className={getCorrectClassName() + '-post-index-item'}
             src={postPhotoUrls[postImageIndex]}
             draggable="false"
-            onClick={handlePostClick}
+            onClick={isProfile ? handlePostClick : null}
           />
         {getImageArrowsIcon()}
       </div>
@@ -129,6 +132,19 @@ function PostIndexItem({ post, isProfile, postOwner }) {
               <IoChatbubbleOutline size={30}
                 className='feed-post-index-item-icon' />
             </div>
+          </div>
+          <div className="feed-post-index-item-like-count-container">
+            0 Likes
+          </div>
+          <div className="feed-post-index-item-handle-caption-container">
+            <span className="feed-post-index-item-handle"
+              onClick={() => history.push(`/profile/${postAuthor.id}`)}
+            >
+              {postAuthor.handle}
+            </span>
+            <span className="feed-post-index-item-caption">
+              {post.caption}
+            </span>
           </div>
         </div>
       )}

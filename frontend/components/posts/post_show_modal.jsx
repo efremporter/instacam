@@ -139,13 +139,13 @@ function PostShowModal() {
               <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
-                  <div className='post-show-modal-handle'
+                  <span className='post-show-modal-handle'
                     onClick={() => {
                       closeModal();
                       history.replace(`/profile/${postOwner.id}`)
                     }}
-                  >{postOwner.handle}</div>
-                  <div className='post-show-modal-caption'>{post.caption}</div>
+                  >{postOwner.handle}</span>
+                  <span className='post-show-modal-caption'>{post.caption}</span>
                 </div>
                 <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
               </div>

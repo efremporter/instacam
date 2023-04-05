@@ -25,7 +25,9 @@ sample_user_1 = User.create({
 demo_user.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
 sample_user_1.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
 
-post_1 = Post.create({author_id: 1, caption: 'omg look at this hot dog', location: 'istanbul'})
+post_1 = Post.create({author_id: 1,
+caption: 'omg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dog',
+location: 'istanbul'})
 post_1.images.attach(io: File.open("app/assets/images/post_1_hot_dog.jpg"), filename: "square.webp")
 post_1.images.attach(io: File.open("app/assets/images/post_2_hey_friends.jpg"), filename: "square.webp")
 

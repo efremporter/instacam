@@ -58,7 +58,7 @@ function PostIndex({ profileUserId }) {
           return <li key={post.id}>
             <PostIndexItem post={post} 
               isProfile={isProfile} 
-              postOwner={users[post.authorId]}
+              postAuthor={users[post.authorId]}
             />
           </li>
         })}
