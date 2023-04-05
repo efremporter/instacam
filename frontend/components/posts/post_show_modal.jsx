@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { bindActionCreators } from 'redux';
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
-import getDateDifference from './post_date';
+import getDateDifference from './post_functions';
 
 function PostShowModal() {
   const postsObject = useSelector(state => state.entities.posts);

@@ -281,7 +281,7 @@
 }
 
 .create-post-modal-image-preview-info-handle {
-  color: white;
+  color: #FAFAFA;
   font-size: 15px;
   font-weight: 500;
 }
@@ -639,7 +639,6 @@
     margin-left: 73px;
   }
   margin-left: 240px;
-  background-color: blue;
   width: 630px;
   display: flex;
   justify-content: center;
@@ -648,7 +647,6 @@
 .feed-post-index-item-container {
   width: 470px;
   height: 693px;
-  background-color: red;
 }
 
 .feed-post-index-item-header {
@@ -656,12 +654,12 @@
   height: 70px;
   display: flex;
   align-items: center;
-  background-color: green;
+  position: relative;
 }
 
 .feed-post-index-item-avatar-container {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -680,12 +678,6 @@
   font-weight: 600;
 }
 
-.feed-post-index-item-date {
-  color: #A8A8A8;
-  font-size: 14px;
-  // margin-left:
-}
-
 .feed-post-index-dot-divider {
   color: #A8A8A8;
   font-size: 16px;
@@ -693,12 +685,84 @@
   margin-right: 5px;
 }
 
+.feed-post-index-item-date {
+  color: #A8A8A8;
+  font-size: 14px;
+}
+
+.feed-post-index-more-icon-container {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0px;
+  color: #FAFAFA;
+}
+
+.feed-post-index-more-icon-container:hover {
+  cursor: pointer;
+  color: #A8A8A8;
+}
+
+.feed-post-index-item-img-and-arrows-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#feed-index-item-previous-image-icon {
+  left: 7px;
+}
+
+#feed-index-item-next-image-icon {
+  right: 7px;
+}
+
 .feed-post-index-item {
   width: 468px;
   height: 468px;
   margin-left: 1px;
+  border-radius: 5px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+.feed-post-index-bottom-container {
+  height: 164px;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-post-index-item-like-comment-container {
+  height: 46px;
+  display: flex;
+  align-items: center;
+}
+
+.feed-post-index-item-icon-container {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.feed-post-index-item-icon {
+  color: #FAFAFA;
+}
+
+.feed-post-index-item-icon:hover {
+  color: #A8A8A8;
+  cursor: pointer;
+}
 
 input[type="file"] {
   display: none;

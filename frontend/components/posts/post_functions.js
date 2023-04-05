@@ -2,7 +2,6 @@ const getDateDifference = pastDate => {
   const date1 = new Date(); // Retreives current date
   const date2 = new Date(pastDate); // Date the post was created
   const dateDifferenceInMinutes = ((date1 - date2) / 1000) / 60
-  console.log(dateDifferenceInMinutes)
   const dateDifferenceInHours = dateDifferenceInMinutes / 60;
   const dateDifferenceInDays = dateDifferenceInHours / 24;
   if (dateDifferenceInMinutes < 1) {

@@ -9,7 +9,6 @@ import { RxCross1 } from 'react-icons/rx';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { HiOutlineSquare2Stack } from 'react-icons/hi2';
 
-
 function CreatePostModal() {
   const [images, setImages] = useState([]);
   const [imagesPreviewUrls, setImagePreviews] = useState([]);
