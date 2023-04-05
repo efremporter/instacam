@@ -6,10 +6,10 @@ const PostsReducer = (state={}, action) => {
 
   switch (action.type) {
     case RECEIVE_POSTS:
-      return Object.assign(nextState, action.data);
+      return action.data;
 
     case RECEIVE_POST:
-      return Object.assign(nextState, action.data)
+      return Object.assign(nextState, action.data);
 
     case REMOVE_POST:
       delete nextState[action.data]

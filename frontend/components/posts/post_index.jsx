@@ -5,20 +5,20 @@ import * as postActionCreators from '../../actions/post_actions';
 import PostIndexItem from "./post_index_item";
 import { useHistory } from "react-router-dom";
 
-function PostIndex() {
+function PostIndex({ profileUserId }) {
   const dispatch = useDispatch();
   const posts = Object.values(useSelector((state) => state.entities.posts));
   const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
 
   useEffect(() => {
-    fetchPosts()
+    fetchPosts(profileUserId)
     .then(() => {
       // history.push(`/posts/${1}`)
       // openModal('postShow');
       // Lines above are here for styling, delete once complete
     });
     // fetchPost(21)
-  }, [])
+  }, [profileUserId]);
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change
 

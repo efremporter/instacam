@@ -1,7 +1,10 @@
-export const fetchPosts = () => {
+export const fetchPosts = authorId => {
   return $.ajax({
     method: 'GET',
-    url: `/api/posts`
+    url:`/api/posts`,
+    data: { 
+      post: { author_id: authorId} 
+    }
   });
 };
 
@@ -13,7 +16,6 @@ export const fetchPost = id => {
 };
 
 export const createPost = post => {
-  console.log(post)
   return $.ajax({
     method: 'POST',
     url: `/api/posts`,
