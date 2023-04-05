@@ -20,6 +20,7 @@ function NavBar() {
   const history = useHistory();
   const dispatch = useDispatch();
   const currentUserId = useSelector(state => state.session.id);
+  const currentUser = useSelector(state => state.entities.users[currentUserId])
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
 
   const handleReroute = newPath => {
@@ -93,10 +94,7 @@ function NavBar() {
         <li className={isSelected(`/profile/${currentUserId}`) ? "nav-bar-li-selected" : null}
           onClick={() => handleReroute(`/profile/${currentUserId}`)}
         >
-          <ImSphere
-            className="nav-bar-icon"
-            size="30px"
-          />
+          <img className="nav-bar-avatar" src={currentUser.profilePhotoUrl} />
           <span className="nav-bar-label">Profile</span>
         </li>
       </ul>

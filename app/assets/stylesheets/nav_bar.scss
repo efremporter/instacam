@@ -62,16 +62,13 @@
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 25px;
   cursor: pointer;
 }
 
 .nav-bar-ul li:hover {
   background-color: #1e1e1e
-}
-
-.nav-bar-icon {
-  margin-left: 10px;
 }
 
 .nav-bar-label {
@@ -93,6 +90,11 @@
   font-weight: 700;
 }
 
+.nav-bar-avatar {
+  width: 24px;
+  height: 24px;
+}
+
 #nav-bar-more-icon-container {
   @media screen and (max-height: 575px) {
     display: none;
@@ -109,6 +111,7 @@
   width: 180px;
   height: 50px;
   display: flex;
+  justify-content: center;
   align-items: center;
   border-radius: 25px;
   cursor: pointer;
