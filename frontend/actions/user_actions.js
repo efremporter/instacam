@@ -34,8 +34,8 @@ const removeUserErrors = () => {
   };
 };
 
-export const fetchUsers = () => dispatch => {
-  return UserAPIUtil.fetchUsers()
+export const fetchUsers = (authorIds=null) => dispatch => {
+  return UserAPIUtil.fetchUsers(authorIds)
     .then(users => dispatch(receiveUsers(users)))
     .catch(() => dispatch(receiveUserErrors(errors.responseJSON)));
 };

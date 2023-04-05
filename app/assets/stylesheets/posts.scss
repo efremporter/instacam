@@ -1,5 +1,5 @@
 // ProfilePostIndex
-.post-index-container {
+.profile-post-index-container {
   @media screen and (max-width: 1045px) {
     width: 88vw;
   }
@@ -7,7 +7,7 @@
   width: 936px;
 }
 
-.post-index-ul {
+.profile-post-index-ul {
   @media screen and (max-width: 1045px) {
     width: 88vw;
     margin-left: 5px;
@@ -23,7 +23,7 @@
   flex-wrap: wrap;
 }
 
-.post-index-item {
+.profile-post-index-item {
   @media screen and (max-width: 1045px) {
     width: 29vw;
     height: 29vw;
@@ -34,11 +34,11 @@
   height: 309px;
 }
 
-.post-index-item-container {
+.profile-post-index-item-container {
   position: relative;
 }
 
-.post-index-item:hover {
+.profile-post-index-item:hover {
   cursor: pointer;
   box-shadow: inset 10px 10px 5px black;
   opacity: 80%;
@@ -630,6 +630,32 @@
 #post-comment-icon {
   margin-left: 0px;
 }
+
+// -------------------------------------------
+// FeedPostIndex
+
+.feed-post-index-container {
+  @media screen and (max-width: 1399px) {
+    margin-left: 73px;
+  }
+  margin-left: 240px;
+  background-color: blue;
+  width: 630px;
+  display: flex;
+  justify-content: center;
+}
+
+.feed-post-index-item-container {
+  width: 468px;
+  height: 693px;
+  background-color: red;
+}
+
+.feed-post-index-item {
+  width: 468px;
+  height: 468px;
+}
+
 
 input[type="file"] {
   display: none;

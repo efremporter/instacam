@@ -21,7 +21,6 @@ function NavBar() {
   const dispatch = useDispatch();
   const currentUserId = useSelector(state => state.session.id);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
-  const [smallNavBar, setSmallNavBar] = useState(false);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path

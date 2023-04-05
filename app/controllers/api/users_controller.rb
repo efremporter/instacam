@@ -1,6 +1,24 @@
 class Api::UsersController < ApplicationController
   # before_action :require_signed_in, only: [:update]
 
+  def index 
+    if params[:user] && params[:user][:author_ids].length > 0
+      author_ids = params[:user][:author_ids]
+      @users = []
+      author_ids.each do |id|
+        user = User.find(id)
+        if user
+          @users << user
+        end
+      end
+      render "api/users/index.json.jbuilder"
+    else
+      errors = []
+      errors.push('Users not found')
+      render json: errors, status: 404
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     if @user
@@ -58,6 +76,6 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :name, :handle, :password)
+    params.require(:user).permit(:email, :name, :handle, :password, :author_ids)
   end
 end
