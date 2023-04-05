@@ -33,7 +33,6 @@ function CreatePostModal() {
   }, []);
 
   useEffect(() => {
-    console.log(imagesPreviewUrls)
   }, [imagesPreviewUrls])
 
   const handleImages = (e, type) => {
@@ -55,7 +54,6 @@ function CreatePostModal() {
       console.log("Some files were not uploaded. You can only choose 10 or fewer files.");
     } else {
       imagesCopy.push(...uploadedFiles);
-      console.log(imagesCopy)
       setImages(imagesCopy);
     };
     

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -22,13 +22,14 @@ function NavBar() {
   const currentUserId = useSelector(state => state.session.id);
   const currentUser = useSelector(state => state.entities.users[currentUserId])
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
+  const modal = useSelector(state => state.ui.modal);
 
   const handleReroute = newPath => {
     // Only push new path onto history stack if we're not already at that path
     history.location.pathname === newPath ?
       null :
       history.push(newPath)
-  }
+  };
 
   const isSelected = pathname => {
     const currentPathName = history.location.pathname;
@@ -38,7 +39,14 @@ function NavBar() {
       return false;
     }
   };
-  
+
+  const isCreateSelected = () => {
+    if (modal === 'createPost') {
+      return true;
+    };
+    return false;
+  };
+
   return (
     <div className="nav-bar-container">
       <div id="nav-bar-logo-full" className="nav-bar-logo">Instacam</div>
@@ -82,10 +90,10 @@ function NavBar() {
           }
           <span className="nav-bar-label">Messages</span>
         </li>
-        <li className={isSelected('/create') ? "nav-bar-li-selected" : null}
+        <li className={isCreateSelected() ? "nav-bar-li-selected" : null}
           onClick={() => openModal('createPost')}
         >
-          {isSelected('/create') ?
+          {isCreateSelected() ?
             <TbSquareRoundedPlusFilled className="nav-bar-icon" size="30px" /> :
             <TbSquareRoundedPlus className="nav-bar-icon" size="30px" />
           }

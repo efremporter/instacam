@@ -12,6 +12,12 @@
   position: fixed;
   top: 0px;
   z-index: 2;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #nav-bar-logo-full {
@@ -27,12 +33,6 @@
 .nav-bar-logo {
   cursor: pointer;
   font-size: 30px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .nav-bar-logo-mini {
