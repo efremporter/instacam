@@ -9,8 +9,10 @@ import PostIndexItem from "./post_index_item";
 function PostIndex({ profileUserId }) {
   const dispatch = useDispatch();
   const posts = Object.values(useSelector((state) => state.entities.posts));
+  const users = useSelector(state => state.entities.users);
   const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
   const { fetchUsers } = bindActionCreators(userActionCreators, dispatch); 
+
   useEffect(() => {
     if (profileUserId) {
       fetchPosts(profileUserId);
@@ -29,7 +31,7 @@ function PostIndex({ profileUserId }) {
           });
           const authorIdsArray = Object.values(authorIdsHash);
           fetchUsers(authorIdsArray);
-        }
+        };
       });
     };
   }, [profileUserId, posts.length]);
@@ -54,7 +56,10 @@ function PostIndex({ profileUserId }) {
       <ul className={getCorrectClassName() + "-post-index-ul"}>
         {posts.map(post => {
           return <li key={post.id}>
-            <PostIndexItem post={post} isProfile={isProfile} />
+            <PostIndexItem post={post} 
+              isProfile={isProfile} 
+              postOwner={users[post.authorId]}
+            />
           </li>
         })}
       </ul>

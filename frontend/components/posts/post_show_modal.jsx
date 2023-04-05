@@ -8,6 +8,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { bindActionCreators } from 'redux';
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
+import getDateDifference from './post_date';
 
 function PostShowModal() {
   const postsObject = useSelector(state => state.entities.posts);
@@ -146,9 +147,7 @@ function PostShowModal() {
                   >{postOwner.handle}</div>
                   <div className='post-show-modal-caption'>{post.caption}</div>
                 </div>
-                <div className='post-show-modal-created-at'>{new Date(post.createdAt).toLocaleDateString('en-US', {
-                  month: '2-digit', day: '2-digit', year: 'numeric'
-                })}</div>
+                <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
               </div>
               <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} />
             </div>
