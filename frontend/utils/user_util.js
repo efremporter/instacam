@@ -1,5 +1,4 @@
 export const fetchUsers = authorIds => {
-  console.log(authorIds)
   return $.ajax({
     method: 'GET',
     url: `/api/users`,

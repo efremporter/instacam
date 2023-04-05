@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { bindActionCreators } from 'redux';
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
+import getDateDifference from './post_functions';
 
 function PostShowModal() {
   const postsObject = useSelector(state => state.entities.posts);
@@ -138,17 +139,15 @@ function PostShowModal() {
               <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
-                  <div className='post-show-modal-handle'
+                  <span className='post-show-modal-handle'
                     onClick={() => {
                       closeModal();
                       history.replace(`/profile/${postOwner.id}`)
                     }}
-                  >{postOwner.handle}</div>
-                  <div className='post-show-modal-caption'>{post.caption}</div>
+                  >{postOwner.handle}</span>
+                  <span className='post-show-modal-caption'>{post.caption}</span>
                 </div>
-                <div className='post-show-modal-created-at'>{new Date(post.createdAt).toLocaleDateString('en-US', {
-                  month: '2-digit', day: '2-digit', year: 'numeric'
-                })}</div>
+                <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
               </div>
               <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} />
             </div>
