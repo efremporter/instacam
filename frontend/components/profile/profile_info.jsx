@@ -2,16 +2,32 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import { MdOutlineSettings } from 'react-icons/md';
 
-function ProfileInfo() {
-  const profileUser = useSelector((state) => Object.values(state.entities.users)[0])
+function ProfileInfo({ profileUserId, isMyProfile }) {
+  const profileUser = useSelector((state) => state.entities.users[profileUserId]);
   const postCount = useSelector((state) => Object.values(state.entities.posts).length);
-  // const profileUser = useContext() <-- update to this soon
   
+  const getCorrectProfileHeaderButton = () => {
+    if (isMyProfile) {
+      return <button className='profile-info-button' id='profile-info-edit-button'>Edit profile</button>
+    } else {
+      return <button className='profile-info-button' id='profile-info-follow-button'>Follow</button>
+    }
+  };
+
   return (
     <div className='profile-info'>
       <div className='profile-info-top'>
           <h2 className='profile-info-handle'>{profileUser.handle}</h2>
-          <button className='profile-info-edit-button'>Edit profile</button>
+          {getCorrectProfileHeaderButton()}
+          {isMyProfile ? (
+            <div className="profile-info-settings-button">
+              <MdOutlineSettings
+                size={30}
+                fill='white' 
+              />
+            </div>
+          ) :
+          null}
           <div className="profile-info-settings-button">
             <MdOutlineSettings
               size={30}

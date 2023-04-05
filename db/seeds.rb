@@ -23,17 +23,18 @@ sample_user_1 = User.create({
 })
 
 demo_user.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
+sample_user_1.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
 
 post_1 = Post.create({author_id: 1, caption: 'check out this melon', location: 'istanbul'})
 post_1.images.attach(io: File.open("app/assets/images/post_2_hey_friends.jpg"), filename: "square.webp")
-post_1.images.attach(io: File.open("app/assets/images/post_1_melon.png"), filename: "square.webp")
+post_1.images.attach(io: File.open("app/assets/images/post_1_hot_dog.jpg"), filename: "square.webp")
 
 
 post_2 = Post.create({author_id: 1, caption: 'hey there my friends', location: 'somewhere over the rainbow'})
 post_2.images.attach(io: File.open("app/assets/images/post_2_hey_friends.jpg"), filename: "square.webp")
 # change above line back to 2 after styling postShow
 post_3 = Post.create({author_id: 1, caption: 'omg look at this hot dog', location: 'Top Dog'})
-post_3.images.attach(io: File.open("app/assets/images/post_3_hot_dog.jpg"), filename: "square.webp")
+post_3.images.attach(io: File.open("app/assets/images/post_3_melon.png"), filename: "square.webp")
 
 post_4 = Post.create({author_id: 1, caption: 'grandma shoes for the day', location: 'Rome'})
 post_4.images.attach(io: File.open("app/assets/images/post_4_grandma_shoes.png"), filename: "square.webp")

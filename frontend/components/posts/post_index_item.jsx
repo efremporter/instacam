@@ -29,7 +29,9 @@ function PostIndexItem({ post }) {
   return (
     <div className="post-index-item-container">
       {getMultipleImagesIcon()}
-      <img className="post-index-item" src={post.imageUrls[0]}
+      <img className="post-index-item"
+        src={post.imageUrls[0]}
+        draggable="false"
         onClick={handlePostClick}
       />
     </div>

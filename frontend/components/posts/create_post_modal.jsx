@@ -182,7 +182,7 @@ function CreatePostModal() {
           <div className='create-post-modal-image-preview-info-inner-container'>
             <div className='create-post-modal-image-preview-info-header'>
               <img className='create-post-modal-image-preview-info-avatar'
-                draggable={false}
+                draggable="false"
                 src={profilePhotoUrl} />
               <div className='create-post-modal-image-preview-info-handle'>{currentUserHandle}</div>
             </div>

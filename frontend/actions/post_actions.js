@@ -40,8 +40,8 @@ const removePostErrors = () => {
   };
 };
 
-export const fetchPosts = () => dispatch => {
-  return PostAPIUtil.fetchPosts()
+export const fetchPosts = (authorId=null) => dispatch => {
+  return PostAPIUtil.fetchPosts(authorId)
     .then(posts => dispatch(receivePosts(posts)))
     .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
 };
