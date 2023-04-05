@@ -639,7 +639,7 @@
   @media screen and (max-width: 1399px) {
     margin-left: 73px;
   }
-  margin-top: 14px;
+  margin-top: 20px;
   margin-left: 240px;
   width: 630px;
   display: flex;
@@ -647,13 +647,12 @@
 }
 
 .feed-post-index-item-container {
-  width: 470px;
-  height: 693px;
+  width: 540px;
   border-bottom: 1px solid rgb(43, 43, 43);
 }
 
 .feed-post-index-item-header {
-  width: 470px;
+  width: 540px;
   height: 70px;
   display: flex;
   align-items: center;
@@ -726,8 +725,8 @@
 }
 
 .feed-post-index-item {
-  width: 468px;
-  height: 468px;
+  width: 538px;
+  height: 538px;
   margin-left: 1px;
   border-radius: 5px;
   -webkit-touch-callout: none;
