@@ -6,7 +6,7 @@ import * as modalActionCreators from '../../actions/modal_actions';
 import * as postActionCreators from '../../actions/post_actions';
 import * as userActionCreators from '../../actions/user_actions';
 import MoreModal from '../navbar/more_modal';
-import CreatePostModal from '../posts/create_post_modal';
+import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import PostShowModal from '../posts/post_show_modal';
 
 function Modal() {
@@ -62,7 +62,7 @@ function Modal() {
       component = <MoreModal />;
       break;
     case 'createPost':
-      component = <CreatePostModal />;
+      component = <CreateAndUpdatePostModal />;
       break;
     case 'postShow':
       component = <PostShowModal />;

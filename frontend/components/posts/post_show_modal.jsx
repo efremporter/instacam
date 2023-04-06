@@ -26,8 +26,8 @@ function PostShowModal() {
   const [postImageIndex, setPostImageIndex] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
-  const postOwner = useSelector(state => state.entities.users[post.authorId])
-  if (!postOwner) {
+  const postAuthor = useSelector(state => state.entities.users[post.authorId])
+  if (!postAuthor) {
     fetchUser(post.authorId);
   };
 
@@ -121,34 +121,34 @@ function PostShowModal() {
       <div className='post-show-modal-right-side'>
         <div className='post-show-modal-right-side-header-container'>
           <div className='post-show-modal-right-side-header'>
-            <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
+            <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
             <div className='post-show-modal-handle-location-container'>
               <div className='post-show-modal-handle'
                 onClick={() => {
                   closeModal();
-                  history.replace(`/profile/${postOwner.id}`)
+                  history.replace(`/profile/${postAuthor.id}`)
                 }}
-              >{postOwner.handle}</div>
+              >{postAuthor.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
             </div>
-            <BiDotsHorizontalRounded size={24}
+            {postAuthor.id === currentUserId ? <BiDotsHorizontalRounded size={24}
               className='post-show-modal-more-icon'
               onClick={() => openDoubleModal('postShowMore')}
-            />
+            /> : null}
           </div>
         </div>
         <div className='post-show-modal-comments-container'>
           <div className='post-show-modal-comments'>
             <div className='post-show-modal-comments-caption-container'>
-              <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
+              <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
                   <span className='post-show-modal-handle'
                     onClick={() => {
                       closeModal();
-                      history.replace(`/profile/${postOwner.id}`)
+                      history.replace(`/profile/${postAuthor.id}`)
                     }}
-                  >{postOwner.handle}</span>
+                  >{postAuthor.handle}</span>
                   <span className='post-show-modal-caption'>{post.caption}</span>
                 </div>
                 <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>

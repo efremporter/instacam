@@ -14,11 +14,11 @@ function Home() {
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const history = useHistory();
 
-  // fetchPost(1)
-  //   .then(() => {
-  //     history.push(`/posts/${2}`);
-  //     setTimeout(() => openDoubleModal('postShowMore'), 1000)
-  //   });
+  fetchPost(1)
+    .then(() => {
+      // history.push(`/posts/${1}/update`);
+      // setTimeout(() => openDoubleModal('updatePost'), 1000)
+    });
 
   return (
     <div className="home-container">
