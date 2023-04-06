@@ -641,9 +641,14 @@
   }
   margin-top: 20px;
   margin-left: 240px;
-  width: 630px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  overflow: auto;
+}
+
+.feed-post-index-ul {
+  width: 630px;
 }
 
 .feed-post-index-item-container {
@@ -792,6 +797,114 @@
   margin-left: 4px;
   line-height: normal;
 }
+
+// -------------------------------------------
+// PostShowMoreModal
+
+.post-show-more-modal-container {
+  height: 180px;
+  width: 400px;
+  border-radius: 5px;
+  background-color: #262626;
+}
+
+.post-show-more-modal-ul {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+}
+
+.post-show-more-modal-ul li {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #F5F5F5;
+  font-weight: 300;
+  border-top: 1px solid #363636;
+}
+
+#post-show-more-modal-delete-button {
+  border: none;
+  color: #ED4956;
+  font-weight: 600;
+}
+
+
+// -------------------------------------------
+// DeletePostModal
+
+.delete-post-modal-container {
+  background-color: #262626;
+  border-radius: 14px;
+  height: 202px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-post-header-container {
+  height: 106px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.delete-post-header-message {
+  font-size: 22px;
+  color: #F5F5F5;
+}
+
+.delete-post-header-subtitle {
+  font-size: 16px;
+  color: #A8A8A8;
+}
+
+.delete-post-buttons-container {
+  width: 100%;
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-post-button {
+  border-top: 1px solid #363636;
+  height: 48px;
+  color: #F5F5F5;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#delete-post-delete-button {
+  color: #ED4956;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
 
 input[type="file"] {
   display: none;

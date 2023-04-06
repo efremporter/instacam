@@ -7,6 +7,7 @@ import { IoChevronForwardCircle, IoChevronBackCircle,
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { bindActionCreators } from 'redux';
 import * as modalActionCreators from '../../actions/modal_actions';
+import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
 import getDateDifference from './post_functions';
 
@@ -16,6 +17,7 @@ function PostShowModal() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
+  const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
@@ -29,7 +31,7 @@ function PostShowModal() {
     fetchUser(post.authorId);
   };
 
-  function getImageArrowsIcon() {
+  const getImageArrowsIcon =  () => {
     if (postPhotoUrls.length > 1) {
       return (
         <>
@@ -50,7 +52,7 @@ function PostShowModal() {
     } else return null;
   };
 
-  function getPostArrowsIcon() {
+  const getPostArrowsIcon = () => {
     if (postsArray.length > 1) {
       return (
         <>
@@ -71,7 +73,7 @@ function PostShowModal() {
     } else return null;
   };
 
-  function handleImageIndex(direction) {
+  const handleImageIndex = (direction) => {
     if (direction === 'previous') {
       if (postImageIndex > 0) {
         setPostImageIndex(postImageIndex - 1);
@@ -87,7 +89,7 @@ function PostShowModal() {
     };
   };
 
-  function handlePostIndex(direction) {
+  const handlePostIndex = (direction) => {
     const postIndex = postsArray.indexOf(post)
     let newPostIndex;
     if (direction === 'previous') {
@@ -105,7 +107,6 @@ function PostShowModal() {
     };
     history.replace(`/posts/${postsArray[newPostIndex].id}`);
   };
-
 
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
@@ -130,7 +131,10 @@ function PostShowModal() {
               >{postOwner.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
             </div>
-            <BiDotsHorizontalRounded size={24} className='post-show-modal-more-icon'/>
+            <BiDotsHorizontalRounded size={24}
+              className='post-show-modal-more-icon'
+              onClick={() => openDoubleModal('postShowMore')}
+            />
           </div>
         </div>
         <div className='post-show-modal-comments-container'>

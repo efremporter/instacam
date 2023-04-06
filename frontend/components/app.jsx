@@ -5,19 +5,24 @@ import SignInForm from './greeting/sign_in_form';
 import SignUpForm from './greeting/sign_up_form';
 import Home from './home/home';
 import Modal from './modal/modal';
+import DoubleModal from './modal/double_modal';
 import NavBar from './navbar/nav_bar';
 import Profile from './profile/profile';
 
 const App = () => {
   return (
     <>
-      <AuthRoute path="/signup" component={SignUpForm} />
-      <AuthRoute path="/" component={SignInForm} />
+      <Switch>
+        <AuthRoute path="/signup" component={SignUpForm} />
+        <AuthRoute path="/" component={SignInForm} />
+      </Switch>
       <ProtectedRoute path="/" component={NavBar}/>
       <ProtectedRoute path="/" component={Modal} />
-      <ProtectedRoute exact path="/" component={Home} />
+      <ProtectedRoute path="/" component={DoubleModal} />
       <Switch>
-        <ProtectedRoute exact path="/profile/:userId" component={Profile} />
+        <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute path="/posts/:postId/edit" component={Home} />
+        <ProtectedRoute path="/profile/:userId" component={Profile} />
       </Switch>
     </>
   )
