@@ -27,13 +27,8 @@ function ProfileInfo({ profileUserId, isMyProfile }) {
               />
             </div>
           ) :
-          null}
-          <div className="profile-info-settings-button">
-            <MdOutlineSettings
-              size={30}
-              fill='white' />
-          </div>
-          
+            null
+          }
       </div>
       <div className='profile-info-middle'>
         <div>
