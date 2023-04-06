@@ -5,6 +5,7 @@ import SignInForm from './greeting/sign_in_form';
 import SignUpForm from './greeting/sign_up_form';
 import Home from './home/home';
 import Modal from './modal/modal';
+import DoubleModal from './modal/double_modal';
 import NavBar from './navbar/nav_bar';
 import Profile from './profile/profile';
 
@@ -15,9 +16,10 @@ const App = () => {
       <AuthRoute path="/" component={SignInForm} />
       <ProtectedRoute path="/" component={NavBar}/>
       <ProtectedRoute path="/" component={Modal} />
+      <ProtectedRoute path="/" component={DoubleModal} />
       <ProtectedRoute exact path="/" component={Home} />
       <Switch>
-        <ProtectedRoute exact path="/profile/:userId" component={Profile} />
+        <ProtectedRoute path="/profile/:userId" component={Profile} />
       </Switch>
     </>
   )

@@ -1,5 +1,5 @@
-export const OPEN_DOUBLE_MODAL = "OPEN_MODAL";
-export const CLOSE_DOUBLE_MODAL = "CLOSE_MODAL";
+export const OPEN_DOUBLE_MODAL = "OPEN_DOUBLE_MODAL";
+export const CLOSE_DOUBLE_MODAL = "CLOSE_DOUBLE_MODAL";
 
 const receiveModal = modalType => {
   return {
@@ -14,10 +14,10 @@ const collapseModal = () => {
   };
 };
 
-export const openModal = type => dispatch => {
+export const openDoubleModal = type => dispatch => {
   dispatch(receiveModal(type));
 };
 
-export const closeModal = () => dispatch => {
+export const closeDoubleModal = () => dispatch => {
   dispatch(collapseModal());
 };
