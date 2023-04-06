@@ -12,13 +12,16 @@ import Profile from './profile/profile';
 const App = () => {
   return (
     <>
-      <AuthRoute path="/signup" component={SignUpForm} />
-      <AuthRoute path="/" component={SignInForm} />
+      <Switch>
+        <AuthRoute path="/signup" component={SignUpForm} />
+        <AuthRoute path="/" component={SignInForm} />
+      </Switch>
       <ProtectedRoute path="/" component={NavBar}/>
       <ProtectedRoute path="/" component={Modal} />
       <ProtectedRoute path="/" component={DoubleModal} />
-      <ProtectedRoute exact path="/" component={Home} />
       <Switch>
+        <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute path="/posts/:postId/edit" component={Home} />
         <ProtectedRoute path="/profile/:userId" component={Profile} />
       </Switch>
     </>

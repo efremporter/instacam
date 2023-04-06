@@ -108,11 +108,6 @@ function PostShowModal() {
     history.replace(`/posts/${postsArray[newPostIndex].id}`);
   };
 
-  const handleEditPostClick = () => {
-    openDoubleModal('editPost');
-    console.log()
-  };
-
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}
@@ -138,7 +133,7 @@ function PostShowModal() {
             </div>
             <BiDotsHorizontalRounded size={24}
               className='post-show-modal-more-icon'
-              onClick={handleEditPostClick}
+              onClick={() => openDoubleModal('postShowMore')}
             />
           </div>
         </div>

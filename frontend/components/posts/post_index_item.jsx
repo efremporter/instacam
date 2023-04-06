@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as modalActionCreators from "../../actions/modal_actions";
+import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import { HiSquare2Stack } from 'react-icons/hi2';
@@ -14,6 +15,7 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
+  const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
   const postPhotoUrls = post.imageUrls;
 
@@ -78,6 +80,11 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
     };
   };
 
+  const handlePostIndexItemMore = () => {
+    history.push(`/posts/${post.id}/edit`)
+    openDoubleModal('postShowMore');
+  }
+
   return (
     <div className={getCorrectClassName() + '-post-index-item-container'}>
       {isProfile ? getMultipleImagesIcon() : null}
@@ -101,6 +108,7 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
           <div className="feed-post-index-more-icon-container">
             <BiDotsHorizontalRounded size={24}
               className='feed-post-index-item-more-icon'
+              onClick={handlePostIndexItemMore}
             />
           </div>
         </div>
