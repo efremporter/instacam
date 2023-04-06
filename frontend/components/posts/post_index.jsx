@@ -15,6 +15,7 @@ function PostIndex({ profileUserId }) {
 
   useEffect(() => {
     if (profileUserId) {
+      console.log(profileUserId)
       fetchPosts(profileUserId);
     } else {
       // This fetches all posts. Eventually, add logic to fetch posts

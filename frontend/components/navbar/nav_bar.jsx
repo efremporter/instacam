@@ -13,7 +13,6 @@ import {
   TbSquareRoundedPlus,
   TbSquareRoundedPlusFilled
 } from "react-icons/tb";
-import { ImSphere } from "react-icons/im";
 
 function NavBar() {
 
@@ -112,7 +111,7 @@ function NavBar() {
       >
         <FaBars
           className="nav-bar-icon"
-          size="25px"
+          size="27px"
         />
         <span className="nav-bar-label-more-span">More</span>
       </div>

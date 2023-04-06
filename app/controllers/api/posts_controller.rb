@@ -1,7 +1,7 @@
 class Api::PostsController < ApplicationController
 
   def index
-    if params[:post] && params[:post][:author_id].length > 1
+    if params[:post] && params[:post][:author_id].length > 0
       @posts = Post.where(author_id: params[:post][:author_id])
     else
       @posts = Post.all.limit(5)
