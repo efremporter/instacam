@@ -8,6 +8,8 @@ import PostIndex from "../posts/post_index";
 function Home() {
   const dispatch = useDispatch();
   const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
+  const history = useHistory();
+
   return (
     <div className="home-container">
       <PostIndex />

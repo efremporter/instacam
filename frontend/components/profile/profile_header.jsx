@@ -3,9 +3,7 @@ import { useSelector } from "react-redux";
 import ProfileInfo from './profile_info';
 
 function ProfileHeader({ profileUserId, isMyProfile }) {
-  console.log(profileUserId)
   const profilePhotoUrl = useSelector((state) => state.entities.users[profileUserId].profilePhotoUrl);
-
   
   return (
     <div className='profile-header'>

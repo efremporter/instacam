@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import * as postActionCreators from '../../actions/post_actions';
 import * as userActionCreators from '../../actions/user_actions';
 import PostIndexItem from "./post_index_item";
+import { FiCamera } from 'react-icons/fi';
 
 function PostIndex({ profileUserId }) {
   const dispatch = useDispatch();
@@ -15,7 +16,6 @@ function PostIndex({ profileUserId }) {
 
   useEffect(() => {
     if (profileUserId) {
-      console.log(profileUserId)
       fetchPosts(profileUserId);
     } else {
       // This fetches all posts. Eventually, add logic to fetch posts
@@ -38,10 +38,6 @@ function PostIndex({ profileUserId }) {
   }, [profileUserId, posts.length]);
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change
-
-  // useEffect(() => {
-
-  // }, [posts])
   
   const isProfile = Boolean(profileUserId);
   const getCorrectClassName = () => {
@@ -50,6 +46,17 @@ function PostIndex({ profileUserId }) {
     } else {
       return 'feed';
     };
+  };
+
+  if (isProfile && posts.length === 0) {
+    return (
+      <div className="profile-post-index-no-posts-container">
+        <div className="profile-post-index-no-posts-icon">
+          <FiCamera size={32} />
+        </div>
+        <div className="profile-post-index-no-posts-message">No Posts Yet</div>
+      </div>
+    );
   };
 
   return (
@@ -65,7 +72,7 @@ function PostIndex({ profileUserId }) {
         })}
       </ul>
     </div>
-  );
+    )
 };
 
 export default PostIndex;
