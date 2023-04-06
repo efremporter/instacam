@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as DoubleModalActionCreators from '../../actions/double_modal_actions';
-import EditPostModal from '../posts/edit_post_modal';
+import PostShowMoreModal from '../posts/post_show_more_modal';
 
 function DoubleModal() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function DoubleModal() {
   let component;
   switch (modal) {
     case 'editPost':
-      component = <EditPostModal />
+      component = <PostShowMoreModal />
       break;
     default:
       return null;

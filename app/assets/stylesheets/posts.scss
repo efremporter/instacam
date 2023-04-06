@@ -794,15 +794,38 @@
 }
 
 // -------------------------------------------
-// EditPostModal
+// PostShowMoreModal
 
-.edit-post-modal-container {
-  height: 140px;
-  width: 40px;
-  background-color: red;
+.post-show-more-modal-container {
+  height: 150px;
+  width: 400px;
+  border-radius: 5px;
+  background-color: #262626;
 }
 
+.post-show-more-modal-ul {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+}
 
+.post-show-more-modal-ul li {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #F5F5F5;
+  font-weight: 300;
+  border-top: 1px solid #363636;
+}
+
+#post-show-more-modal-delete-button {
+  border: none;
+  color: #ED4956;
+  font-weight: 600;
+}
 
 
 
