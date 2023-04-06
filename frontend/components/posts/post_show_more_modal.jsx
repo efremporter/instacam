@@ -16,6 +16,11 @@ function PostShowMoreModal() {
     openDoubleModal('deletePost');
   };
 
+  const handleEditPostClick = () => {
+    closeDoubleModal();
+    openDoubleModal('updatePost');
+  };
+
   const handleCancelClick = () => {
     closeDoubleModal();
     if (locationArray.includes('edit')) {
@@ -30,13 +35,10 @@ function PostShowMoreModal() {
     <div className="post-show-more-modal-container">
       <ul className="post-show-more-modal-ul">
         <li id="post-show-more-modal-delete-button"
-          onClick={handleDeletePostClick}
-        >
+          onClick={handleDeletePostClick}>
           <div>Delete</div>
         </li>
-        <li 
-          onClick={() => {}}
-        >
+        <li onClick={handleEditPostClick}>
           <div>Edit</div>
         </li>
         <li onClick={handleCancelClick}>
