@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as postActionCreators from '../../actions/post_actions';
-import * as modalActionCreators from '../../actions/modal_actions';
-import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import { IoImagesOutline } from 'react-icons/io5';
 import { GoLocation } from 'react-icons/go';
 import { RxCross1 } from 'react-icons/rx';
@@ -11,14 +9,12 @@ import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { HiOutlineSquare2Stack } from 'react-icons/hi2';
 import { useHistory } from 'react-router-dom';
 
-function CreateAndUpdatePostModal() {
+function CreateAndUpdatePostModal({ postId, closeModal, closeDoubleModal }) {
   // Lines below are for if user is accessing modal via the 'Edit' post button
-  const modal = useSelector(state => state.ui.modal);
-  const isUpdateModal = modal.type === 'updatePost';
-  const postId = isUpdateModal ? modal.postId : null;
-  // postId will be null if the createPostModal is mounted, since we don't have
-  // a postId when creating a post
+  const isUpdateModal = Boolean(postId);
   const post = useSelector(state => state.entities.posts[postId]);
+  const currentUserId = useSelector(state => state.session.id);
+  const currentUser = useSelector(state => state.entities.users[currentUserId]);
 
   const history = useHistory();
   const [images, setImages] = useState([]);
@@ -26,13 +22,8 @@ function CreateAndUpdatePostModal() {
   const [imageIndex, setImageIndex] = useState(0);
   const [caption, setCaption] = useState('');
   const [postLocation, setPostLocation] = useState('');
-  const currentUserId = useSelector((state) => state.session.id);
-  const currentUserHandle = useSelector((state) => state.entities.users[currentUserId].handle);
-  const profilePhotoUrl = useSelector((state) => state.entities.users[currentUserId].profilePhotoUrl);
   const dispatch = useDispatch();
   const { createPost, fetchPost, updatePost } = bindActionCreators(postActionCreators, dispatch);
-  const { closeModal } =  bindActionCreators(modalActionCreators, dispatch);
-  const { closeDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
 
   useEffect(() => {
     if (isUpdateModal) {
@@ -42,7 +33,7 @@ function CreateAndUpdatePostModal() {
           handlePostLocation(post.location);
           handleCaption(post.caption);
           setImagePreviewUrls(post.imageUrls);
-        })
+        });
       } else {
         handlePostLocation(post.location);
         handleCaption(post.caption);
@@ -238,8 +229,10 @@ function CreateAndUpdatePostModal() {
             <div className='create-post-modal-image-preview-info-header'>
               <img className='create-post-modal-image-preview-info-avatar'
                 draggable="false"
-                src={profilePhotoUrl} />
-              <div className='create-post-modal-image-preview-info-handle'>{currentUserHandle}</div>
+                src={currentUser.profilePhotoUrl} />
+              <div className='create-post-modal-image-preview-info-handle'>
+                {currentUser.handle}
+              </div>
             </div>
             <div className='create-post-modal-image-preview-info-input-container'>
               <textarea

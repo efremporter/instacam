@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { bindActionCreators } from 'redux';
-import * as modalActionCreators from '../../actions/modal_actions';
-import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
-import * as postActionCreators from '../../actions/post_actions';
 import getDateDifference from './post_functions';
 
-function PostShowModal({ postId }) {
+function PostShowModal({ postId, closeModal, openDoubleModal }) {
   const postsObject = useSelector(state => state.entities.posts);
   const postsArray = Object.values(postsObject);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
-  const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
-  const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
-  const location = useLocation();
-  const locationArray = location.pathname.split('/');
 
-  const post = postsObject[postId] ? postsObject[postId] : null
-  if (!post) {
-    fetchPost(postId);
-  };
+  const post = postsObject[postId];
   const [postImageIndex, setPostImageIndex] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
+
+  // The if statement below should never fire because we can only
+  // access the PostShowModal via the Profile component, so postAuthor
+  // will always already be in the redux state. However, in case I use this
+  // modal elsewhere in the future, this will save me some debugging
   const postAuthor = useSelector(state => state.entities.users[post.authorId])
   if (!postAuthor) {
     fetchUser(post.authorId);
@@ -119,7 +113,7 @@ function PostShowModal({ postId }) {
       from: "profile",
       postId: post.id
     };
-    openDoubleModal(doubleModal)
+    openDoubleModal(doubleModal);
   };
 
   return (

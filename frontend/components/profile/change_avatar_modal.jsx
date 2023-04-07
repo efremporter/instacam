@@ -1,14 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as modalActionCreators from '../../actions/modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
 
-function ChangeAvatarModal() {
+function ChangeAvatarModal({ currentUserId, closeModal }) {
   const dispatch = useDispatch();
-  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
   const { updateUser } = bindActionCreators(userActionCreators, dispatch);
-  const currentUserId = useSelector(state => state.session.id);
 
   const handleAvatar = e => {
     e.preventDefault();
@@ -18,7 +15,7 @@ function ChangeAvatarModal() {
       userFormData.append("user[id]", currentUserId);
       userFormData.append("user[profile_photo_url]", avatar);
       updateUser(userFormData)
-      .then(closeModal)
+      .then(closeModal);
     } else {
       return;
     };

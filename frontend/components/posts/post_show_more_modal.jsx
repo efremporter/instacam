@@ -1,39 +1,24 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 
-function PostShowMoreModal() {
-  const history = useHistory();
-  const location = useLocation();
-  const locationArray = location.pathname.split('/');
-  const navigatedFromFeed = locationArray.includes('edit');
-  const postId = navigatedFromFeed ?
-    locationArray[locationArray.length - 2] :
-    locationArray[locationArray.length - 1]
-  const dispatch = useDispatch();
-  const { openDoubleModal, closeDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
-  
+function PostShowMoreModal({ postId, openDoubleModal, closeDoubleModal }) {
+
   const handleDeletePostClick = () => {
     closeDoubleModal();
-    openDoubleModal('deletePost');
+    const doubleModal = {
+      type: 'deletePost',
+      from: 'postShow'
+    };
+    openDoubleModal(doubleModal);
   };
 
   const handleEditPostClick = () => {
     closeDoubleModal();
-    history.replace(`/posts/${postId}/update`);
-    openDoubleModal('updatePost');
-  };
-
-  const handleCancelClick = () => {
-    closeDoubleModal();
-    if (navigatedFromFeed) {
-      // This means that we reached PostShowMoreModal through FeedPostIndex
-      // because FeedPostIndex manually changes the url, while accessing through
-      // ProfilePostShow does not change the url
-      history.replace('/');
+    const doubleModal = {
+      type: 'updatePost',
+      from: 'postShow',
+      postId
     };
+    openDoubleModal(doubleModal);
   };
 
   return (
@@ -46,7 +31,7 @@ function PostShowMoreModal() {
         <li onClick={handleEditPostClick}>
           <div>Edit</div>
         </li>
-        <li onClick={handleCancelClick}>
+        <li onClick={closeDoubleModal}>
           <div>Cancel</div>
         </li>
       </ul>

@@ -2,15 +2,13 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import * as modalActionCreators from '../../actions/modal_actions';
 import * as sessionActionCreators from '../../actions/session_actions';
 import { MdOutlineSettings } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
 
-function NavBarMoreModal() {
+function NavBarMoreModal({ closeModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
   const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
 
   const handleReroute = newPath => {

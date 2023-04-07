@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
 import { bindActionCreators } from "redux";
 import * as modalActionCreators from '../../actions/modal_actions';
-import * as postActionCreators from '../../actions/post_actions';
-import * as userActionCreators from '../../actions/user_actions';
+import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import NavBarMoreModal from '../navbar/nav_bar_more_modal';
 import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import PostShowModal from '../posts/post_show_modal';
@@ -12,12 +10,10 @@ import ChangeAvatarModal from '../profile/change_avatar_modal';
 
 function Modal() {
   const modal = useSelector(state => state.ui.modal) // Either null or modal
-  const history = useHistory();
   const dispatch = useDispatch();
-  const location = useLocation();
-  const posts = useSelector(state => state.entities.posts);
-  const [authorId, setAuthorId] = useState();
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
+  // Import these functions below in order to thread them to modals
+  const { openDoubleModal, closeDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   
   if (!modal) return null;
   
@@ -44,13 +40,31 @@ function Modal() {
 
   let component;
   if (modal.type === 'navBarMore') {
-    component = <NavBarMoreModal />;
+    component = <NavBarMoreModal closeModal={closeModal} />;
   } else if (modal.type === 'createPost') {
-    component = <CreateAndUpdatePostModal />;
+    component = (
+      <CreateAndUpdatePostModal 
+        postId={null}
+        closeModal={closeModal}
+        closeDoubleModal={closeDoubleModal}
+      />
+    );
+    // postId is null since we don't have one when creating a post
   } else if (modal.type === 'postShow') {
-    component = <PostShowModal  />;
+    component = (
+      <PostShowModal 
+        postId={modal.postId}
+        closeModal={closeModal}
+        openDoubleModal={openDoubleModal}
+      />
+    );
   } else if (modal.type === 'changeAvatar') {
-    component = <ChangeAvatarModal />;
+    component = (
+      <ChangeAvatarModal
+        currentUserId={modal.currentUserId}
+        closeModal={closeModal}
+      />
+    );
   } else {
     component = null;
   };
@@ -63,10 +77,6 @@ function Modal() {
     <div id={isCreateModal()} className={getClassName('modal-background')} onClick={e => {
       e.preventDefault();
       closeModal();
-      // Delete below once routes work correctly
-      // if (modal.type === 'postShow') {
-      //   history.replace(`/profile/${authorId}`);
-      // };
     }}>
       <div id={isCreateModal()} className={getClassName('modal-child')}
         onClick={e => {
