@@ -8,6 +8,7 @@ import * as userActionCreators from '../../actions/user_actions';
 import MoreModal from '../navbar/more_modal';
 import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import PostShowModal from '../posts/post_show_modal';
+import ChangeAvatarModal from '../profile/change_avatar_modal';
 
 function Modal() {
   const modal = useSelector(state => state.ui.modal) // Either null or modalType
@@ -66,6 +67,9 @@ function Modal() {
       break;
     case 'postShow':
       component = <PostShowModal />;
+      break;
+    case 'changeAvatar':
+      component = <ChangeAvatarModal />;
       break;
     default:
       return null;
