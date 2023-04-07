@@ -3,8 +3,9 @@ class Api::PostsController < ApplicationController
   def index
     if params[:post] && params[:post][:author_id].length > 0
       @posts = Post.where(author_id: params[:post][:author_id])
-    else
+    elsif params[:post] && params[:post][:current_user_id].length > 0
       @posts = Post.all.limit(5)
+      @posts += Post.where(author_id: params[:post][:current_user_id])
     end
       render :index
   end
@@ -65,6 +66,6 @@ class Api::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:author_id, :caption, :location, :images)
+    params.require(:post).permit(:author_id, :caption, :location, :images, :current_user_id)
   end
 end

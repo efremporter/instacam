@@ -9,7 +9,7 @@ import { GoLocation } from 'react-icons/go';
 import { RxCross1 } from 'react-icons/rx';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { HiOutlineSquare2Stack } from 'react-icons/hi2';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function CreateAndUpdatePostModal() {
   // Lines below are for if user is accessing modal via the 'Edit' post button
@@ -17,9 +17,9 @@ function CreateAndUpdatePostModal() {
   const locationArray = location.pathname.split('/');
   const isUpdateModal = locationArray.includes('update');
   const postId = isUpdateModal ? locationArray[locationArray.length - 2] : null;
-  const post = isUpdateModal ?
-    useSelector(state => state.entities.posts[postId]) : null;
+  const post = useSelector(state => state.entities.posts[postId]);
 
+  const history = useHistory();
   const [images, setImages] = useState([]);
   const [imagesPreviewUrls, setImagePreviewUrls] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
@@ -163,6 +163,7 @@ function CreateAndUpdatePostModal() {
       updatePost(updatedPost)
       .then(() => {
         closeDoubleModal();
+        history.goBack();
       })
       .catch(() => console.log("Could not update post"));
     } else {
@@ -190,7 +191,7 @@ function CreateAndUpdatePostModal() {
   const getCorrectButton = () => {
     if (isUpdateModal) {
       return 'Done';
-    } else return 'Save';
+    } else return 'Share';
   };
 
   let uploaded = images.length > 0;
@@ -200,6 +201,15 @@ function CreateAndUpdatePostModal() {
         <div className='create-post-modal-share-button'
           onClick={handleSubmit} 
         >{getCorrectButton()}</div>
+        {isUpdateModal ? 
+        <div className='update-post-modal-cancel-button'
+          onClick={() => {
+            console.log(history)
+            closeDoubleModal();
+            history.replace(`/posts/${post.id}`)
+          }}
+          >Cancel
+        </div> : null}
       </div>
       <div className='create-post-modal-divider'></div>
       <div className='create-post-modal-body-container'>

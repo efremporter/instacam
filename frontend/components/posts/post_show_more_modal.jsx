@@ -8,6 +8,10 @@ function PostShowMoreModal() {
   const history = useHistory();
   const location = useLocation();
   const locationArray = location.pathname.split('/');
+  const navigatedFromFeed = locationArray.includes('edit');
+  const postId = navigatedFromFeed ?
+    locationArray[locationArray.length - 2] :
+    locationArray[locationArray.length - 1]
   const dispatch = useDispatch();
   const { openDoubleModal, closeDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   
@@ -18,12 +22,13 @@ function PostShowMoreModal() {
 
   const handleEditPostClick = () => {
     closeDoubleModal();
+    history.replace(`/posts/${postId}/update`);
     openDoubleModal('updatePost');
   };
 
   const handleCancelClick = () => {
     closeDoubleModal();
-    if (locationArray.includes('edit')) {
+    if (navigatedFromFeed) {
       // This means that we reached PostShowMoreModal through FeedPostIndex
       // because FeedPostIndex manually changes the url, while accessing through
       // ProfilePostShow does not change the url

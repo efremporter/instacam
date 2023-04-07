@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
+import * as postActionCreators from '../../actions/post_actions';
 import getDateDifference from './post_functions';
 
 function PostShowModal() {
@@ -19,16 +20,34 @@ function PostShowModal() {
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
+  const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
-  const postId = locationArray[locationArray.length - 1];
-  const post = postsObject[postId]
+  let postId = locationArray[locationArray.length - 1];
+
+  if (postId === 'update') {
+    // This means that the updatePostModal is open
+    postId = locationArray[locationArray.length - 2];
+  }
+  const post = postsObject[postId] ? postsObject[postId] : null
+  const [currentPost, setCurrentPost] = useState(post);
+  useEffect(() => {
+    if (!currentPost) {
+      fetchPost(postId)
+      .then(() => {
+        setCurrentPost(postsObject[postId]);
+      });
+    };
+  }, [locationArray])
+  if (!post) {
+    return;
+  }
   const [postImageIndex, setPostImageIndex] = useState(0);
-  const postPhotoUrls = post.imageUrls;
+  const postPhotoUrls = currentPost.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
-  const postAuthor = useSelector(state => state.entities.users[post.authorId])
+  const postAuthor = useSelector(state => state.entities.users[currentPost.authorId])
   if (!postAuthor) {
-    fetchUser(post.authorId);
+    fetchUser(currentPost.authorId);
   };
 
   const getImageArrowsIcon =  () => {
