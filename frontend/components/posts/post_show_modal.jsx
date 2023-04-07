@@ -30,24 +30,12 @@ function PostShowModal() {
     postId = locationArray[locationArray.length - 2];
   }
   const post = postsObject[postId] ? postsObject[postId] : null
-  const [currentPost, setCurrentPost] = useState(post);
-  useEffect(() => {
-    if (!currentPost) {
-      fetchPost(postId)
-      .then(() => {
-        setCurrentPost(postsObject[postId]);
-      });
-    };
-  }, [locationArray])
-  if (!post) {
-    return;
-  }
   const [postImageIndex, setPostImageIndex] = useState(0);
-  const postPhotoUrls = currentPost.imageUrls;
+  const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
-  const postAuthor = useSelector(state => state.entities.users[currentPost.authorId])
+  const postAuthor = useSelector(state => state.entities.users[post.authorId])
   if (!postAuthor) {
-    fetchUser(currentPost.authorId);
+    fetchUser(post.authorId);
   };
 
   const getImageArrowsIcon =  () => {
@@ -124,7 +112,7 @@ function PostShowModal() {
         newPostIndex = 0;
       };
     };
-    history.replace(`/posts/${postsArray[newPostIndex].id}`);
+    history.push(`/posts/${postsArray[newPostIndex].id}`);
   };
 
   return (
