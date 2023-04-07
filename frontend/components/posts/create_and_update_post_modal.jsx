@@ -206,7 +206,8 @@ function CreateAndUpdatePostModal() {
           onClick={() => {
             console.log(history)
             closeDoubleModal();
-            history.replace(`/posts/${post.id}`)
+            history.goBack();
+            // history.replace(`/posts/${post.id}`)
           }}
           >Cancel
         </div> : null}
