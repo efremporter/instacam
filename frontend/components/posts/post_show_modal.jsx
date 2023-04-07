@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
@@ -12,14 +11,13 @@ import getDateDifference from './post_functions';
 function PostShowModal({ postId, closeModal, openDoubleModal }) {
   const postsObject = useSelector(state => state.entities.posts);
   const postsArray = Object.values(postsObject);
-  const history = useHistory();
   const dispatch = useDispatch();
-  const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
-
-  const post = postsObject[postId];
+  const [currentPostId, setCurrentPostId] = useState(postId);
+  const post = postsObject[currentPostId];
   const [postImageIndex, setPostImageIndex] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
+  const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
 
   // The if statement below should never fire because we can only
   // access the PostShowModal via the Profile component, so postAuthor
@@ -104,7 +102,8 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
         newPostIndex = 0;
       };
     };
-    history.push(`/posts/${postsArray[newPostIndex].id}`);
+    // history.push(`/posts/${postsArray[newPostIndex].id}`);
+    setCurrentPostId(postsArray[newPostIndex].id);
   };
 
   const handleOpenDoubleModal = modalType => {
@@ -132,10 +131,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
             <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
             <div className='post-show-modal-handle-location-container'>
               <div className='post-show-modal-handle'
-                onClick={() => {
-                  closeModal();
-                  history.replace(`/profile/${postAuthor.id}`)
-                }}
+                onClick={closeModal}
               >{postAuthor.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
             </div>
@@ -152,10 +148,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
                   <span className='post-show-modal-handle'
-                    onClick={() => {
-                      closeModal();
-                      history.replace(`/profile/${postAuthor.id}`)
-                    }}
+                    onClick={closeModal}
                   >{postAuthor.handle}</span>
                   <span className='post-show-modal-caption'>{post.caption}</span>
                 </div>

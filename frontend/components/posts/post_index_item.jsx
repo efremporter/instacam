@@ -21,9 +21,9 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
 
   function handlePostClick() {
     const modal = {
+      postId: post.id,
       type: "postShow",
       from: "profile",
-      postId: post.id
     };
     openModal(modal);
   };

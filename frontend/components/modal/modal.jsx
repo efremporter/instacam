@@ -52,7 +52,7 @@ function Modal() {
     // postId is null since we don't have one when creating a post
   } else if (modal.type === 'postShow') {
     component = (
-      <PostShowModal 
+      <PostShowModal
         postId={modal.postId}
         closeModal={closeModal}
         openDoubleModal={openDoubleModal}

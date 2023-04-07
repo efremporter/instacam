@@ -155,7 +155,6 @@ function CreateAndUpdatePostModal({ postId, closeModal, closeDoubleModal }) {
       updatePost(updatedPost)
       .then(() => {
         closeDoubleModal();
-        history.goBack();
       })
       .catch(() => console.log("Could not update post"));
     } else {
