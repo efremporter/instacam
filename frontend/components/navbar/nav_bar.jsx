@@ -107,7 +107,7 @@ function NavBar() {
       </ul>
       <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
         id="nav-bar-more-icon-container"
-        onClick={() => openModal('more')}
+        onClick={() => openModal('navBarMore')}
       >
         <FaBars
           className="nav-bar-icon"

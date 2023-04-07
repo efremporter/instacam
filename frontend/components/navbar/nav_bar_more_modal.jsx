@@ -7,7 +7,7 @@ import * as sessionActionCreators from '../../actions/session_actions';
 import { MdOutlineSettings } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
 
-function MoreModal() {
+function NavBarMoreModal() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
@@ -53,4 +53,4 @@ function MoreModal() {
   );
 };
 
-export default MoreModal;
+export default NavBarMoreModal;

@@ -1,32 +1,30 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from "redux";
-import * as DoubleModalActionCreators from '../../actions/double_modal_actions';
+import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import DeletePostModal from '../posts/delete_post_modal';
 import PostShowMoreModal from '../posts/post_show_more_modal';
 
 function DoubleModal() {
   const dispatch = useDispatch();
-  const modal = useSelector(state => state.ui.doubleModal) // Either null or modalType
-  const { closeDoubleModal } = bindActionCreators(DoubleModalActionCreators, dispatch);
+  const doubleModal = useSelector(state => state.ui.doubleModal) // Either null or doubleModal
+  const { closeDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
 
-  if (!modal) return null;
+  if (!doubleModal) return null;
+
   let component;
-  switch (modal) {
-    case 'postShowMore':
-      component = <PostShowMoreModal />;
-      break;
-    case 'updatePost':
-      component = <CreateAndUpdatePostModal />;
-      break;
-    case 'deletePost':
-      component = <DeletePostModal />;
-      break;
-    default:
-      return null;
+  if (doubleModal.type === 'postShowMore') {
+    component = <PostShowMoreModal />;
+  } else if (doubleModal.type === 'updatePost') {
+    component = <CreateAndUpdatePostModal />;
+  } else if (doubleModal.type === 'deletePost') {
+    component = <DeletePostModal />;
+  } else {
+    component = null;
   };
 
+  if (!component) return null;
   return (
     <div className='double-modal-background' onClick={closeDoubleModal}>
       <div className='double-modal-child' onClick={e => e.stopPropagation()}>
