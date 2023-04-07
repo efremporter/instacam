@@ -9,14 +9,15 @@ import { GoLocation } from 'react-icons/go';
 import { RxCross1 } from 'react-icons/rx';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { HiOutlineSquare2Stack } from 'react-icons/hi2';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function CreateAndUpdatePostModal() {
   // Lines below are for if user is accessing modal via the 'Edit' post button
-  const location = useLocation();
-  const locationArray = location.pathname.split('/');
-  const isUpdateModal = locationArray.includes('update');
-  const postId = isUpdateModal ? locationArray[locationArray.length - 2] : null;
+  const modal = useSelector(state => state.ui.modal);
+  const isUpdateModal = modal.type === 'updatePost';
+  const postId = isUpdateModal ? modal.postId : null;
+  // postId will be null if the createPostModal is mounted, since we don't have
+  // a postId when creating a post
   const post = useSelector(state => state.entities.posts[postId]);
 
   const history = useHistory();
@@ -203,12 +204,7 @@ function CreateAndUpdatePostModal() {
         >{getCorrectButton()}</div>
         {isUpdateModal ? 
         <div className='update-post-modal-cancel-button'
-          onClick={() => {
-            console.log(history)
-            closeDoubleModal();
-            history.goBack();
-            // history.replace(`/posts/${post.id}`)
-          }}
+          onClick={closeDoubleModal}
           >Cancel
         </div> : null}
       </div>

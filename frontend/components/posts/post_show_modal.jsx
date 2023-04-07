@@ -12,7 +12,7 @@ import * as userActionCreators from '../../actions/user_actions';
 import * as postActionCreators from '../../actions/post_actions';
 import getDateDifference from './post_functions';
 
-function PostShowModal() {
+function PostShowModal({ postId }) {
   const postsObject = useSelector(state => state.entities.posts);
   const postsArray = Object.values(postsObject);
   const history = useHistory();
@@ -23,13 +23,11 @@ function PostShowModal() {
   const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
-  let postId = locationArray[locationArray.length - 1];
 
-  if (postId === 'update') {
-    // This means that the updatePostModal is open
-    postId = locationArray[locationArray.length - 2];
-  }
   const post = postsObject[postId] ? postsObject[postId] : null
+  if (!post) {
+    fetchPost(postId);
+  };
   const [postImageIndex, setPostImageIndex] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
@@ -115,6 +113,15 @@ function PostShowModal() {
     history.push(`/posts/${postsArray[newPostIndex].id}`);
   };
 
+  const handleOpenDoubleModal = modalType => {
+    const doubleModal = {
+      type: modalType,
+      from: "profile",
+      postId: post.id
+    };
+    openDoubleModal(doubleModal)
+  };
+
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}
@@ -140,7 +147,7 @@ function PostShowModal() {
             </div>
             {postAuthor.id === currentUserId ? <BiDotsHorizontalRounded size={24}
               className='post-show-modal-more-icon'
-              onClick={() => openDoubleModal('postShowMore')}
+              onClick={() => handleOpenDoubleModal('postShowMore')}
             /> : null}
           </div>
         </div>

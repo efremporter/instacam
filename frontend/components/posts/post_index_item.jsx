@@ -87,7 +87,7 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
   const handlePostIndexItemMore = () => {
     const doubleModal = {
       type: "postShowMore",
-      from: "profile",
+      from: "feed",
       postId: post.id
     }
     openDoubleModal(doubleModal);
