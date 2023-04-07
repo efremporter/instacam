@@ -16,11 +16,22 @@ export const fetchUser = id => {
 };
 
 export const updateUser = user => {
-  return $.ajax({
-    method: 'PATCH',
-    url: `/api/users/${user.id}`,
-    data: {user}
-  });
+  const userId = user.get('user[id]');
+  if (user instanceof FormData) {
+    return $.ajax({
+      method: 'PATCH',
+      url: `/api/users/${userId}`,
+      data: user,
+      processData: false,
+      contentType: false
+    });
+  } else {
+    return $.ajax({
+      method: 'PATCH',
+      url: `/api/users/${user.id}`,
+      data: {user}
+    });
+  };
 };
 
 export const deleteUser = id => {

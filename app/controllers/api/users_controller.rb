@@ -53,8 +53,13 @@ class Api::UsersController < ApplicationController
   def update 
     @user = User.find(params[:id])
     if @user
+      if params[:user] && params[:user][:profile_photo_url]
+        @user.profile_photo.purge
+        @user.profile_photo.attach(params[:user][:profile_photo_url])
+      else
         @user.update(user_params)
-        # render "api/users/_user.json.jbuilder"
+      end
+      render "api/users/_show.json.jbuilder"
     else  
       render json: ["Couldn't update user (User not found)"], status: 404
     end
@@ -76,6 +81,6 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :name, :handle, :password, :author_ids)
+    params.require(:user).permit(:email, :name, :handle, :password, :author_ids, :profile_photo_url)
   end
 end

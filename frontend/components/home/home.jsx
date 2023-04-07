@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import * as sessionActionCreators from '../../actions/session_actions';
 import * as postActionCreators from '../../actions/post_actions';
+import * as modalActionCreators from '../../actions/modal_actions';
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import PostIndex from "../posts/post_index";
 
@@ -12,7 +13,9 @@ function Home() {
   const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
   const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
+  const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const history = useHistory();
+
   // history.push('/profile/1')
   // fetchPost(1)
     // .then(() => {
