@@ -6,7 +6,8 @@ function PostShowMoreModal({ postId, openDoubleModal, closeDoubleModal }) {
     closeDoubleModal();
     const doubleModal = {
       type: 'deletePost',
-      from: 'postShow'
+      from: 'postShow',
+      postId
     };
     openDoubleModal(doubleModal);
   };
