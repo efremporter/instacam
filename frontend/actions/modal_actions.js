@@ -1,10 +1,10 @@
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 
-const receiveModal = modalType => {
+const receiveModal = modal => {
   return {
     type: OPEN_MODAL,
-    data: modalType
+    data: modal
   };
 };
 
@@ -14,8 +14,8 @@ const collapseModal = () => {
   };
 };
 
-export const openModal = type => dispatch => {
-  dispatch(receiveModal(type));
+export const openModal = modal => dispatch => {
+  dispatch(receiveModal(modal));
 };
 
 export const closeModal = () => dispatch => {

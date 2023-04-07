@@ -9,11 +9,11 @@ import * as userActionCreators from '../../actions/user_actions';
 function Profile() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const currentUserId = useSelector((state) => state.session.id)
+  const currentUserId = useSelector((state) => state.session.id);
   const locationArray = location.pathname.split('/');
   const profileUserId = locationArray[locationArray.length - 1];
-  const user = useSelector(state => state.entities.users[profileUserId])
-  const isMyProfile = currentUserId == profileUserId
+  const user = useSelector(state => state.entities.users[profileUserId]);
+  const isMyProfile = currentUserId == profileUserId;
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
 
   useEffect(() => {
@@ -26,7 +26,11 @@ function Profile() {
   return (
     <div className='profile-background'>
       <div className='profile-container'>
-        <ProfileHeader profileUserId={profileUserId} isMyProfile={isMyProfile} />
+        <ProfileHeader 
+          profileUserId={profileUserId} 
+          isMyProfile={isMyProfile}
+          currentUserId={currentUserId}  
+        />
         <div className='profile-divider'></div>
         <PostIndex profileUserId={profileUserId} />
       </div>

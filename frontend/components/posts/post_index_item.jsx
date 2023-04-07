@@ -20,8 +20,12 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
   const postPhotoUrls = post.imageUrls;
 
   function handlePostClick() {
-    history.push(`/posts/${post.id}`)
-    openModal('postShow');
+    const modal = {
+      type: "postShow",
+      from: "profile",
+      postId: post.id
+    };
+    openModal(modal);
   };
 
   function getMultipleImagesIcon() {
@@ -81,9 +85,13 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
   };
 
   const handlePostIndexItemMore = () => {
-    history.push(`/posts/${post.id}/edit`)
-    openDoubleModal('postShowMore');
-  }
+    const doubleModal = {
+      type: "postShowMore",
+      from: "feed",
+      postId: post.id
+    }
+    openDoubleModal(doubleModal);
+  };
 
   return (
     <div className={getCorrectClassName() + '-post-index-item-container'}>

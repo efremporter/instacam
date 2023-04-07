@@ -46,6 +46,14 @@ function NavBar() {
     return false;
   };
 
+  const handleOpenModal = type => {
+    const modal = {
+      type,
+      from: 'navBar'
+    };
+    openModal(modal);
+  };
+
   return (
     <div className="nav-bar-container">
       <div id="nav-bar-logo-full" className="nav-bar-logo">Instacam</div>
@@ -90,7 +98,7 @@ function NavBar() {
           <span className="nav-bar-label">Messages</span>
         </li>
         <li className={isCreateSelected() ? "nav-bar-li-selected" : null}
-          onClick={() => openModal('createPost')}
+          onClick={() => handleOpenModal('createPost')}
         >
           {isCreateSelected() ?
             <TbSquareRoundedPlusFilled className="nav-bar-icon" size="30px" /> :
@@ -107,7 +115,7 @@ function NavBar() {
       </ul>
       <div className={isSelected('/more') ? "nav-bar-li-selected" : null}
         id="nav-bar-more-icon-container"
-        onClick={() => openModal('more')}
+        onClick={() => handleOpenModal('navBarMore')}
       >
         <FaBars
           className="nav-bar-icon"
