@@ -11,6 +11,7 @@ function PostIndex({ profileUserId }) {
   const dispatch = useDispatch();
   const posts = Object.values(useSelector((state) => state.entities.posts));
   const users = useSelector(state => state.entities.users);
+  const currentUserId = useSelector(state => state.session.id);
   const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
   const { fetchUsers } = bindActionCreators(userActionCreators, dispatch); 
 
@@ -20,7 +21,7 @@ function PostIndex({ profileUserId }) {
     } else {
       // This fetches all posts. Eventually, add logic to fetch posts
       // only from followees of current user
-      fetchPosts()
+      fetchPosts(null, currentUserId)
       .then(() => {
         if (posts.length) {
           const authorIdsHash = {};

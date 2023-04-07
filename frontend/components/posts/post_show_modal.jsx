@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as userActionCreators from '../../actions/user_actions';
+import * as postActionCreators from '../../actions/post_actions';
 import getDateDifference from './post_functions';
 
 function PostShowModal() {
@@ -19,15 +20,21 @@ function PostShowModal() {
   const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
+  const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
   const location = useLocation();
   const locationArray = location.pathname.split('/');
-  const postId = locationArray[locationArray.length - 1];
-  const post = postsObject[postId]
+  let postId = locationArray[locationArray.length - 1];
+
+  if (postId === 'update') {
+    // This means that the updatePostModal is open
+    postId = locationArray[locationArray.length - 2];
+  }
+  const post = postsObject[postId] ? postsObject[postId] : null
   const [postImageIndex, setPostImageIndex] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
-  const postOwner = useSelector(state => state.entities.users[post.authorId])
-  if (!postOwner) {
+  const postAuthor = useSelector(state => state.entities.users[post.authorId])
+  if (!postAuthor) {
     fetchUser(post.authorId);
   };
 
@@ -105,7 +112,7 @@ function PostShowModal() {
         newPostIndex = 0;
       };
     };
-    history.replace(`/posts/${postsArray[newPostIndex].id}`);
+    history.push(`/posts/${postsArray[newPostIndex].id}`);
   };
 
   return (
@@ -121,34 +128,34 @@ function PostShowModal() {
       <div className='post-show-modal-right-side'>
         <div className='post-show-modal-right-side-header-container'>
           <div className='post-show-modal-right-side-header'>
-            <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
+            <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
             <div className='post-show-modal-handle-location-container'>
               <div className='post-show-modal-handle'
                 onClick={() => {
                   closeModal();
-                  history.replace(`/profile/${postOwner.id}`)
+                  history.replace(`/profile/${postAuthor.id}`)
                 }}
-              >{postOwner.handle}</div>
+              >{postAuthor.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
             </div>
-            <BiDotsHorizontalRounded size={24}
+            {postAuthor.id === currentUserId ? <BiDotsHorizontalRounded size={24}
               className='post-show-modal-more-icon'
               onClick={() => openDoubleModal('postShowMore')}
-            />
+            /> : null}
           </div>
         </div>
         <div className='post-show-modal-comments-container'>
           <div className='post-show-modal-comments'>
             <div className='post-show-modal-comments-caption-container'>
-              <img className='post-show-modal-right-side-avatar' src={postOwner.profilePhotoUrl} />
+              <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
                   <span className='post-show-modal-handle'
                     onClick={() => {
                       closeModal();
-                      history.replace(`/profile/${postOwner.id}`)
+                      history.replace(`/profile/${postAuthor.id}`)
                     }}
-                  >{postOwner.handle}</span>
+                  >{postAuthor.handle}</span>
                   <span className='post-show-modal-caption'>{post.caption}</span>
                 </div>
                 <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>

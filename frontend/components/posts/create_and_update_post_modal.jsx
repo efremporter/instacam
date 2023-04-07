@@ -3,15 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as postActionCreators from '../../actions/post_actions';
 import * as modalActionCreators from '../../actions/modal_actions';
+import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import { IoImagesOutline } from 'react-icons/io5';
 import { GoLocation } from 'react-icons/go';
 import { RxCross1 } from 'react-icons/rx';
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
 import { HiOutlineSquare2Stack } from 'react-icons/hi2';
+import { useHistory, useLocation } from 'react-router-dom';
 
-function CreatePostModal() {
+function CreateAndUpdatePostModal() {
+  // Lines below are for if user is accessing modal via the 'Edit' post button
+  const location = useLocation();
+  const locationArray = location.pathname.split('/');
+  const isUpdateModal = locationArray.includes('update');
+  const postId = isUpdateModal ? locationArray[locationArray.length - 2] : null;
+  const post = useSelector(state => state.entities.posts[postId]);
+
+  const history = useHistory();
   const [images, setImages] = useState([]);
-  const [imagesPreviewUrls, setImagePreviews] = useState([]);
+  const [imagesPreviewUrls, setImagePreviewUrls] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
   const [caption, setCaption] = useState('');
   const [postLocation, setPostLocation] = useState('');
@@ -19,21 +29,35 @@ function CreatePostModal() {
   const currentUserHandle = useSelector((state) => state.entities.users[currentUserId].handle);
   const profilePhotoUrl = useSelector((state) => state.entities.users[currentUserId].profilePhotoUrl);
   const dispatch = useDispatch();
-  const { createPost } = bindActionCreators(postActionCreators, dispatch);
-  const { closeModal } = bindActionCreators(modalActionCreators, dispatch);
-  useEffect(() => {
-    const dragDrop = document.getElementById('create-post-drag-and-drop');
-    dragDrop.addEventListener('dragover', e => {
-      e.preventDefault();
-    });
-    dragDrop.addEventListener('drop', e => {
-      e.preventDefault();
-      handleImages(e, 'drop');
-    });
-  }, []);
+  const { createPost, fetchPost, updatePost } = bindActionCreators(postActionCreators, dispatch);
+  const { closeModal } =  bindActionCreators(modalActionCreators, dispatch);
+  const { closeDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
 
   useEffect(() => {
-  }, [imagesPreviewUrls])
+    if (isUpdateModal) {
+      if (!post) {
+        fetchPost(postId)
+        .then(() => {
+          handlePostLocation(post.location);
+          handleCaption(post.caption);
+          setImagePreviewUrls(post.imageUrls);
+        })
+      } else {
+        handlePostLocation(post.location);
+        handleCaption(post.caption);
+        setImagePreviewUrls(post.imageUrls);
+      };
+    } else {
+      const dragDrop = document.getElementById('create-post-drag-and-drop');
+      dragDrop.addEventListener('dragover', e => {
+        e.preventDefault();
+      });
+      dragDrop.addEventListener('drop', e => {
+        e.preventDefault();
+        handleImages(e, 'drop');
+      });
+    };
+  }, [post]);
 
   const handleImages = (e, type) => {
     const uploadedFiles = type === 'drop' ?
@@ -67,7 +91,7 @@ function CreatePostModal() {
     uploadedFiles.forEach(image => {
       imagesPreviewUrlsCopy.push(URL.createObjectURL(image));
     });
-    setImagePreviews(imagesPreviewUrlsCopy)
+    setImagePreviewUrls(imagesPreviewUrlsCopy)
   };
 
   const getLocationIcon = () => {
@@ -130,50 +154,88 @@ function CreatePostModal() {
   };
 
   const handleSubmit = () => {
-    let postFormData = new FormData();
-    postFormData.append("post[author_id]", currentUserId);
-    postFormData.append("post[caption]", caption);
-    postFormData.append("post[location]", postLocation);
-    for (let i = 0; i < images.length; i++) {
-      postFormData.append(`post[images][${i}]`, images[i]);
+    if (isUpdateModal) {
+      const updatedPost = {
+        id: post.id,
+        caption,
+        location: postLocation
+      };
+      updatePost(updatedPost)
+      .then(() => {
+        closeDoubleModal();
+        history.goBack();
+      })
+      .catch(() => console.log("Could not update post"));
+    } else {
+      let postFormData = new FormData();
+      postFormData.append("post[author_id]", currentUserId);
+      postFormData.append("post[caption]", caption);
+      postFormData.append("post[location]", postLocation);
+      for (let i = 0; i < images.length; i++) {
+        postFormData.append(`post[images][${i}]`, images[i]);
+      };
+      createPost(postFormData)
+      .then(() => {
+        closeModal();
+      })
+      .catch(() => console.log('Could not create post'));
     };
-    createPost(postFormData)
-    .then(() => {
-      closeModal()
-    })
-    .catch(() => console.log('failure'))
+  };
+
+  const getCorrectHeader = () => {
+    if (isUpdateModal) {
+      return "Edit info";
+    } else return "Create new post";
+  };
+
+  const getCorrectButton = () => {
+    if (isUpdateModal) {
+      return 'Done';
+    } else return 'Share';
   };
 
   let uploaded = images.length > 0;
-  const content = uploaded ? (
+  const content = uploaded || isUpdateModal ? (
     <div className='create-post-modal-share-container'>
-      <div className='create-post-modal-header'>Create new post
+      <div className='create-post-modal-header'>{getCorrectHeader()}
         <div className='create-post-modal-share-button'
           onClick={handleSubmit} 
-        >Share</div>
+        >{getCorrectButton()}</div>
+        {isUpdateModal ? 
+        <div className='update-post-modal-cancel-button'
+          onClick={() => {
+            console.log(history)
+            closeDoubleModal();
+            history.goBack();
+            // history.replace(`/posts/${post.id}`)
+          }}
+          >Cancel
+        </div> : null}
       </div>
       <div className='create-post-modal-divider'></div>
       <div className='create-post-modal-body-container'>
         <div className='create-post-modal-image-preview-container'>
           <img className='create-post-modal-image-preview' src={imagesPreviewUrls[imageIndex]}/>
           {getArrowsIcon()}
-          <div className='create-post-modal-image-preview-add-photos-icon-container'
-            onClick={() => {
-              document.getElementById("upload-image-input").click();
-            }}>
-            <HiOutlineSquare2Stack
-              color='white'
-              size={16}
-            />
-            <input
-              id="upload-image-input"
-              type="file"
-              accept="image/*"
-              multiple="multiple"
-              limit="10"
-              onChange={handleImages}
-            />
-          </div>
+          {isUpdateModal ? null : (
+            <div className='create-post-modal-image-preview-add-photos-icon-container'
+              onClick={() => {
+                document.getElementById("upload-image-input").click();
+              }}>
+              <HiOutlineSquare2Stack
+                color='white'
+                size={16}
+              />
+              <input
+                id="upload-image-input"
+                type="file"
+                accept="image/*"
+                multiple="multiple"
+                limit="10"
+                onChange={handleImages}
+              />
+            </div>
+          )}
         </div>
         <div className='create-post-modal-image-preview-info-outer-container'>
           <div className='create-post-modal-image-preview-info-inner-container'>
@@ -228,7 +290,7 @@ function CreatePostModal() {
                 multiple="multiple"
                 limit="10"
                 onChange={handleImages}
-                />
+              />
             </label>
           </div>
         </div>
@@ -239,4 +301,4 @@ function CreatePostModal() {
   return content;
 };
 
-export default CreatePostModal;
+export default CreateAndUpdatePostModal;

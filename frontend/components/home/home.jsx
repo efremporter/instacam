@@ -13,12 +13,12 @@ function Home() {
   const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const history = useHistory();
-
+  // history.push('/profile/1')
   // fetchPost(1)
-  //   .then(() => {
-  //     history.push(`/posts/${2}`);
-  //     setTimeout(() => openDoubleModal('postShowMore'), 1000)
-  //   });
+    // .then(() => {
+      // history.push(`/posts/${1}/update`);
+      // setTimeout(() => openDoubleModal('updatePost'), 1000)
+    // });
 
   return (
     <div className="home-container">

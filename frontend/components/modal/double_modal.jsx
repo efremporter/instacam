@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as DoubleModalActionCreators from '../../actions/double_modal_actions';
-import UpdatePostModal from '../posts/update_post_modal';
+import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import DeletePostModal from '../posts/delete_post_modal';
 import PostShowMoreModal from '../posts/post_show_more_modal';
 
@@ -18,7 +18,7 @@ function DoubleModal() {
       component = <PostShowMoreModal />;
       break;
     case 'updatePost':
-      component = <UpdatePostModal />;
+      component = <CreateAndUpdatePostModal />;
       break;
     case 'deletePost':
       component = <DeletePostModal />;

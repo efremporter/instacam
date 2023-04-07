@@ -22,6 +22,7 @@ const App = () => {
       <Switch>
         <ProtectedRoute exact path="/" component={Home} />
         <ProtectedRoute path="/posts/:postId/edit" component={Home} />
+        <ProtectedRoute path="/posts/:postId/update" component={Home} />
         <ProtectedRoute path="/profile/:userId" component={Profile} />
       </Switch>
     </>
