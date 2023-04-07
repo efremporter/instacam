@@ -104,14 +104,21 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
               onClick={() => history.push(`/profile/${postAuthor.id}`)}
             />
           </div>
-          <div className="feed-post-index-item-handle"
-            onClick={() => history.push(`/profile/${postAuthor.id}`)}
-          >
-            {postAuthor.handle}
-          </div>
-          <span className="feed-post-index-dot-divider">•</span>
-          <div className='feed-post-index-item-date'>
-            {getDateDifference(post.createdAt)}
+          <div className="feed-post-index-location-container">
+            <div className="feed-post-index-handle-date-container">
+              <div className="feed-post-index-item-handle"
+                onClick={() => history.push(`/profile/${postAuthor.id}`)}
+              >
+                {postAuthor.handle}
+              </div>
+              <span className="feed-post-index-dot-divider">•</span>
+              <div className='feed-post-index-item-date'>
+                {getDateDifference(post.createdAt)}
+              </div>
+            </div>
+            <div className="feed-post-index-location">
+              {post.location.length ? post.location : null}
+            </div>
           </div>
           <div className="feed-post-index-more-icon-container">
             <BiDotsHorizontalRounded size={24}
