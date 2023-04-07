@@ -19,13 +19,13 @@ function Modal() {
   
   const getClassName = type => {
     if (type === 'modal-background') {
-      if (modal.type === 'more') {
+      if (modal.type === 'navBarMore') {
         return 'more-modal-background'
       } else {
         return 'modal-background';
       };
     } else if (type === 'modal-child') {
-      if (modal.type === 'more') {
+      if (modal.type === 'navBarMore') {
         return null;
       } else {
         return 'modal-child';
