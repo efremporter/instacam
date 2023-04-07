@@ -14,9 +14,12 @@ function ProfileHeader({ profileUserId, isMyProfile }) {
     <div className='profile-header'>
       <div className='profile-header-top'>
         <div className='profile-header-photo-container'>
-          <img className='profile-header-photo' 
+          <img className='profile-header-photo'
+            id={!isMyProfile ? 'profile-other-profile-avatar' : null} 
             src={profilePhotoUrl}
-            onClick={() => openModal('changeAvatar')}
+            onClick={() => {
+              isMyProfile ? openModal('changeAvatar') : null
+            }}
           />
         </div>
         <ProfileInfo profileUserId={profileUserId} isMyProfile={isMyProfile} />
