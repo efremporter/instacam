@@ -17,12 +17,12 @@ function Home() {
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const history = useHistory();
 
-  history.push('/profile/1')
-  openModal({
-    type: 'editProfile',
-    from: 'feed',
-    profileUser
-  });
+  // history.push('/profile/1')
+  // openModal({
+  //   type: 'editProfile',
+  //   from: 'feed',
+  //   profileUser
+  // });
   // fetchPost(1)
     // .then(() => {
       // history.push(`/posts/${1}/update`);
