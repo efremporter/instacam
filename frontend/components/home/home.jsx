@@ -10,13 +10,19 @@ import PostIndex from "../posts/post_index";
 
 function Home() {
   const dispatch = useDispatch();
+  const profileUser = useSelector(state => state.entities.users[state.session.id]);
   const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
   const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const history = useHistory();
 
-  // history.push('/profile/1')
+  history.push('/profile/1')
+  openModal({
+    type: 'editProfile',
+    from: 'feed',
+    profileUser
+  });
   // fetchPost(1)
     // .then(() => {
       // history.push(`/posts/${1}/update`);

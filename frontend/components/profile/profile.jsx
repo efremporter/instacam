@@ -27,7 +27,7 @@ function Profile() {
     <div className='profile-background'>
       <div className='profile-container'>
         <ProfileHeader 
-          profileUserId={profileUserId} 
+          profileUser={user} 
           isMyProfile={isMyProfile}
           currentUserId={currentUserId}  
         />

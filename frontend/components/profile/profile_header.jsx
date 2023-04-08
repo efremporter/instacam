@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from "react-redux";
 import ProfileInfo from './profile_info';
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as modalActionCreators from '../../actions/modal_actions'
 
-function ProfileHeader({ profileUserId, isMyProfile, currentUserId }) {
-  const profilePhotoUrl = useSelector((state) => state.entities.users[profileUserId].profilePhotoUrl);
+function ProfileHeader({ profileUser, isMyProfile, currentUserId }) {
+  const profilePhotoUrl = profileUser.profilePhotoUrl;
   const dispatch = useDispatch();
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
 
@@ -29,7 +28,11 @@ function ProfileHeader({ profileUserId, isMyProfile, currentUserId }) {
             onClick={isMyProfile ? handleOpenModal : null}
           />
         </div>
-        <ProfileInfo profileUserId={profileUserId} isMyProfile={isMyProfile} />
+        <ProfileInfo 
+          profileUser={profileUser}
+          isMyProfile={isMyProfile}
+          openModal={openModal}
+        />
       </div>
     </div>
   );

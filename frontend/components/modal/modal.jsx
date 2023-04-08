@@ -7,6 +7,7 @@ import NavBarMoreModal from '../navbar/nav_bar_more_modal';
 import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import PostShowModal from '../posts/post_show_modal';
 import ChangeAvatarModal from '../profile/change_avatar_modal';
+import EditProfileModal from '../profile/edit_profile_modal';
 
 function Modal() {
   const modal = useSelector(state => state.ui.modal) // Either null or modal
@@ -65,6 +66,14 @@ function Modal() {
         closeModal={closeModal}
       />
     );
+  } else if (modal.type === 'editProfile') {
+    component = (
+      <EditProfileModal 
+        profileUser={modal.profileUser} 
+        closeModal={closeModal} 
+        openDoubleModal={openDoubleModal}  
+      />
+    );
   } else {
     component = null;
   };
@@ -73,6 +82,7 @@ function Modal() {
     console.log('Component returning null');
     return null;
   };
+
   return (
     <div id={isCreateModal()} className={getClassName('modal-background')} onClick={e => {
       e.preventDefault();

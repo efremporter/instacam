@@ -2,16 +2,34 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import { MdOutlineSettings } from 'react-icons/md';
 
-function ProfileInfo({ profileUserId, isMyProfile }) {
-  const profileUser = useSelector((state) => state.entities.users[profileUserId]);
+function ProfileInfo({ profileUser, isMyProfile, openModal }) {
   const postCount = useSelector((state) => Object.values(state.entities.posts).length);
-  
+
   const getCorrectProfileHeaderButton = () => {
     if (isMyProfile) {
-      return <button className='profile-info-button' id='profile-info-edit-button'>Edit profile</button>
+      return (
+        <button className='profile-info-button' 
+          id='profile-info-edit-button'
+          onClick={() => {
+            const modal = {
+              type: 'editProfile',
+              from: 'profile',
+              profileUser
+            };
+            openModal(modal);
+          }}
+        >
+          Edit profile
+        </button>
+      );
     } else {
-      return <button className='profile-info-button' id='profile-info-follow-button'>Follow</button>
-    }
+      return (
+        <button className='profile-info-button' 
+          id='profile-info-follow-button'>
+            Follow
+        </button>
+      );
+    };
   };
 
   return (
