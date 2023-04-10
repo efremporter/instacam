@@ -31,7 +31,7 @@ export const fetchLikes = (userId, postId) => dispatch => {
 };
 
 export const fetchLike = (userId, postId) => dispatch => {
-  return LikeApiUtil.fetchLike(id)
+  return LikeApiUtil.fetchLike(userId, postId)
   .then(like => dispatch(receiveLike(like)));
 };
 

@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import PostsReducer from "./posts_reducer";
 import UsersReducer from "./users_reducer";
+import LikesReducer from "./likes_reducer";
 
 const EntitiesReducer = combineReducers({
   users: UsersReducer,
-  posts: PostsReducer
+  posts: PostsReducer,
+  likes: LikesReducer
 });
 
 export default EntitiesReducer;

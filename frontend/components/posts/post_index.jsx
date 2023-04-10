@@ -66,6 +66,7 @@ function PostIndex({ profileUserId }) {
         {posts.map(post => {
           return <li key={post.id}>
             <PostIndexItem post={post} 
+              currentUserId={currentUserId}
               isProfile={isProfile} 
               postAuthor={users[post.authorId]}
             />
