@@ -4,7 +4,13 @@ class Api::LikesController < ApplicationController
     post_id = params[:like][:post_id]
     user_id = params[:like][:user_id]
     if user_id && post_id
-      @likes = Like.where(user_id: user_id, post_id: post_id)
+      # There can only be one like for each [user_id, post_id] combo
+      @like = Like.find_by(user_id: user_id, post_id: post_id)
+      if @like
+        render :show
+      else
+        render json: ["Could not find like"], status: 404
+      end
     elsif post_id && user_id == nil
       @likes = Like.where(post_id: post_id)
     elsif user_id && post_id == nil
