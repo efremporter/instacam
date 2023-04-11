@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import * as modalActionCreators from "../../actions/modal_actions";
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as likeActionCreators from '../../actions/like_actions';
 import { bindActionCreators } from "redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HiSquare2Stack } from 'react-icons/hi2';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
@@ -15,11 +15,20 @@ import getDateDifference from "./post_functions";
 function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { likes } = useSelector(state => state.entities.likes);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
-  const { createLike } = bindActionCreators(likeActionCreators, dispatch);
+  const { fetchLikes, fetchLike, createLike } = bindActionCreators(likeActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
+  const [postLikes, setPostLikes] = useState([])
   const postPhotoUrls = post.imageUrls;
+
+  useEffect(() => {
+    fetchLikes(null, post.id)
+    .then(likes => {
+      setPostLikes(Object.values(likes.data));
+    });
+  }, [likes])
 
   const handlePostClick = () => {
     const modal = {
