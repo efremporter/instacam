@@ -13,12 +13,13 @@ class Api::LikesController < ApplicationController
       end
     elsif post_id && user_id == nil
       @likes = Like.where(post_id: post_id)
+      render :index
     elsif user_id && post_id == nil
       @likes = Like.where(user_id: user_id)
+      render :index
     else 
       render json: ["Bad request (user_id && post_id are nil)"], status: 400
     end
-    render :index
   end
 
   def show

@@ -40,10 +40,7 @@ export const createLike = (userId, postId) => dispatch => {
   .then(like => dispatch(receiveLike(like)));
 };
 
-export const deleteLike = (userId, postId) => dispatch => {
-  return LikeApiUtil.fetchLike(userId, postId)
-  .then(like => {
-    return LikeApiUtil.deleteLike(like.id)
-    .then(() => dispatch(removeLike(like.id)));
-  });
+export const deleteLike = (id, likeId) => dispatch => {
+  return LikeApiUtil.deleteLike(id)
+  .then(() => dispatch(removeLike(likeId)));
 };

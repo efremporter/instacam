@@ -15,20 +15,24 @@ import getDateDifference from "./post_functions";
 function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { likes } = useSelector(state => state.entities.likes);
+  const likes = useSelector(state => state.entities.likes);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
-  const { fetchLikes, fetchLike, createLike } = bindActionCreators(likeActionCreators, dispatch);
+  const { fetchLikes, fetchLike, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
-  const [postLikes, setPostLikes] = useState([])
+  const [isLiked, setIsLiked] = useState(false);
   const postPhotoUrls = post.imageUrls;
+  const likeId = Number(currentUserId) + Number(post.id)
 
   useEffect(() => {
     fetchLikes(null, post.id)
-    .then(likes => {
-      setPostLikes(Object.values(likes.data));
-    });
-  }, [likes])
+  }, []);
+
+  useEffect(() => {
+    if (likes[likeId]) {
+      setIsLiked(true);
+    };
+  }, [likes]);
 
   const handlePostClick = () => {
     const modal = {
@@ -40,8 +44,32 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   };
 
   const handleToggleLike = () => {
-    createLike(currentUserId, post.id);
-  }
+    if (isLiked) {
+      deleteLike(likes[likeId].id, likeId)
+      .then(() => setIsLiked(false));
+    } else {
+      createLike(currentUserId, post.id)
+      .then(() => setIsLiked(true));
+    };
+  }; 
+
+  const handleLikeIcon = () => {
+    if (isLiked) {
+      return (
+        <AiFillHeart size={32}
+          className='feed-post-index-item-icon'
+          color="#FF2F40"
+          onClick={handleToggleLike} />
+      )
+    } else {
+      return (
+        <AiOutlineHeart size={32}
+          className='feed-post-index-item-icon'
+          color="white"
+          onClick={handleToggleLike} />
+      );
+    };
+  };
 
   const handleImageIndex = direction => {
     if (direction === 'previous') {
@@ -163,9 +191,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
         <div className='feed-post-index-bottom-container'>
           <div className='feed-post-index-item-like-comment-container'>
             <div className='feed-post-index-item-icon-container'>
-              <AiOutlineHeart size={32} 
-                className='feed-post-index-item-icon'
-                onClick={handleToggleLike} />
+              {handleLikeIcon()}
             </div>
             <div className='feed-post-index-item-icon-container'>
               <IoChatbubbleOutline size={30}
