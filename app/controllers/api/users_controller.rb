@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  # before_action :require_signed_in, only: [:update]
+  before_action :require_signed_in, only: [:update]
 
   def index 
     if params[:user] && params[:user][:author_ids].length > 0
