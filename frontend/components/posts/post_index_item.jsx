@@ -18,11 +18,11 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const likes = useSelector(state => state.entities.likes);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
-  const { fetchLikes, fetchLike, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
+  const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const postPhotoUrls = post.imageUrls;
-  const likeId = Number(currentUserId) + Number(post.id)
+  const likeId = Number(currentUserId) + Number(post.id);
 
   useEffect(() => {
     fetchLikes(null, post.id)
