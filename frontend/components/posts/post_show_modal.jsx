@@ -60,14 +60,14 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
         <AiFillHeart size={32}
           className='feed-post-index-item-icon'
           color="#FF2F40"
-          onClick={handleToggleLike} />
+         />
       )
     } else {
       return (
         <AiOutlineHeart size={32}
           className='feed-post-index-item-icon'
           color="white"
-          onClick={handleToggleLike} />
+        />
       );
     };
   };
@@ -205,7 +205,9 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
         <div className='post-show-modal-right-side-bottom-outer-container'>
           <div className='post-show-modal-right-side-bottom-inner-container'>
               <div className='post-show-modal-right-side-bottom-icons-container'>
-                <div className='post-show-modal-post-like-icon-container'>
+                <div className='post-show-modal-post-like-icon-container'
+                  onClick={handleToggleLike}
+                >
                 {handleLikeIcon()}
                 </div>
                 <div id="post-comment-icon-container"

@@ -59,14 +59,14 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
         <AiFillHeart size={32}
           className='feed-post-index-item-icon'
           color="#FF2F40"
-          onClick={handleToggleLike} />
+        />
       )
     } else {
       return (
         <AiOutlineHeart size={32}
           className='feed-post-index-item-icon'
           color="white"
-          onClick={handleToggleLike} />
+        />
       );
     };
   };
@@ -190,7 +190,9 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
       {isProfile ? null : (
         <div className='feed-post-index-bottom-container'>
           <div className='feed-post-index-item-like-comment-container'>
-            <div className='feed-post-index-item-icon-container'>
+            <div className='feed-post-index-item-icon-container'
+              onClick={handleToggleLike}
+            >
               {handleLikeIcon()}
             </div>
             <div className='feed-post-index-item-icon-container'>
