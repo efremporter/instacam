@@ -18,10 +18,10 @@ const receiveLike = like => {
   };
 };
 
-const removeLike = id => {
+const removeLike = likeId => {
   return {
     type: REMOVE_LIKE,
-    data: id
+    data: likeId
   };
 };
 

@@ -22,7 +22,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
   const currentUserId = useSelector(state => state.session.id);
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
   const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
-  const likeId = Number(currentUserId) + Number(currentPostId);
+  const likeId = String(currentUserId) + String(currentPostId);
   useEffect(() => {
     fetchLikes(null, currentPostId)
   }, []);

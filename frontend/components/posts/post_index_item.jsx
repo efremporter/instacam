@@ -22,7 +22,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const postPhotoUrls = post.imageUrls;
-  const likeId = Number(currentUserId) + Number(post.id);
+  const likeId = String(currentUserId) + String(post.id);
 
   useEffect(() => {
     fetchLikes(null, post.id)

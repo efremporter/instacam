@@ -12,7 +12,7 @@ const LikesReducer = (state={}, action) => {
       return Object.assign(nextState, action.data);
 
     case REMOVE_LIKE:
-      delete nextState[state.data];
+      delete nextState[action.data];
       return nextState;
 
     default:
