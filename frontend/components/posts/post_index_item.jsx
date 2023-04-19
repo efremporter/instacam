@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import * as modalActionCreators from "../../actions/modal_actions";
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
+import * as likeActionCreators from '../../actions/like_actions';
 import { bindActionCreators } from "redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HiSquare2Stack } from 'react-icons/hi2';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
@@ -11,15 +12,29 @@ import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import getDateDifference from "./post_functions";
 
-function PostIndexItem({ post, isProfile, postAuthor }) {
+function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const likes = useSelector(state => state.entities.likes);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
+  const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
   const postPhotoUrls = post.imageUrls;
+  const likeId = String(currentUserId) + String(post.id);
 
-  function handlePostClick() {
+  useEffect(() => {
+    fetchLikes(null, post.id)
+  }, []);
+
+  useEffect(() => {
+    if (likes[likeId]) {
+      setIsLiked(true);
+    };
+  }, [likes]);
+
+  const handlePostClick = () => {
     const modal = {
       postId: post.id,
       type: "postShow",
@@ -28,47 +43,35 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
     openModal(modal);
   };
 
-  function getMultipleImagesIcon() {
-    if (post.imageUrls.length > 1) {
+  const handleToggleLike = () => {
+    if (isLiked) {
+      deleteLike(likes[likeId].id, likeId)
+      .then(() => setIsLiked(false));
+    } else {
+      createLike(currentUserId, post.id)
+      .then(() => setIsLiked(true));
+    };
+  }; 
+
+  const handleLikeIcon = () => {
+    if (isLiked) {
       return (
-        <HiSquare2Stack className="post-index-item-multiple-images-icon"
-          color='white'
-          size={25}
+        <AiFillHeart size={32}
+          className='feed-post-index-item-icon'
+          color="#FF2F40"
+        />
+      )
+    } else {
+      return (
+        <AiOutlineHeart size={32}
+          className='feed-post-index-item-icon'
+          color="white"
         />
       );
-    } else return null;
-  };
-
-  const getCorrectClassName = () => {
-    if (isProfile) {
-      return 'profile';
-    } else {
-      return 'feed';
     };
   };
 
-  function getImageArrowsIcon() {
-    if (postPhotoUrls.length > 1) {
-      return (
-        <>
-          <IoChevronBackCircle id="feed-index-item-previous-image-icon"
-            className='post-show-modal-image-icon'
-            size={30}
-            color="white"
-            onClick={() => handleImageIndex('previous')}
-          />
-          <IoChevronForwardCircle id="feed-index-item-next-image-icon"
-            className='post-show-modal-image-icon'
-            size={30}
-            color="white"
-            onClick={() => handleImageIndex('next')}
-          />
-        </>
-      );
-    } else return null;
-  };
-
-  function handleImageIndex(direction) {
+  const handleImageIndex = direction => {
     if (direction === 'previous') {
       if (postImageIndex > 0) {
         setPostImageIndex(postImageIndex - 1);
@@ -91,6 +94,46 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
       postId: post.id
     }
     openDoubleModal(doubleModal);
+  };
+
+  const getMultipleImagesIcon = () => {
+    if (post.imageUrls.length > 1) {
+      return (
+        <HiSquare2Stack className="post-index-item-multiple-images-icon"
+          color='white'
+          size={25}
+        />
+      );
+    } else return null;
+  };
+
+  const getCorrectClassName = () => {
+    if (isProfile) {
+      return 'profile';
+    } else {
+      return 'feed';
+    };
+  };
+
+  const getImageArrowsIcon = () => {
+    if (postPhotoUrls.length > 1) {
+      return (
+        <>
+          <IoChevronBackCircle id="feed-index-item-previous-image-icon"
+            className='post-show-modal-image-icon'
+            size={30}
+            color="white"
+            onClick={() => handleImageIndex('previous')}
+          />
+          <IoChevronForwardCircle id="feed-index-item-next-image-icon"
+            className='post-show-modal-image-icon'
+            size={30}
+            color="white"
+            onClick={() => handleImageIndex('next')}
+          />
+        </>
+      );
+    } else return null;
   };
 
   return (
@@ -147,9 +190,10 @@ function PostIndexItem({ post, isProfile, postAuthor }) {
       {isProfile ? null : (
         <div className='feed-post-index-bottom-container'>
           <div className='feed-post-index-item-like-comment-container'>
-            <div className='feed-post-index-item-icon-container'>
-              <AiOutlineHeart size={32} 
-                className='feed-post-index-item-icon' />
+            <div className='feed-post-index-item-icon-container'
+              onClick={handleToggleLike}
+            >
+              {handleLikeIcon()}
             </div>
             <div className='feed-post-index-item-icon-container'>
               <IoChatbubbleOutline size={30}

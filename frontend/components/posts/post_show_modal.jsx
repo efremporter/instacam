@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
@@ -6,18 +6,34 @@ import { IoChevronForwardCircle, IoChevronBackCircle,
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { bindActionCreators } from 'redux';
 import * as userActionCreators from '../../actions/user_actions';
+import * as likeActionCreators from '../../actions/like_actions';
 import getDateDifference from './post_functions';
 
 function PostShowModal({ postId, closeModal, openDoubleModal }) {
   const postsObject = useSelector(state => state.entities.posts);
+  const likes = useSelector(state => state.entities.likes);
   const postsArray = Object.values(postsObject);
   const dispatch = useDispatch();
   const [currentPostId, setCurrentPostId] = useState(postId);
   const post = postsObject[currentPostId];
   const [postImageIndex, setPostImageIndex] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
+  const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
+  const likeId = String(currentUserId) + String(currentPostId);
+  useEffect(() => {
+    fetchLikes(null, currentPostId)
+  }, []);
+
+  useEffect(() => {
+    if (likes[likeId]) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  }, [currentPostId]);
 
   // The if statement below should never fire because we can only
   // access the PostShowModal via the Profile component, so postAuthor
@@ -26,6 +42,34 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
   const postAuthor = useSelector(state => state.entities.users[post.authorId])
   if (!postAuthor) {
     fetchUser(post.authorId);
+  };
+
+  const handleToggleLike = () => {
+    if (isLiked) {
+      deleteLike(likes[likeId].id, likeId)
+        .then(() => setIsLiked(false));
+    } else {
+      createLike(currentUserId, post.id)
+        .then(() => setIsLiked(true));
+    };
+  };
+
+  const handleLikeIcon = () => {
+    if (isLiked) {
+      return (
+        <AiFillHeart size={32}
+          className='feed-post-index-item-icon'
+          color="#FF2F40"
+         />
+      )
+    } else {
+      return (
+        <AiOutlineHeart size={32}
+          className='feed-post-index-item-icon'
+          color="white"
+        />
+      );
+    };
   };
 
   const getImageArrowsIcon =  () => {
@@ -161,10 +205,10 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
         <div className='post-show-modal-right-side-bottom-outer-container'>
           <div className='post-show-modal-right-side-bottom-inner-container'>
               <div className='post-show-modal-right-side-bottom-icons-container'>
-                <div className='post-show-modal-post-like-icon-container'>
-                  <AiOutlineHeart id="post-like-icon"
-                    className='post-show-modal-comments-like-icon'
-                    size={32} />
+                <div className='post-show-modal-post-like-icon-container'
+                  onClick={handleToggleLike}
+                >
+                {handleLikeIcon()}
                 </div>
                 <div id="post-comment-icon-container"
                   className='post-show-modal-post-like-icon-container'>

@@ -5,7 +5,8 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, maximum: 30, allow_nil: true }
 
-  # has_many :posts
+  has_many :posts, foreign_key: :author_id
+  has_many :likes, foreign_key: :user_id
   # has_many :follows
   has_one_attached :profile_photo
 
