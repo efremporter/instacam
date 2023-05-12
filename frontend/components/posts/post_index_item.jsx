@@ -25,7 +25,9 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const likeId = String(currentUserId) + String(post.id);
 
   useEffect(() => {
-    fetchLikes(null, post.id)
+    if (!isProfile) {
+      fetchLikes(null, post.id);
+    };
   }, []);
 
   useEffect(() => {
