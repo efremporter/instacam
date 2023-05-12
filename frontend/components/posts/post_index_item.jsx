@@ -11,6 +11,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
 import getDateDifference from "./post_functions";
+import Comments from "../comments/comments";
 
 function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
@@ -214,6 +215,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             <span className="feed-post-index-item-caption">
               {post.caption}
             </span>
+            <Comments />
           </div>
         </div>
       )}

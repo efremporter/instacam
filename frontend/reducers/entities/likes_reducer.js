@@ -7,6 +7,8 @@ const LikesReducer = (state={}, action) => {
   switch (action.type) {
     case RECEIVE_LIKES:
       return Object.assign(nextState, action.data);
+      // Figure out why line below doesn't work
+      // return action.data 
     
     case RECEIVE_LIKE:
       return Object.assign(nextState, action.data);
