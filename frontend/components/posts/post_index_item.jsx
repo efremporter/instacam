@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import * as modalActionCreators from "../../actions/modal_actions";
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as likeActionCreators from '../../actions/like_actions';
+import * as commentActionCreators from '../../actions/comment_actions';
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { HiSquare2Stack } from 'react-icons/hi2';
@@ -17,9 +18,11 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const likes = useSelector(state => state.entities.likes);
+  const comments = useSelector(state => state.entities.comments);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
+  const { fetchComments } = bindActionCreators(commentActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const postPhotoUrls = post.imageUrls;
@@ -29,6 +32,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
     if (!isProfile) {
       fetchLikes(null, post.id);
     };
+    fetchComments(post.id);
   }, []);
 
   useEffect(() => {
@@ -36,6 +40,10 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
       setIsLiked(true);
     };
   }, [likes]);
+
+  // useEffect(() => {
+  //   fetchComments(post.id);
+  // }, [comments.length]);
 
   const handlePostClick = () => {
     const modal = {
@@ -215,7 +223,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             <span className="feed-post-index-item-caption">
               {post.caption}
             </span>
-            <Comments />
+            <Comments postId={post.id} currentUserId={currentUserId} />
           </div>
         </div>
       )}

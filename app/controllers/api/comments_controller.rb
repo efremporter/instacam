@@ -1,7 +1,7 @@
 class Api::CommentsController < ApplicationController
 
   def index
-    @comments = Comment.where(post_id: params[:post_id])
+    @comments = Comment.where(post_id: params[:comment][:post_id])
     render :index
   end
 
