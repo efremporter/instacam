@@ -5,7 +5,7 @@ class Api::PostsController < ApplicationController
       @posts = Post.where(author_id: params[:post][:author_id])
     elsif params[:post] && params[:post][:current_user_id].length > 0
       # @posts = Post.all.limit(5)
-      @posts = Post.all.limit(2)
+      @posts = Post.all.limit(1)
       # @posts += Post.where(author_id: params[:post][:current_user_id])
     end
       render :index
