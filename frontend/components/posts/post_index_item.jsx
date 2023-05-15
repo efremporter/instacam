@@ -10,7 +10,7 @@ import { HiSquare2Stack } from 'react-icons/hi2';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
-  IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
+  IoChatbubbleOutline } from 'react-icons/io5';
 import getDateDifference from "./post_functions";
 import Comments from "../comments/comments";
 
@@ -26,6 +26,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [postLikes, setPostLikes] = useState(0);
+  const [postComments, setPostComments] = useState([]);
   const postPhotoUrls = post.imageUrls;
   const likeId = String(currentUserId) + String(post.id);
 
@@ -33,7 +34,10 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
     if (!isProfile) {
       fetchLikes(null, post.id)
     };
-    fetchComments(post.id);
+    fetchComments(post.id)
+    .then(fetchedComments => {
+      setPostComments(Object.values(fetchedComments.data));
+    });
   }, []);
 
   useEffect(() => {
@@ -149,6 +153,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
     } else return null;
   };
 
+
   return (
     <div className={getCorrectClassName() + '-post-index-item-container'}>
       {isProfile ? getMultipleImagesIcon() : null}
@@ -225,7 +230,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             <span className="feed-post-index-item-caption">
               {post.caption}
             </span>
-            <Comments comments={comments}
+            <Comments comments={postComments}
               postId={post.id}
               currentUserId={currentUserId} />
           </div>

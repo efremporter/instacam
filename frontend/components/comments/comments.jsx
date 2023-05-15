@@ -6,6 +6,7 @@ import * as commentActionCreators from '../../actions/comment_actions';
 function Comments({ comments, postId, currentUserId }) {
 
   const [content, setContent] = useState("");
+  const [myComments, setMyComments] = useState([]);
   const dispatch = useDispatch();
   const { createComment } = bindActionCreators(commentActionCreators, dispatch);
 
@@ -19,7 +20,11 @@ function Comments({ comments, postId, currentUserId }) {
     if (content.length <= 2200) {
       const comment = { post_id: postId, user_id: currentUserId, content }
       createComment(comment)
-      .then(() => setContent(''));
+      .then(newComment => {
+        setContent('');
+        console.log(Object.values(newComment.data));
+        setMyComments(myComments.concat(newComment.data))
+      });
     };
   };
 
@@ -29,7 +34,10 @@ function Comments({ comments, postId, currentUserId }) {
         <div className="view-all-comments-container">
           <div className="view-all-comments-button"
             onClick={() => {}}>
-            View all {comments.length} comments
+            {comments.length === 1 ?
+              `View ${comments.length} comment` :
+              `View all ${comments.length} comments`
+            }
           </div>
         </div> ) : null}
       <div className="add-a-comment-container">
