@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as commentActionCreators from '../../actions/comment_actions';
 
-function Comments({ postId, currentUserId }) {
+function Comments({ comments, postId, currentUserId }) {
 
   const [content, setContent] = useState("");
   const dispatch = useDispatch();
@@ -25,6 +25,13 @@ function Comments({ postId, currentUserId }) {
 
   return (
     <div>
+      {comments.length > 0 ? (
+        <div className="view-all-comments-container">
+          <div className="view-all-comments-button"
+            onClick={() => {}}>
+            View all {comments.length} comments
+          </div>
+        </div> ) : null}
       <div className="add-a-comment-container">
         <textarea className="add-a-comment-textarea"
           placeholder="Add a comment..."

@@ -25,12 +25,13 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const { fetchComments } = bindActionCreators(commentActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [postLikes, setPostLikes] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const likeId = String(currentUserId) + String(post.id);
 
   useEffect(() => {
     if (!isProfile) {
-      fetchLikes(null, post.id);
+      fetchLikes(null, post.id)
     };
     fetchComments(post.id);
   }, []);
@@ -39,11 +40,12 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
     if (likes[likeId]) {
       setIsLiked(true);
     };
+    let postLikesSum = 0;
+    Object.values(likes).forEach(like => {
+      if (like.postId === post.id) postLikesSum += 1;
+    });
+    setPostLikes(postLikesSum);
   }, [likes]);
-
-  // useEffect(() => {
-  //   fetchComments(post.id);
-  // }, [comments.length]);
 
   const handlePostClick = () => {
     const modal = {
@@ -212,7 +214,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             </div>
           </div>
           <div className="feed-post-index-item-like-count-container">
-            0 Likes
+            {postLikes} Likes
           </div>
           <div className="feed-post-index-item-handle-caption-container">
             <span className="feed-post-index-item-handle"
@@ -223,7 +225,9 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             <span className="feed-post-index-item-caption">
               {post.caption}
             </span>
-            <Comments postId={post.id} currentUserId={currentUserId} />
+            <Comments comments={comments}
+              postId={post.id}
+              currentUserId={currentUserId} />
           </div>
         </div>
       )}
