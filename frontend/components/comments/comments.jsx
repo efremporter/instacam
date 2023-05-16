@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as commentActionCreators from '../../actions/comment_actions';
 
-function Comments({ comments, postId, currentUserId }) {
-
+function Comments({ postId, isProfile, currentUserId }) {
+  const dispatch = useDispatch();
+  const comments = useSelector(state => Object.values(state.entities.comments));
   const [content, setContent] = useState("");
   const [myComments, setMyComments] = useState([]);
   const [commentsCount, setCommentsCount] = useState(0);
   const currentUser = useSelector(state => state.entities.users[currentUserId]);
-  const dispatch = useDispatch();
   const { createComment } = bindActionCreators(commentActionCreators, dispatch);
 
 useEffect(() => {
@@ -21,13 +21,13 @@ useEffect(() => {
 useEffect(() => {
   let myCommentsSetup = [];
   let i = commentsCount - 1;
-  // console.log(comments.length, commentsCount)
   let count = 0;
   while (count <= 1 && i > 0) {
+    console.log(i, comments[i], comments.length)
     if (comments[i] && comments[i].userId === currentUserId) {
-      myCommentsSetup.push(comments[i]);
+      myCommentsSetup.unshift(comments[i]);
+      count++;
     };
-    count++;
     i--;
   };
   setMyComments(myCommentsSetup);
@@ -50,7 +50,7 @@ useEffect(() => {
       });
     };
   };
-  // console.log(myComments)
+
   return (
     <div className="comments-container">
       {commentsCount > 0 ? (

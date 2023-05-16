@@ -18,7 +18,6 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const likes = useSelector(state => state.entities.likes);
-  const comments = useSelector(state => state.entities.comments);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
@@ -26,19 +25,18 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [postLikes, setPostLikes] = useState(0);
-  const [postComments, setPostComments] = useState([]);
   const postPhotoUrls = post.imageUrls;
   const likeId = String(currentUserId) + String(post.id);
 
   useEffect(() => {
-    if (!isProfile) {
+    if (isProfile === false) {
       fetchLikes(null, post.id)
     };
+  }, [isProfile]);
+
+  useEffect(() => {
     fetchComments(post.id)
-    .then(fetchedComments => {
-      setPostComments(Object.values(fetchedComments.data));
-    });
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (likes[likeId]) {
@@ -153,7 +151,6 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
     } else return null;
   };
 
-
   return (
     <div className={getCorrectClassName() + '-post-index-item-container'}>
       {isProfile ? getMultipleImagesIcon() : null}
@@ -230,9 +227,11 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             <span className="feed-post-index-item-caption">
               {post.caption}
             </span>
-            <Comments comments={postComments}
-              postId={post.id}
+            {!isProfile ? (
+              <Comments postId={post.id}
+              isProfile={isProfile}
               currentUserId={currentUserId} />
+            ) : null}
           </div>
         </div>
       )}
