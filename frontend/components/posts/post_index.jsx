@@ -16,29 +16,32 @@ function PostIndex({ profileUserId }) {
   const { fetchUsers } = bindActionCreators(userActionCreators, dispatch); 
 
   useEffect(() => {
-    if (profileUserId) {
-      fetchPosts(profileUserId);
-    } else {
-      // This fetches all posts. Eventually, add logic to fetch posts
-      // only from followees of current user
-      fetchPosts(null, currentUserId)
-      .then(() => {
-        if (posts.length) {
-          const authorIdsHash = {};
-          posts.forEach(post => {
-            const authorId = post.authorId
-            if (!authorIdsHash[authorId]) {
-              authorIdsHash[authorId] = authorId;
-            };
-          });
-          const authorIdsArray = Object.values(authorIdsHash);
-          fetchUsers(authorIdsArray);
-        };
-      });
-    };
-  }, [profileUserId, posts.length]);
+    // This fetches all posts. Eventually, add logic to fetch posts
+    // only from followees of current user
+    console.log(currentUserId)
+    fetchPosts(null, currentUserId)
+    .then(() => {
+      if (posts.length) {
+        const authorIdsHash = {};
+        posts.forEach(post => {
+          const authorId = post.authorId
+          if (!authorIdsHash[authorId] && !users[authorId]) {
+            authorIdsHash[authorId] = authorId;
+          };
+        });
+        const authorIdsArray = Object.values(authorIdsHash);
+        if (authorIdsArray.length) fetchUsers(authorIdsArray);
+      };
+    });
+  }, [currentUserId]);
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change
+
+  useEffect(() => {
+    if (profileUserId) {
+      fetchPosts(profileUserId, null);
+    }
+  }, [profileUserId, posts.length])
   
   const isProfile = Boolean(profileUserId);
   const getCorrectClassName = () => {

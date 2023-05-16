@@ -7,14 +7,17 @@
   color: #A8A8A8;
   margin-top: 12px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
+.my-comment-li {
+  margin-bottom: 6px;
+}
 
 .add-a-comment-container {
   display: flex;
   align-items: center;
   height: auto;
-  margin-top: 10px;
   margin-left: -3px;
 }
 
