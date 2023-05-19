@@ -7,11 +7,14 @@ import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { bindActionCreators } from 'redux';
 import * as userActionCreators from '../../actions/user_actions';
 import * as likeActionCreators from '../../actions/like_actions';
+import * as commentActionCreators from '../../actions/comment_actions';
 import getDateDifference from './post_functions';
 
-function PostShowModal({ postId, closeModal, openDoubleModal }) {
+function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const postsObject = useSelector(state => state.entities.posts);
   const likes = useSelector(state => state.entities.likes);
+  const comments = Object.values(useSelector(state => state.entities.comments));
+  const users = useSelector(state => state.entities.users);
   const postsArray = Object.values(postsObject);
   const dispatch = useDispatch();
   const [currentPostId, setCurrentPostId] = useState(postId);
@@ -22,10 +25,19 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
   const currentUserId = useSelector(state => state.session.id);
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
   const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
+  const { fetchComments } = bindActionCreators(commentActionCreators, dispatch);
   const likeId = String(currentUserId) + String(currentPostId);
 
   useEffect(() => {
     fetchLikes(null, currentPostId);
+    fetchComments(postId)
+    .then(() => {
+      comments.forEach(comment => {
+        if (!users[comment.userId]) {
+          fetchUser(comment.userId);
+        };
+      });
+    });
   }, []);
 
   useEffect(() => {
@@ -35,6 +47,10 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
       setIsLiked(false);
     }
   }, [currentPostId]);
+
+  // useEffect(() => {
+
+  // }, [comments.length])
 
   // The if statement below should never fire because we can only
   // access the PostShowModal via the Profile component, so postAuthor
@@ -199,8 +215,29 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
                 </div>
                 <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
               </div>
-              <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} />
+              {/* <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} /> */}
             </div>
+            <ul className='post-show-comments'>
+              {comments.map(comment => {
+                return (
+                  <li key={comment.id}>
+                    <div className='post-show-modal-comments-caption-container'>
+                      <img className='post-show-modal-right-side-avatar'
+                        src={users[comment.userId].profilePhotoUrl} />
+                      <div className='post-show-modal-right-side-caption-date-container'>
+                        <div className='post-show-modal-right-side-handle-caption-container'>
+                          <span className='post-show-modal-handle'
+                            onClick={closeModal}
+                          >{users[comment.userId].handle}</span>
+                          <span className='post-show-modal-caption'>{comment.content}</span>
+                        </div>
+                        <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
         </div>
         <div className='post-show-modal-right-side-bottom-outer-container'>

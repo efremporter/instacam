@@ -55,6 +55,7 @@ function Modal() {
     component = (
       <PostShowModal
         postId={modal.postId}
+        isProfile={modal.isProfile}
         closeModal={closeModal}
         openDoubleModal={openDoubleModal}
       />

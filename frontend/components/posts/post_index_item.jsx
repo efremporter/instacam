@@ -12,7 +12,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
   IoChatbubbleOutline } from 'react-icons/io5';
 import getDateDifference from "./post_functions";
-import Comments from "../comments/comments";
+import FeedComments from "../comments/feed_comments";
 
 function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
@@ -52,6 +52,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const handlePostClick = () => {
     const modal = {
       postId: post.id,
+      isProfile: true,
       type: "postShow",
       from: "profile",
     };
@@ -228,7 +229,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
               {post.caption}
             </span>
             {!isProfile ? (
-              <Comments postId={post.id}
+              <FeedComments postId={post.id}
               isProfile={isProfile}
               currentUserId={currentUserId} />
             ) : null}

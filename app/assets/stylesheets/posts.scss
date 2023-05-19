@@ -545,7 +545,8 @@
 }
 
 .post-show-modal-comments-caption-container {
-  height: 55px;
+  min-height: 55px;
+  height: auto;
   margin-top: 12px;
   display: flex;
   align-items: center;
