@@ -16,16 +16,18 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const comments = Object.values(useSelector(state => state.entities.comments));
   const users = useSelector(state => state.entities.users);
   const postsArray = Object.values(postsObject);
-  const dispatch = useDispatch();
   const [currentPostId, setCurrentPostId] = useState(postId);
   const post = postsObject[currentPostId];
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [content, setContent] = useState("");
+  
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
+  const dispatch = useDispatch();
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
   const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
-  const { fetchComments } = bindActionCreators(commentActionCreators, dispatch);
+  const { fetchComments, createComment } = bindActionCreators(commentActionCreators, dispatch);
   const likeId = String(currentUserId) + String(currentPostId);
 
   useEffect(() => {
@@ -176,6 +178,24 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
     openDoubleModal(doubleModal);
   };
 
+  const postComment = () => {
+    if (content.length <= 2200) {
+      const comment = { post_id: postId, user_id: currentUserId, content }
+      createComment(comment)
+        .then(newComment => {
+          setContent('');
+          setMyComments(myComments.concat(Object.values(newComment.data)[0]));
+          setCommentsCount(commentsCount + 1);
+      });
+    };
+  };
+
+  const updateCommentContent = commentContent => {
+    if (commentContent.length < 2200) {
+      setContent(commentContent);
+    };
+  };
+
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}
@@ -256,7 +276,17 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                 </div>
               </div>
               <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
-              <div className='post-show-modal-right-side-bottom-add-comment-container'>Add a comment</div>
+              <div className="add-a-comment-container">
+                <textarea id="post-comment-textarea" className="add-a-comment-textarea"
+                  placeholder="Add a comment..."
+                  value={content}
+                  type="submit"
+                  onChange={e => updateCommentContent(e.target.value)}
+                />
+                <div id="post-comment-button" className="add-a-comment-post-button"
+                  onClick={postComment}
+                >Post</div>
+              </div>
           </div>
         </div>
       </div>
