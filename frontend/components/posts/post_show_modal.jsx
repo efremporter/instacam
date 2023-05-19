@@ -253,6 +253,10 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                         </div>
                         <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
                       </div>
+                      {comment.userId === currentUserId ? <BiDotsHorizontalRounded size={24}
+                        className='post-show-modal-more-icon'
+                        // onClick={() => handleOpenDoubleModal('postShowMore')} Create new double modal for delete comment
+                      /> : null}
                     </div>
                   </li>
                 )
