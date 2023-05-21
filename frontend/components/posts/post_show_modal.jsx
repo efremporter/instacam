@@ -169,12 +169,17 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
     setCurrentPostId(postsArray[newPostIndex].id);
   };
 
-  const handleOpenDoubleModal = modalType => {
-    const doubleModal = {
+  const handleOpenDoubleModal = (modalType, commentId=null) => {
+    const doubleModal = modalType === 'postShowMore' ? {
       type: modalType,
-      from: "profile",
+      from: "postShow",
       postId: post.id
-    };
+    } :
+    {
+      type: modalType,
+      from: "postShow",
+      commentId
+    }
     openDoubleModal(doubleModal);
   };
 
@@ -218,7 +223,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
             </div>
             {postAuthor.id === currentUserId ? <BiDotsHorizontalRounded size={24}
               className='post-show-modal-more-icon'
-              onClick={() => handleOpenDoubleModal('postShowMore')}
+              onClick={() => handleOpenDoubleModal('postShowMore', null)}
             /> : null}
           </div>
         </div>
@@ -255,7 +260,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                       </div>
                       {comment.userId === currentUserId ? <BiDotsHorizontalRounded size={24}
                         className='post-show-modal-more-icon'
-                        // onClick={() => handleOpenDoubleModal('postShowMore')} Create new double modal for delete comment
+                        onClick={() => handleOpenDoubleModal('deleteComment', comment.id)}
                       /> : null}
                     </div>
                   </li>

@@ -6,6 +6,7 @@ import * as modalActionCreators from '../../actions/modal_actions';
 import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import DeletePostModal from '../posts/delete_post_modal';
 import PostShowMoreModal from '../posts/post_show_more_modal';
+import DeleteCommentModal from '../comments/delete_comment_modal';
 
 function DoubleModal() {
   const dispatch = useDispatch();
@@ -38,6 +39,13 @@ function DoubleModal() {
       <DeletePostModal 
         postId={doubleModal.postId}
         closeModal={closeModal}
+        closeDoubleModal={closeDoubleModal}
+      />
+    );
+  } else if (doubleModal.type === 'deleteComment') {
+    component = (
+      <DeleteCommentModal
+        commentId={doubleModal.commentId}
         closeDoubleModal={closeDoubleModal}
       />
     );
