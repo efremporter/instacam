@@ -18,15 +18,15 @@ function Home() {
   const history = useHistory();
 
   // history.push('/profile/1')
-  fetchPost(1)
-    .then(() => {
-      openModal({
-        postId: 1,
-        type: 'postShow',
-        from: 'feed',
-        isProfile: false
-      });
-    });
+  // fetchPost(1)
+  //   .then(() => {
+  //     openModal({
+  //       postId: 1,
+  //       type: 'postShow',
+  //       from: 'feed',
+  //       isProfile: false
+  //     });
+  //   });
 
   return (
     <div className="home-container">
