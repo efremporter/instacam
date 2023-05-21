@@ -92,7 +92,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const getImageArrowsIcon =  () => {
-    if (postPhotoUrls.length > 1) {
+    if (postPhotoUrls.length > 1 && isProfile) {
       return (
         <>
           <IoChevronBackCircle id="post-show-modal-previous-image-icon"
