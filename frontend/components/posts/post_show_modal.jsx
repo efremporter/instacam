@@ -7,34 +7,65 @@ import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { bindActionCreators } from 'redux';
 import * as userActionCreators from '../../actions/user_actions';
 import * as likeActionCreators from '../../actions/like_actions';
+import * as commentActionCreators from '../../actions/comment_actions';
 import getDateDifference from './post_functions';
 
-function PostShowModal({ postId, closeModal, openDoubleModal }) {
+function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const postsObject = useSelector(state => state.entities.posts);
   const likes = useSelector(state => state.entities.likes);
+  const comments = Object.values(useSelector(state => state.entities.comments));
+  const users = useSelector(state => state.entities.users);
   const postsArray = Object.values(postsObject);
-  const dispatch = useDispatch();
   const [currentPostId, setCurrentPostId] = useState(postId);
   const post = postsObject[currentPostId];
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [content, setContent] = useState("");
+  const [currentComments, setCurrentComments] = useState(comments);
+  
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
+  const dispatch = useDispatch();
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
   const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
+  const { fetchComments, createComment } = bindActionCreators(commentActionCreators, dispatch);
   const likeId = String(currentUserId) + String(currentPostId);
 
   useEffect(() => {
     fetchLikes(null, currentPostId);
+    fetchComments(currentPostId)
+    .then(comments => {
+      setCurrentComments(Object.values(comments.data));
+    });
   }, []);
+
+  useEffect(() => {
+    setCurrentComments(comments)
+  }, [comments.length])
+
+  useEffect(() => {
+    currentComments.forEach(comment => {
+      if (!users[comment.userId]) {
+        fetchUser(comment.userId);
+      };
+    });
+  }, [currentComments])
 
   useEffect(() => {
     if (likes[likeId]) {
       setIsLiked(true);
     } else {
       setIsLiked(false);
-    }
+    };
+    fetchComments(currentPostId)
+    .then(comments => {
+      setCurrentComments(Object.values(comments.data));
+    });
   }, [currentPostId]);
+
+  // useEffect(() => {
+
+  // }, [comments.length])
 
   // The if statement below should never fire because we can only
   // access the PostShowModal via the Profile component, so postAuthor
@@ -74,7 +105,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
   };
 
   const getImageArrowsIcon =  () => {
-    if (postPhotoUrls.length > 1) {
+    if (postPhotoUrls.length > 1 && isProfile) {
       return (
         <>
           <IoChevronBackCircle id="post-show-modal-previous-image-icon"
@@ -151,15 +182,36 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
     setCurrentPostId(postsArray[newPostIndex].id);
   };
 
-  const handleOpenDoubleModal = modalType => {
-    const doubleModal = {
+  const handleOpenDoubleModal = (modalType, commentId=null) => {
+    const doubleModal = modalType === 'postShowMore' ? {
       type: modalType,
-      from: "profile",
+      from: "postShow",
       postId: post.id
-    };
+    } :
+    {
+      type: modalType,
+      from: "postShow",
+      commentId
+    }
     openDoubleModal(doubleModal);
   };
 
+  const postComment = () => {
+    if (content.length <= 2200) {
+      const comment = { post_id: postId, user_id: currentUserId, content }
+      createComment(comment)
+        .then(newComment => {
+          setContent('');
+      });
+    };
+  };
+
+  const updateCommentContent = commentContent => {
+    if (commentContent.length < 2200) {
+      setContent(commentContent);
+    };
+  };
+  console.log(currentComments)
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}
@@ -182,7 +234,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
             </div>
             {postAuthor.id === currentUserId ? <BiDotsHorizontalRounded size={24}
               className='post-show-modal-more-icon'
-              onClick={() => handleOpenDoubleModal('postShowMore')}
+              onClick={() => handleOpenDoubleModal('postShowMore', null)}
             /> : null}
           </div>
         </div>
@@ -199,8 +251,33 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
                 </div>
                 <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
               </div>
-              <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} />
+              {/* <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} /> */}
             </div>
+            <ul className='post-show-comments'>
+              {currentComments.map(comment => {
+                return (
+                  <li key={comment.id}>
+                    <div className='post-show-modal-comments-caption-container'>
+                      <img className='post-show-modal-right-side-avatar'
+                        src={users[comment.userId].profilePhotoUrl} />
+                      <div className='post-show-modal-right-side-caption-date-container'>
+                        <div className='post-show-modal-right-side-handle-caption-container'>
+                          <span className='post-show-modal-handle'
+                            onClick={closeModal}
+                          >{users[comment.userId].handle}</span>
+                          <span className='post-show-modal-caption'>{comment.content}</span>
+                        </div>
+                        <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
+                      </div>
+                      {comment.userId === currentUserId ? <BiDotsHorizontalRounded size={24}
+                        className='post-show-modal-more-icon'
+                        onClick={() => handleOpenDoubleModal('deleteComment', comment.id)}
+                      /> : null}
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
         </div>
         <div className='post-show-modal-right-side-bottom-outer-container'>
@@ -219,7 +296,17 @@ function PostShowModal({ postId, closeModal, openDoubleModal }) {
                 </div>
               </div>
               <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
-              <div className='post-show-modal-right-side-bottom-add-comment-container'>Add a comment</div>
+              <div className="add-a-comment-container">
+                <textarea id="post-comment-textarea" className="add-a-comment-textarea"
+                  placeholder="Add a comment..."
+                  value={content}
+                  type="submit"
+                  onChange={e => updateCommentContent(e.target.value)}
+                />
+                <div id="post-comment-button" className="add-a-comment-post-button"
+                  onClick={postComment}
+                >Post</div>
+              </div>
           </div>
         </div>
       </div>

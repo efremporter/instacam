@@ -3,14 +3,16 @@ import { useHistory } from "react-router-dom";
 import * as modalActionCreators from "../../actions/modal_actions";
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as likeActionCreators from '../../actions/like_actions';
+import * as commentActionCreators from '../../actions/comment_actions';
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { HiSquare2Stack } from 'react-icons/hi2';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { IoChevronForwardCircle, IoChevronBackCircle,
-  IoChatbubbleOutline, IoChatbubble } from 'react-icons/io5';
+  IoChatbubbleOutline } from 'react-icons/io5';
 import getDateDifference from "./post_functions";
+import FeedComments from "../comments/feed_comments";
 
 function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const dispatch = useDispatch();
@@ -19,26 +21,38 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { fetchLikes, createLike, deleteLike } = bindActionCreators(likeActionCreators, dispatch);
+  const { fetchComments } = bindActionCreators(commentActionCreators, dispatch);
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [postLikes, setPostLikes] = useState(0);
   const postPhotoUrls = post.imageUrls;
   const likeId = String(currentUserId) + String(post.id);
 
   useEffect(() => {
-    if (!isProfile) {
-      fetchLikes(null, post.id);
+    if (isProfile === false) {
+      fetchLikes(null, post.id)
     };
-  }, []);
+  }, [isProfile]);
+
+  useEffect(() => {
+    fetchComments(post.id)
+  }, [])
 
   useEffect(() => {
     if (likes[likeId]) {
       setIsLiked(true);
     };
+    let postLikesSum = 0;
+    Object.values(likes).forEach(like => {
+      if (like.postId === post.id) postLikesSum += 1;
+    });
+    setPostLikes(postLikesSum);
   }, [likes]);
 
   const handlePostClick = () => {
     const modal = {
       postId: post.id,
+      isProfile: true,
       type: "postShow",
       from: "profile",
     };
@@ -203,7 +217,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             </div>
           </div>
           <div className="feed-post-index-item-like-count-container">
-            0 Likes
+            {postLikes} Likes
           </div>
           <div className="feed-post-index-item-handle-caption-container">
             <span className="feed-post-index-item-handle"
@@ -214,6 +228,11 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             <span className="feed-post-index-item-caption">
               {post.caption}
             </span>
+            {!isProfile ? (
+              <FeedComments postId={post.id}
+              isProfile={isProfile}
+              currentUserId={currentUserId} />
+            ) : null}
           </div>
         </div>
       )}

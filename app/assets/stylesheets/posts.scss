@@ -545,7 +545,8 @@
 }
 
 .post-show-modal-comments-caption-container {
-  height: 55px;
+  min-height: 55px;
+  height: auto;
   margin-top: 12px;
   display: flex;
   align-items: center;
@@ -662,7 +663,8 @@
 
 .feed-post-index-item-container {
   width: 540px;
-  border-bottom: 1px solid rgb(43, 43, 43);
+  margin-bottom: 50px;
+  // background-color: blue;
 }
 
 .feed-post-index-item-header {

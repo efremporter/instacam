@@ -1,3 +1,61 @@
-// Place all the styles related to the Comments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.comments-container {
+  border-bottom: 1px solid rgb(43, 43, 43);
+}
+
+.view-all-comments-button {
+  font-size: 16px;
+  color: #A8A8A8;
+  margin-top: 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.my-comment-li {
+  margin-bottom: 6px;
+}
+
+.add-a-comment-container {
+  display: flex;
+  align-items: center;
+  height: auto;
+  margin-left: -3px;
+  margin-top: 7px;
+}
+
+.add-a-comment-textarea {
+  background-color: #000000;
+  border: none;
+  width: 100%;
+  color: #F5F5F5;
+  font-size: 16px;
+  font-family: 'Figtree', sans-serif;
+  resize: none;
+  overflow-y: auto;
+}
+
+.add-a-comment-textarea:focus {
+  outline: none;
+}
+
+.add-a-comment-textarea::placeholder {
+  color: #A8A8A8;
+}
+
+.add-a-comment-post-button {
+  color: #0095F6;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0 8px 0 8px;
+  cursor: pointer;
+}
+
+.post-show-comments {
+  width: 100%;
+}
+
+#delete-comment-modal-container {
+    height: 120px;
+    width: 360px;
+}
+
+

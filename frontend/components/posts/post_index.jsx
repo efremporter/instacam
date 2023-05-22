@@ -12,35 +12,41 @@ function PostIndex({ profileUserId }) {
   const posts = Object.values(useSelector((state) => state.entities.posts));
   const users = useSelector(state => state.entities.users);
   const currentUserId = useSelector(state => state.session.id);
-  const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
+  const { fetchPosts, clearPosts } = bindActionCreators(postActionCreators, dispatch);
   const { fetchUsers } = bindActionCreators(userActionCreators, dispatch); 
 
   useEffect(() => {
-    if (profileUserId) {
-      fetchPosts(profileUserId);
-    } else {
-      // This fetches all posts. Eventually, add logic to fetch posts
-      // only from followees of current user
-      fetchPosts(null, currentUserId)
-      .then(() => {
-        if (posts.length) {
-          const authorIdsHash = {};
-          posts.forEach(post => {
-            const authorId = post.authorId
-            if (!authorIdsHash[authorId]) {
-              authorIdsHash[authorId] = authorId;
-            };
-          });
-          const authorIdsArray = Object.values(authorIdsHash);
-          fetchUsers(authorIdsArray);
-        };
-      });
-    };
-  }, [profileUserId, posts.length]);
+    // This fetches all posts. Eventually, add logic to fetch posts
+    // only from followees of current user
+    fetchPosts(null, currentUserId)
+    .then(() => {
+      if (posts.length) {
+        const authorIdsHash = {};
+        posts.forEach(post => {
+          const authorId = post.authorId
+          if (!authorIdsHash[authorId] && !users[authorId]) {
+            authorIdsHash[authorId] = authorId;
+          };
+        });
+        const authorIdsArray = Object.values(authorIdsHash);
+        if (authorIdsArray.length) fetchUsers(authorIdsArray);
+      };
+    });
+    return () => {
+      console.log('this should run when component is unmounted')
+    }
+  }, []);
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change
+
+  useEffect(() => {
+    if (profileUserId) {
+      fetchPosts(profileUserId, null);
+    }
+  }, [profileUserId, posts.length])
   
   const isProfile = Boolean(profileUserId);
+
   const getCorrectClassName = () => {
     if (isProfile) {
       return 'profile';

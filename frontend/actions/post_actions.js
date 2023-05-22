@@ -2,6 +2,7 @@ import * as PostAPIUtil from "../utils/post_util";
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
+export const REMOVE_POSTS = 'REMOVE_POSTS';
 export const REMOVE_POST = 'REMOVE_POST';
 export const RECEIVE_POST_ERRORS = 'RECEIVE_POST_ERRORS';
 export const REMOVE_POST_ERRORS = 'REMOVE_POST_ERRORS';
@@ -27,6 +28,12 @@ const removePost = id => {
   };
 };
 
+const removePosts = () => {
+  return {
+    type: REMOVE_POSTS
+  };
+};
+
 const receivePostErrors = errors => {
   return {
     type: RECEIVE_POST_ERRORS,
@@ -41,6 +48,7 @@ const removePostErrors = () => {
 };
 
 export const fetchPosts = (authorId=null, currentUserId=null) => dispatch => {
+  // console.log(currentUserId)
   return PostAPIUtil.fetchPosts(authorId, currentUserId)
     .then(posts => dispatch(receivePosts(posts)))
     .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
@@ -69,6 +77,10 @@ export const deletePost = id => dispatch => {
     .then(() => dispatch(removePost(id)))
     .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
 };
+
+export const clearPosts = () => dispatch => {
+  dispatch(removePosts());
+}
 
 export const clearPostErrors = () => dispatch => {
   dispatch(removePostErrors());
