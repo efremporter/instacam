@@ -21,6 +21,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [content, setContent] = useState("");
+  const [currentComments, setCurrentComments] = useState(comments);
   
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
@@ -32,22 +33,34 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
 
   useEffect(() => {
     fetchLikes(null, currentPostId);
-    fetchComments(postId)
-    .then(() => {
-      comments.forEach(comment => {
-        if (!users[comment.userId]) {
-          fetchUser(comment.userId);
-        };
-      });
+    fetchComments(currentPostId)
+    .then(comments => {
+      setCurrentComments(Object.values(comments.data));
     });
   }, []);
+
+  useEffect(() => {
+    setCurrentComments(comments)
+  }, [comments.length])
+
+  useEffect(() => {
+    currentComments.forEach(comment => {
+      if (!users[comment.userId]) {
+        fetchUser(comment.userId);
+      };
+    });
+  }, [currentComments])
 
   useEffect(() => {
     if (likes[likeId]) {
       setIsLiked(true);
     } else {
       setIsLiked(false);
-    }
+    };
+    fetchComments(currentPostId)
+    .then(comments => {
+      setCurrentComments(Object.values(comments.data));
+    });
   }, [currentPostId]);
 
   // useEffect(() => {
@@ -189,8 +202,6 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
       createComment(comment)
         .then(newComment => {
           setContent('');
-          setMyComments(myComments.concat(Object.values(newComment.data)[0]));
-          setCommentsCount(commentsCount + 1);
       });
     };
   };
@@ -200,7 +211,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
       setContent(commentContent);
     };
   };
-
+  console.log(currentComments)
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}
@@ -243,7 +254,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
               {/* <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} /> */}
             </div>
             <ul className='post-show-comments'>
-              {comments.map(comment => {
+              {currentComments.map(comment => {
                 return (
                   <li key={comment.id}>
                     <div className='post-show-modal-comments-caption-container'>
