@@ -33,6 +33,7 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
       sign_in!(@user)
       render "api/users/_show.json.jbuilder"
     else
