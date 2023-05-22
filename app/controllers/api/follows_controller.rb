@@ -1,7 +1,14 @@
 class Api::FollowsController < ApplicationController
   def index
-    @follows = Follow.where(user_id: params[:follow][:user_id])
-    render :index
+    user_id = params[:follow][:user_id]
+    following_id = params[:follow][:following_id]
+    if user_id && following_id
+      @follow = Follow.find_by(user_id: user_id, following_id: following_id)
+      render: show
+    else
+      @follows = Follow.where(user_id: user_id)
+      render :index
+    end
   end
 
   def show
