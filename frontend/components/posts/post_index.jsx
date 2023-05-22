@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -13,7 +13,8 @@ function PostIndex({ profileUserId }) {
   const users = useSelector(state => state.entities.users);
   const currentUserId = useSelector(state => state.session.id);
   const { fetchPosts, clearPosts } = bindActionCreators(postActionCreators, dispatch);
-  const { fetchUsers } = bindActionCreators(userActionCreators, dispatch); 
+  const { fetchUsers } = bindActionCreators(userActionCreators, dispatch);
+  const [postAuthors, setPostAuthors] = useState([]);
 
   useEffect(() => {
     // This fetches all posts. Eventually, add logic to fetch posts
@@ -29,12 +30,13 @@ function PostIndex({ profileUserId }) {
           };
         });
         const authorIdsArray = Object.values(authorIdsHash);
-        if (authorIdsArray.length) fetchUsers(authorIdsArray);
+        if (authorIdsArray.length){
+          fetchUsers(authorIdsArray)
+          .then(users => {
+          })
+        }
       };
     });
-    return () => {
-      console.log('this should run when component is unmounted')
-    }
   }, []);
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change

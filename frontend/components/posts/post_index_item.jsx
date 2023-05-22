@@ -152,6 +152,8 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
     } else return null;
   };
 
+  if (!postAuthor) return null;
+
   return (
     <div className={getCorrectClassName() + '-post-index-item-container'}>
       {isProfile ? getMultipleImagesIcon() : null}

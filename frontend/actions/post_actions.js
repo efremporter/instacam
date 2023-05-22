@@ -48,7 +48,6 @@ const removePostErrors = () => {
 };
 
 export const fetchPosts = (authorId=null, currentUserId=null) => dispatch => {
-  // console.log(currentUserId)
   return PostAPIUtil.fetchPosts(authorId, currentUserId)
     .then(posts => dispatch(receivePosts(posts)))
     .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
