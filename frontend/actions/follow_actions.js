@@ -1,7 +1,7 @@
 import * as FollowApiUtil from '../utils/follow_util';
 
-export const RECEIVE_FOLLOW = 'RECEIVE_FOLLOW';
 export const RECEIVE_FOLLOWS = 'RECEIVE_FOLLOWS';
+export const RECEIVE_FOLLOW = 'RECEIVE_FOLLOW';
 export const REMOVE_FOLLOW = 'REMOVE_FOLLOW';
 
 const receiveFollows = follows => {
