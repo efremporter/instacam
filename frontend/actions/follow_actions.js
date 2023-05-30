@@ -25,7 +25,7 @@ const removeFollow = id => {
   };
 };
 
-export const fetchFollows = (userId) => dispatch => {
+export const fetchFollows = userId => dispatch => {
   return FollowApiUtil.fetchFollows(userId)
   .then(follows => dispatch(receiveFollows(follows)));
 };

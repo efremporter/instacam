@@ -4,7 +4,11 @@ class Api::FollowsController < ApplicationController
     following_id = params[:follow][:following_id]
     if user_id && following_id
       @follow = Follow.find_by(user_id: user_id, following_id: following_id)
-      render: show
+      if @follow
+        render :show
+      else 
+        render json: ["Follow not found"], status: 404
+      end
     else
       @follows = Follow.where(user_id: user_id)
       render :index

@@ -1,9 +1,61 @@
-import React from 'react';
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineSettings } from 'react-icons/md';
+import { bindActionCreators } from 'redux';
+import * as followActionCreators from '../../actions/follow_actions';
 
-function ProfileInfo({ profileUser, isMyProfile, openModal }) {
+function ProfileInfo({ profileUser, currentUserId, openModal }) {
+  const dispatch = useDispatch();
   const postCount = useSelector((state) => Object.values(state.entities.posts).length);
+  const follows = useSelector(state => state.entities.follows);
+  const { fetchFollows, fetchFollow, createFollow, deleteFollow } = bindActionCreators(followActionCreators, dispatch);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const isMyProfile = profileUser.id === currentUserId;
+
+  useEffect(() => {
+    if (!isMyProfile) {
+      fetchFollow(currentUserId, profileUser.id)
+      .then(follow => {
+        if (follow.data) {
+          console.log(follow)
+          if (isFollowing === false) setIsFollowing(true);
+        };
+      });
+    };
+  }, [profileUser.id]);
+
+  const handleFollowClick = () => {
+    if (!isMyProfile) {
+      if (isFollowing) {
+        const followNestedId = `${currentUserId}${profileUser.id}`
+        const follow = follows[followNestedId];
+        deleteFollow(follow.id, followNestedId)
+        .then(() => setIsFollowing(false));
+      } else {
+        createFollow(currentUserId, profileUser.id)
+        .then(() => setIsFollowing(true));
+      };
+    };
+  };
+
+  const getCorrectButton = () => {
+    if (isFollowing) {
+      return (
+        <button className='profile-info-button'
+          onClick={handleFollowClick}>
+            Following
+        </button>
+      );
+    } else {
+      return (
+        <button className='profile-info-button'
+          id='profile-info-follow-button'
+          onClick={handleFollowClick}>
+            Follow
+        </button>
+      );
+    };
+  };
 
   const getCorrectProfileHeaderButton = () => {
     if (isMyProfile) {
@@ -23,12 +75,7 @@ function ProfileInfo({ profileUser, isMyProfile, openModal }) {
         </button>
       );
     } else {
-      return (
-        <button className='profile-info-button' 
-          id='profile-info-follow-button'>
-            Follow
-        </button>
-      );
+      return getCorrectButton();
     };
   };
 
