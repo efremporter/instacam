@@ -17,7 +17,6 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
       fetchFollow(currentUserId, profileUser.id)
       .then(follow => {
         if (follow.data) {
-          console.log(follow)
           if (isFollowing === false) setIsFollowing(true);
         };
       });

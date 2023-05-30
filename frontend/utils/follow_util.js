@@ -37,7 +37,6 @@ export const createFollow = (userId, followingId) => {
 };
 
 export const deleteFollow = id => {
-  // console.log('hey'); app breaks without this line, even edited out??? wierdest bug ever
   return $.ajax({
     method: 'DELETE',
     url: `/api/follows/${id}`
