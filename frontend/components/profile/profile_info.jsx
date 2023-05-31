@@ -20,6 +20,11 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
           if (isFollowing === false) setIsFollowing(true);
         };
       });
+      // LEFT OFF HERE 05/30, NEED TO FETCH ALL FOLLOWS FOR PROFILE FOLLOWING COUNT
+      // fetchFollows(profileUser.id)
+      // .then(follows => {
+      //   if (follows)
+      // });
     };
   }, [profileUser.id]);
 

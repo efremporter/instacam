@@ -9,7 +9,7 @@ class Api::FollowsController < ApplicationController
       else 
         render json: ["Follow not found"], status: 404
       end
-    else
+    elsif user_id
       @follows = Follow.where(user_id: user_id)
       render :index
     end
