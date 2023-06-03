@@ -47,6 +47,10 @@ const removePostErrors = () => {
   };
 };
 
+export const removePostsManually = followingId => dispatch => {
+  dispatch(removePost(followingId))
+}
+
 export const fetchPosts = (authorId=null, currentUserId=null) => dispatch => {
   return PostAPIUtil.fetchPosts(authorId, currentUserId)
     .then(posts => dispatch(receivePosts(posts)))

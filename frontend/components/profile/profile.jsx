@@ -5,6 +5,7 @@ import ProfileHeader from './profile_header';
 import { useLocation } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as userActionCreators from '../../actions/user_actions';
+import * as postActionCreators from '../../actions/post_actions';
 import * as followActionCreators from '../../actions/follow_actions';
 
 function Profile() {
@@ -35,6 +36,10 @@ function Profile() {
         };
       });
     };
+
+    return () => {
+
+    }
   }, [profileUserId]);
 
   if (!user) return null;

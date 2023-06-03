@@ -19,24 +19,28 @@ function PostIndex({ profileUserId }) {
   useEffect(() => {
     // This fetches all posts. Eventually, add logic to fetch posts
     // only from followees of current user
-    fetchPosts(null, currentUserId)
-    .then(() => {
-      if (posts.length) {
-        const authorIdsHash = {};
-        posts.forEach(post => {
-          const authorId = post.authorId
-          if (!authorIdsHash[authorId] && !users[authorId]) {
-            authorIdsHash[authorId] = authorId;
-          };
-        });
-        const authorIdsArray = Object.values(authorIdsHash);
-        if (authorIdsArray.length){
-          fetchUsers(authorIdsArray)
-          .then(users => {
-          })
-        }
-      };
-    });
+    if (profileUserId) {
+      fetchPosts(profileUserId);
+    } else {
+      fetchPosts(null, currentUserId)
+      .then(() => {
+        if (posts.length) {
+          const authorIdsHash = {};
+          posts.forEach(post => {
+            const authorId = post.authorId
+            if (!authorIdsHash[authorId] && !users[authorId]) {
+              authorIdsHash[authorId] = authorId;
+            };
+          });
+          const authorIdsArray = Object.values(authorIdsHash);
+          if (authorIdsArray.length){
+            fetchUsers(authorIdsArray)
+            .then(users => {
+            })
+          }
+        };
+      });
+    }
   }, []);
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change

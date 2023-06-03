@@ -6,6 +6,7 @@ const FollowsReducer = (state={}, action) => {
 
   switch(action.type) {
     case RECEIVE_FOLLOWS: 
+      console.log('HIT THIS CASE')
       return action.data;
 
     case RECEIVE_FOLLOW:
