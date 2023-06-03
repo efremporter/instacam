@@ -19,7 +19,6 @@ function Profile() {
   const { removePostsManually } = bindActionCreators(postActionCreators, dispatch);
 
   useEffect(() => {
-    console.log('REMOUNT')
     if (!user) {
       fetchUser(profileUserId);
     };

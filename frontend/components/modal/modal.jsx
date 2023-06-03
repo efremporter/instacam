@@ -8,6 +8,7 @@ import CreateAndUpdatePostModal from '../posts/create_and_update_post_modal';
 import PostShowModal from '../posts/post_show_modal';
 import ChangeAvatarModal from '../profile/change_avatar_modal';
 import EditProfileModal from '../profile/edit_profile_modal';
+import FollowsModal from '../profile/follows_modal';
 
 function Modal() {
   const modal = useSelector(state => state.ui.modal) // Either null or modal
@@ -75,6 +76,13 @@ function Modal() {
         openDoubleModal={openDoubleModal}  
       />
     );
+  } else if (modal.type === 'follows') {
+    component = (
+      <FollowsModal
+        followType={modal.followType}
+        closeModal={closeModal}
+      />
+    )
   } else {
     component = null;
   };

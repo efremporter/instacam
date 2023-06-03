@@ -8,12 +8,13 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
   const dispatch = useDispatch();
   const postCount = useSelector(state => Object.values(state.entities.posts).length);
   const follows = useSelector(state => state.entities.follows);
-  const { fetchFollows, fetchFollow, createFollow, deleteFollow, removeFollowManually } = bindActionCreators(followActionCreators, dispatch);
+  const { fetchFollows, fetchFollow, createFollow, 
+    deleteFollow, removeFollowManually 
+  } = bindActionCreators(followActionCreators, dispatch);
   const [isFollowing, setIsFollowing] = useState(false);
   const [followingCount, setFollowingCount] = useState();
   const isMyProfile = profileUser.id === currentUserId;
   const followNestedId = `${currentUserId}${profileUser.id}`
-  console.log('HERE', follows, followNestedId)
 
   useEffect(() => {
     fetchFollows(profileUser.id)
@@ -28,8 +29,8 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
   }, [profileUser.id]);
 
   useEffect(() => {
-
-  }, [followNestedId]);
+    handleOpenFollowModal('following')
+  }, [follows]);
 
   useEffect(() => {
     if (follows[followNestedId]) { // if currentUser isFollowing profileUser
@@ -102,6 +103,19 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
     };
   };
 
+  const handleOpenFollowModal = followType => {
+    if (followType === 'following') {
+      const modal = {
+        type: 'follows',
+        from: 'profile',
+        followType,
+      }
+      openModal(modal);
+    } else {
+      // Open followers modal once created
+    };
+  };
+
   return (
     <div className='profile-info'>
       <div className='profile-info-top'>
@@ -122,10 +136,14 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
         <div>
           <span className='profile-info-count'>{postCount}</span> posts
         </div>
-        <div className='profile-info-follow'>
+        <div className='profile-info-follow'
+          onClick={() => handleOpenFollowModal('followers')}
+        >
           <span className='profile-info-count'>100</span> followers
         </div>
-        <div id={getFollowId('following')} className='profile-info-follow'>
+        <div id={getFollowId('following')} className='profile-info-follow'
+          onClick={() => handleOpenFollowModal('following')}
+        >
           <span className='profile-info-count'>{followingCount}</span> following
         </div>
       </div>

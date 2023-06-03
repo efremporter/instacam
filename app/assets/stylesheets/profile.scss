@@ -292,3 +292,35 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.follows-modal-container {
+  width: 400px;
+  height: 400px;
+  background-color: #262626;
+  border-radius: 10px;
+}
+
+.follows-modal-body-container {
+  width: 100%;
+  height: 92%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.follows-modal-info-container {
+  width: 350px;
+  background-color: orange;
+  display: flex;
+  flex-direction: row;
+  height: 63px;
+}
+
+.follows-modal-info-profile-pic-container {
+
+}
+
+.follows-modal-info-profile-pic {
+  width: 44px;
+  height: 44px;
+}

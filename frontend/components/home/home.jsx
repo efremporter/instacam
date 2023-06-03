@@ -7,6 +7,7 @@ import * as postActionCreators from '../../actions/post_actions';
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import PostIndex from "../posts/post_index";
+import FollowsModal from "../profile/follows_modal";
 
 function Home() {
   const dispatch = useDispatch();
