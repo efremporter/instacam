@@ -6,7 +6,7 @@ export const REMOVE_FOLLOW = 'REMOVE_FOLLOW';
 
 const receiveFollows = follows => {
   return {
-    type: RECEIVE_FOLLOW,
+    type: RECEIVE_FOLLOWS,
     data: follows
   };
 };

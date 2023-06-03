@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as userActionCreators from '../../actions/user_actions';
 import * as postActionCreators from '../../actions/post_actions';
-import * as followActionCreators from '../../actions/follow_actions';
 
 function Profile() {
   const location = useLocation();
@@ -15,30 +14,20 @@ function Profile() {
   const locationArray = location.pathname.split('/');
   const profileUserId = locationArray[locationArray.length - 1];
   const user = useSelector(state => state.entities.users[profileUserId]);
-  const follow = useSelector(state => state.entities.follows[`${currentUserId}${profileUserId}`])
   const isMyProfile = currentUserId == profileUserId;
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
-  const { fetchFollow } = bindActionCreators(followActionCreators, dispatch);
-  const [isFollowing, setIsFollowing] = useState(Boolean(follow))
+  const { removePostsManually } = bindActionCreators(postActionCreators, dispatch);
 
   useEffect(() => {
+    console.log('REMOUNT')
     if (!user) {
       fetchUser(profileUserId);
     };
   });
 
   useEffect(() => {
-    if (!isMyProfile) {
-      fetchFollow(currentUserId, profileUserId)
-      .then(follow => {
-        if (follow.data) {
-          setIsFollowing(true);
-        };
-      });
-    };
-
     return () => {
-
+      removePostsManually();
     }
   }, [profileUserId]);
 

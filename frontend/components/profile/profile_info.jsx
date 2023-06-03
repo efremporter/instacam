@@ -15,35 +15,28 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
   const followNestedId = `${currentUserId}${profileUser.id}`
 
   useEffect(() => {
-    console.log('FETCHING AGAIN');
     fetchFollows(profileUser.id)
     .then(() => {
       if (!isMyProfile) {
-        fetchFollow(currentUserId, profileUser.id)
-        .then(follow => {
-          console.log('FETCHED FROM HERE', followNestedId)
-          if (follow.data) {
-            if (isFollowing === false) setIsFollowing(true);
-          };
-        });
+        if (!follows[followNestedId]) {
+          fetchFollow(currentUserId, profileUser.id);
+        };
       };
-    })
+    });
     return () => {
-      removeFollowManually(followNestedId);
-    }
+      if (!isMyProfile) removeFollowManually(followNestedId);
+    };
   }, [profileUser.id]);
 
   useEffect(() => {
     if (follows[followNestedId]) { // if currentUser isFollowing profileUser
+      if (isFollowing === false) setIsFollowing(true);
       setFollowingCount(Object.values(follows).length - 1) // Don't count the currentUser -> profileUser follow
     } else {
+      if (isFollowing === true) setIsFollowing(false);
       setFollowingCount(Object.values(follows).length)
     };
   }, [follows]);
-
-  // useEffect(() => {
-  //   fetchFollows(profileUser.id)
-  // }, [])
 
   const handleFollowClick = () => {
     if (!isMyProfile) {

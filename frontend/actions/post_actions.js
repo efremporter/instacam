@@ -47,8 +47,8 @@ const removePostErrors = () => {
   };
 };
 
-export const removePostsManually = followingId => dispatch => {
-  dispatch(removePost(followingId))
+export const removePostsManually = () => dispatch => {
+  dispatch(removePosts())
 }
 
 export const fetchPosts = (authorId=null, currentUserId=null) => dispatch => {
