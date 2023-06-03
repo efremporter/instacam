@@ -9,10 +9,10 @@ import { FiCamera } from 'react-icons/fi';
 
 function PostIndex({ profileUserId }) {
   const dispatch = useDispatch();
-  const posts = Object.values(useSelector((state) => state.entities.posts));
+  const posts = Object.values(useSelector(state => state.entities.posts));
   const users = useSelector(state => state.entities.users);
   const currentUserId = useSelector(state => state.session.id);
-  const { fetchPosts, clearPosts } = bindActionCreators(postActionCreators, dispatch);
+  const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
   const { fetchUsers } = bindActionCreators(userActionCreators, dispatch);
   const [postAuthors, setPostAuthors] = useState([]);
 

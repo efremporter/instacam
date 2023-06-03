@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -12,7 +12,7 @@ function Home() {
   const dispatch = useDispatch();
   const profileUser = useSelector(state => state.entities.users[state.session.id]);
   const { signOut } = bindActionCreators(sessionActionCreators, dispatch);
-  const { fetchPost } = bindActionCreators(postActionCreators, dispatch);
+  const { fetchPost, removePostsManually } = bindActionCreators(postActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const history = useHistory();
@@ -27,6 +27,10 @@ function Home() {
   //       isProfile: false
   //     });
   //   });
+
+  useEffect(() => {
+    return () => removePostsManually();
+  }, []);
 
   return (
     <div className="home-container">

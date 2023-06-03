@@ -6,27 +6,30 @@ import * as followActionCreators from '../../actions/follow_actions';
 
 function ProfileInfo({ profileUser, currentUserId, openModal }) {
   const dispatch = useDispatch();
-  const postCount = useSelector((state) => Object.values(state.entities.posts).length);
+  const postCount = useSelector(state => Object.values(state.entities.posts).length);
   const follows = useSelector(state => state.entities.follows);
   const { fetchFollows, fetchFollow, createFollow, deleteFollow, removeFollowManually } = bindActionCreators(followActionCreators, dispatch);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [followingCount, setFollowingCount] = useState()
+  const [followingCount, setFollowingCount] = useState();
   const isMyProfile = profileUser.id === currentUserId;
   const followNestedId = `${currentUserId}${profileUser.id}`
+  console.log('HERE', follows, followNestedId)
 
   useEffect(() => {
     fetchFollows(profileUser.id)
     .then(() => {
-      if (!isMyProfile) {
-        if (!follows[followNestedId]) {
-          fetchFollow(currentUserId, profileUser.id);
-        };
+      if (isMyProfile === false) { // If I'm on my own profile, no need to check if I'm following myself
+        fetchFollow(currentUserId, profileUser.id);
       };
     });
     return () => {
-      if (!isMyProfile) removeFollowManually(followNestedId);
+      if (isMyProfile === false) removeFollowManually(followNestedId);
     };
   }, [profileUser.id]);
+
+  useEffect(() => {
+
+  }, [followNestedId]);
 
   useEffect(() => {
     if (follows[followNestedId]) { // if currentUser isFollowing profileUser
@@ -41,8 +44,8 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
   const handleFollowClick = () => {
     if (!isMyProfile) {
       if (isFollowing) {
-        const followNestedId = followNestedId
         const follow = follows[followNestedId];
+        console.log(follow, followNestedId)
         deleteFollow(follow.id, followNestedId)
         .then(() => setIsFollowing(false));
       } else {

@@ -211,7 +211,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
       setContent(commentContent);
     };
   };
-  console.log(currentComments)
+
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}

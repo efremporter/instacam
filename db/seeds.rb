@@ -81,8 +81,8 @@ users << sample_user_5
 users << sample_user_6
 
 i = 0;
-j = i + 1;
 while i < users.length - 1
+  j = i + 1;
   while j < users.length
     Follow.create({
       user_id: users[i].id,
