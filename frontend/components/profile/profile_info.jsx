@@ -109,6 +109,8 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
         type: 'follows',
         from: 'profile',
         followType,
+        isMyProfile,
+        profileUserId: profileUser.id
       }
       openModal(modal);
     } else {

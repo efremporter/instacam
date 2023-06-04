@@ -80,6 +80,8 @@ function Modal() {
     component = (
       <FollowsModal
         followType={modal.followType}
+        isMyProfile={modal.isMyProfile}
+        profileUserId={modal.profileUserId}
         closeModal={closeModal}
       />
     )
