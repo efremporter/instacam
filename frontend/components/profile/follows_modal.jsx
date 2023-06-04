@@ -36,6 +36,12 @@ function FollowsModal({ followType, closeModal }) {
     return word.slice(0, 1).toUpperCase() +  word.slice(1).toLowerCase();
   };
 
+  const shortenName = name => {
+    if (name.length > 29) {
+      return name.slice(0, 26) + "...";
+    } else return name;
+  };
+
   if (Object.values(users).length < Object.values(follows).length) {
     return null; 
     // Because we don't have all of the correct users, we won't be able to
@@ -50,13 +56,31 @@ function FollowsModal({ followType, closeModal }) {
         <ul className='follows-modal-body-ul'>
           {Object.values(follows).map(follow => {
             return (
-              <li key={follow.id}>
+              <li key={follow.id} className="follows-modal-info-li">
                 <div className='follows-modal-info-container'>
                   <div className='follows-modal-info-profile-pic-container'>
                     <img src={users[follow.followingId].profilePhotoUrl} 
                       className="follows-modal-info-profile-pic"
+                      draggable="false"
                     />
+                  </div>
+                  <div className="follows-modal-info-name-container">
+                    <div>
+                      <span className="follows-modal-info-handle">
+                        {users[follow.followingId].handle}
+                      </span>
+                      <span className="follows-modal-info-dot-divider">•</span>
+                      <span className="follows-modal-info-follow-button">
+                        Follow
+                      </span>
                     </div>
+                    <div className="follows-modal-info-name">
+                      {shortenName(users[follow.followingId].name)}
+                    </div>
+                  </div>
+                  <div>
+                    
+                  </div>
                 </div>
               </li>
             )

@@ -308,8 +308,12 @@
   justify-content: center;
 }
 
+.follows-modal-info-li:hover {
+  cursor: pointer;
+}
+
 .follows-modal-info-container {
-  width: 350px;
+  width: 355px;
   background-color: orange;
   display: flex;
   flex-direction: row;
@@ -317,10 +321,50 @@
 }
 
 .follows-modal-info-profile-pic-container {
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .follows-modal-info-profile-pic {
   width: 44px;
   height: 44px;
+  border-radius: 50%;
+  margin-right: 13px;
+}
+
+.follows-modal-info-name-container {
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.follows-modal-info-handle {
+  color: #F5F5F5;
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.follows-modal-info-dot-divider {
+  color: #F5F5F5;
+  font-size: 16px;
+  margin-right: 6px;
+}
+
+.follows-modal-info-follow-button {
+  font-size: 14px;
+  color: #0095F6;
+  font-weight: 600;
+}
+
+.follows-modal-info-name {
+  color: #A8A8A8;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.follows-modal-info-follow-button:hover {
+  color: #F5F5F5;
 }
