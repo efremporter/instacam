@@ -6,7 +6,7 @@ const FollowsReducer = (state={}, action) => {
 
   switch(action.type) {
     case RECEIVE_FOLLOWS: 
-      return action.data;
+      return Object.assign(nextState, action.data);
 
     case RECEIVE_FOLLOW:
       return Object.assign(nextState, action.data);

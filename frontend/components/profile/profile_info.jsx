@@ -18,14 +18,6 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
 
   useEffect(() => {
     fetchFollows(profileUser.id)
-    .then(() => {
-      if (isMyProfile === false) { // If I'm on my own profile, no need to check if I'm following myself
-        fetchFollow(currentUserId, profileUser.id);
-      };
-    });
-    return () => {
-      if (isMyProfile === false) removeFollowManually(followNestedId);
-    };
   }, [profileUser.id]);
 
   useEffect(() => {

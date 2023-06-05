@@ -51,17 +51,19 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
     } else return name;
   };
 
-  const getCorrectFollowButton = followingUserId => {
+  const getCorrectFollowButton = followingId => {
     if (followType === 'following') {
-      if (isMyProfile || follows[`${currentUserId}${followingUserId}`]) {
+      if (isMyProfile || follows[`${currentUserId}${followingId}`]) {
+        console.log(follows[`${currentUserId}${followingId}`])
         return (
           <button className="follows-modal-following-button">Following</button>
         );
       };
     } else { // implement else once followers exists
       // if (isMyProfile || followers[`${currentUserId}${followingUserId}`]) {
+        console.log('HERE')
         return (
-          <button>Following</button>
+          <button>Follow</button>
         );
       // };
     };
@@ -93,7 +95,7 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
                   </div>
                 </div>
                 <div className="follows-modal-button-container">
-                  {getCorrectFollowButton(follow.userId)}
+                  {getCorrectFollowButton(follow.followingId)}
                 </div>
               </div>
             </li>
