@@ -294,18 +294,19 @@
 }
 
 .follows-modal-container {
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 450px;
   background-color: #262626;
   border-radius: 10px;
 }
 
 .follows-modal-body-container {
   width: 100%;
-  height: 92%;
+  height: 91%;
   border-radius: 10px;
   display: flex;
   justify-content: center;
+  overflow-y: auto;
 }
 
 .follows-modal-info-li:hover {
@@ -313,11 +314,16 @@
 }
 
 .follows-modal-info-container {
-  width: 355px;
-  background-color: orange;
+  width: 410px;
   display: flex;
   flex-direction: row;
-  height: 63px;
+  justify-content: space-between;
+  height: 67px;
+}
+
+.follows-modal-info-left {
+  display: flex;
+  flex-direction: row;
 }
 
 .follows-modal-info-profile-pic-container {
@@ -334,7 +340,6 @@
 }
 
 .follows-modal-info-name-container {
-  background-color: blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -345,10 +350,29 @@
   font-size: 16px;
   font-weight: 600;
   margin-right: 6px;
+  margin-bottom: 5px;
 }
 
 .follows-modal-info-name {
   color: #A8A8A8;
   font-size: 14px;
   font-weight: 200;
+}
+
+.follows-modal-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.follows-modal-following-button {
+  color: #000000;
+  font-size: 15px;
+  border-radius: 9px;
+  border: none;
+  outline: none;
+  padding: 7px 16px;
+  background-color: #EFEFEF;
+  width: 106px;
+  height: 36px;
+  font-weight: 600;
 }

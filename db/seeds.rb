@@ -63,6 +63,38 @@ sample_user_6 = User.create({
   password: "easy123"
 })
 
+sample_user_7 = User.create({
+  email: "sample7@user.com",
+  name: "Jimmy Butler",
+  handle: "himmybuckets",
+  bio: "Will we win game 3?",
+  password: "easy123"
+})
+
+sample_user_8 = User.create({
+  email: "sample8@user.com",
+  name: "greatreggaeband",
+  handle: "Groundation",
+  bio: "I just found this band recently, great music",
+  password: "easy123"
+})
+
+sample_user_9 = User.create({
+  email: "sample9@user.com",
+  name: "Arnold Palmer",
+  handle: "arnoldpalmer",
+  bio: "I think this guy was a golfer? Great drink tho",
+  password: "easy123"
+})
+
+sample_user_10 = User.create({
+  email: "sample10@user.com",
+  name: "Water bottle",
+  handle: "crystalgeyser",
+  bio: "A bottle was sitting on my speaker :D",
+  password: "easy123"
+})
+
 default_photo = "app/assets/images/blank_profile_photo.jpg"
 demo_user.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
 sample_user_1.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
@@ -71,6 +103,11 @@ sample_user_3.profile_photo.attach(io: File.open(default_photo), filename: "squa
 sample_user_4.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
 sample_user_5.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
 sample_user_6.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_7.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_8.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_9.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_10.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+
 
 users = [];
 users << sample_user_1
@@ -79,6 +116,11 @@ users << sample_user_3
 users << sample_user_4
 users << sample_user_5
 users << sample_user_6
+users << sample_user_7
+users << sample_user_8
+users << sample_user_9
+users << sample_user_10
+
 
 i = 0;
 while i < users.length - 1
