@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 demo_user = User.create({
   email: "demo@user.com",
   name: "Demo User",
@@ -22,8 +23,125 @@ sample_user_1 = User.create({
   password: "easy123"
 })
 
-demo_user.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
-sample_user_1.profile_photo.attach(io: File.open("app/assets/images/blank_profile_photo.jpg"), filename: "square.webp")
+sample_user_2 = User.create({
+  email: "sample2@user.com",
+  name: "Dwayne Johnson",
+  handle: "dj",
+  bio: "The rock is cookin",
+  password: "easy123"
+})
+
+sample_user_3 = User.create({
+  email: "sample3@user.com",
+  name: "Hello Panda",
+  handle: "yumsnack",
+  bio: "Mmmmmmm",
+  password: "easy123"
+})
+
+sample_user_4 = User.create({
+  email: "sample4@user.com",
+  name: "Steve Jobs",
+  handle: "stevejobs",
+  bio: "R.I.P",
+  password: "easy123"
+})
+
+sample_user_5 = User.create({
+  email: "sample5@user.com",
+  name: "Wacka Flacka",
+  handle: "flackaflame",
+  bio: "YEAAAAAAAAHHHHHHH",
+  password: "easy123"
+})
+
+sample_user_6 = User.create({
+  email: "sample6@user.com",
+  name: "Grandmother",
+  handle: "grammy",
+  bio: "Coooookiieeees",
+  password: "easy123"
+})
+
+sample_user_7 = User.create({
+  email: "sample7@user.com",
+  name: "Jimmy Butler",
+  handle: "himmybuckets",
+  bio: "Will we win game 3?",
+  password: "easy123"
+})
+
+sample_user_8 = User.create({
+  email: "sample8@user.com",
+  name: "greatreggaeband",
+  handle: "Groundation",
+  bio: "I just found this band recently, great music",
+  password: "easy123"
+})
+
+sample_user_9 = User.create({
+  email: "sample9@user.com",
+  name: "Arnold Palmer",
+  handle: "arnoldpalmer",
+  bio: "I think this guy was a golfer? Great drink tho",
+  password: "easy123"
+})
+
+sample_user_10 = User.create({
+  email: "sample10@user.com",
+  name: "Water bottle",
+  handle: "crystalgeyser",
+  bio: "A bottle was sitting on my speaker :D",
+  password: "easy123"
+})
+
+default_photo = "app/assets/images/blank_profile_photo.jpg"
+demo_user.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_1.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_2.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_3.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_4.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_5.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_6.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_7.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_8.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_9.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+sample_user_10.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+
+
+users = [];
+users << sample_user_1
+users << sample_user_2
+users << sample_user_3
+users << sample_user_4
+users << sample_user_5
+users << sample_user_6
+users << sample_user_7
+users << sample_user_8
+users << sample_user_9
+users << sample_user_10
+
+
+i = 0;
+while i < users.length - 1
+  j = i + 1;
+  while j < users.length
+    Follow.create({
+      user_id: users[i].id,
+      following_id: users[j].id
+    })
+    if i % 2 == 0
+      Follow.create({
+        user_id: users[j].id,
+        following_id: users[i].id
+      })
+    end
+    j += 1;
+  end
+  i += 1;
+end
+
+Follow.create({user_id: 1, following_id: 2})
 
 post_1 = Post.create({author_id: 1,
 caption: 'omg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dog',

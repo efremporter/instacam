@@ -28,15 +28,20 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
   const postPhotoUrls = post.imageUrls;
   const likeId = String(currentUserId) + String(post.id);
 
-  useEffect(() => {
-    if (isProfile === false) {
-      fetchLikes(null, post.id)
-    };
-  }, [isProfile]);
+  // useEffect(() => {
+  //   if (isProfile === false) { // Only fetch likes if 
+  //     fetchLikes(null, post.id)
+  //   };
+  // }, [isProfile]);
 
   useEffect(() => {
-    fetchComments(post.id)
-  }, [])
+    if (isProfile === false) {
+      fetchComments(post.id);
+      fetchLikes(null, post.id);
+    }
+    // only fetch comments if we are on feed because when we are on profile, 
+    // the PostIndexItems don't display comments. Only the PostShowModal does
+  }, [isProfile])
 
   useEffect(() => {
     if (likes[likeId]) {

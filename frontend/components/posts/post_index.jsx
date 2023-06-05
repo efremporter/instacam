@@ -9,34 +9,38 @@ import { FiCamera } from 'react-icons/fi';
 
 function PostIndex({ profileUserId }) {
   const dispatch = useDispatch();
-  const posts = Object.values(useSelector((state) => state.entities.posts));
+  const posts = Object.values(useSelector(state => state.entities.posts));
   const users = useSelector(state => state.entities.users);
   const currentUserId = useSelector(state => state.session.id);
-  const { fetchPosts, clearPosts } = bindActionCreators(postActionCreators, dispatch);
+  const { fetchPosts } = bindActionCreators(postActionCreators, dispatch);
   const { fetchUsers } = bindActionCreators(userActionCreators, dispatch);
   const [postAuthors, setPostAuthors] = useState([]);
 
   useEffect(() => {
     // This fetches all posts. Eventually, add logic to fetch posts
     // only from followees of current user
-    fetchPosts(null, currentUserId)
-    .then(() => {
-      if (posts.length) {
-        const authorIdsHash = {};
-        posts.forEach(post => {
-          const authorId = post.authorId
-          if (!authorIdsHash[authorId] && !users[authorId]) {
-            authorIdsHash[authorId] = authorId;
-          };
-        });
-        const authorIdsArray = Object.values(authorIdsHash);
-        if (authorIdsArray.length){
-          fetchUsers(authorIdsArray)
-          .then(users => {
-          })
-        }
-      };
-    });
+    if (profileUserId) {
+      fetchPosts(profileUserId);
+    } else {
+      fetchPosts(null, currentUserId)
+      .then(() => {
+        if (posts.length) {
+          const authorIdsHash = {};
+          posts.forEach(post => {
+            const authorId = post.authorId
+            if (!authorIdsHash[authorId] && !users[authorId]) {
+              authorIdsHash[authorId] = authorId;
+            };
+          });
+          const authorIdsArray = Object.values(authorIdsHash);
+          if (authorIdsArray.length){
+            fetchUsers(authorIdsArray)
+            .then(users => {
+            })
+          }
+        };
+      });
+    }
   }, []);
   // Add an array because React will only call useEffect once onMount
   // Without the array, it calls useEffect on every state change

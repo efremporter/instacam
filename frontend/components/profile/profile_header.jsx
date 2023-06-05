@@ -8,7 +8,7 @@ function ProfileHeader({ profileUser, isMyProfile, currentUserId }) {
   const profilePhotoUrl = profileUser.profilePhotoUrl;
   const dispatch = useDispatch();
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
-
+  
   const handleOpenModal = () => {
     const modal = {
       type: 'changeAvatar',
@@ -30,7 +30,7 @@ function ProfileHeader({ profileUser, isMyProfile, currentUserId }) {
         </div>
         <ProfileInfo 
           profileUser={profileUser}
-          isMyProfile={isMyProfile}
+          currentUserId={currentUserId}
           openModal={openModal}
         />
       </div>
