@@ -25,13 +25,16 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
   }, [follows]);
 
   useEffect(() => {
-    if (follows[followNestedId]) { // if currentUser isFollowing profileUser
+    if (follows[followNestedId]) { // if currentUser is following profileUser
       if (isFollowing === false) setIsFollowing(true);
-      setFollowingCount(Object.values(follows).length - 1) // Don't count the currentUser -> profileUser follow
     } else {
       if (isFollowing === true) setIsFollowing(false);
-      setFollowingCount(Object.values(follows).length)
     };
+    let followsCount = 0;
+    Object.values(follows).forEach(follow => {
+      if (follow.userId === profileUser.id) followsCount += 1;
+    })
+    setFollowingCount(followsCount);
   }, [follows]);
 
   const handleFollowClick = () => {

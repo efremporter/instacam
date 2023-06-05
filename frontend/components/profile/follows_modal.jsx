@@ -11,7 +11,9 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
   const users = useSelector(state => state.entities.users);
   const currentUserId = useSelector(state => state.session.id);
   const { fetchUsers } = bindActionCreators(userActionCreators, dispatch);
-  const { fetchFollows } = bindActionCreators(followActionCreators, dispatch);
+  const { 
+    fetchFollows, createFollow, deleteFollow 
+  } = bindActionCreators(followActionCreators, dispatch);
 
   useEffect(() => {
     fetchFollows(currentUserId);
@@ -53,15 +55,26 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
 
   const getCorrectFollowButton = followingId => {
     if (followType === 'following') {
-      if (isMyProfile || follows[`${currentUserId}${followingId}`]) {
-        console.log(follows[`${currentUserId}${followingId}`])
+      const correctFollow = follows[`${currentUserId}${followingId}`]
+      if (isMyProfile || correctFollow) {
         return (
-          <button className="follows-modal-following-button">Following</button>
+          <button id="follows-modal-following-button"
+            className="follows-modal-button"
+            onClick={() => {
+              deleteFollow(correctFollow.id, `${currentUserId}${followingId}`)
+            }}>Following
+          </button>
         );
-      };
+      } else {
+        return (
+          <button id="follows-modal-follow-button"
+            className="follows-modal-button"
+            onClick={() => createFollow(currentUserId, followingId)}>Follow
+          </button>
+        );
+      }
     } else { // implement else once followers exists
       // if (isMyProfile || followers[`${currentUserId}${followingUserId}`]) {
-        console.log('HERE')
         return (
           <button>Follow</button>
         );

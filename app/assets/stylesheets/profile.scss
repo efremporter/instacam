@@ -364,15 +364,34 @@
   align-items: center;
 }
 
-.follows-modal-following-button {
-  color: #000000;
+.follows-modal-button {
   font-size: 15px;
   border-radius: 9px;
   border: none;
   outline: none;
   padding: 7px 16px;
-  background-color: #EFEFEF;
-  width: 106px;
   height: 36px;
   font-weight: 600;
+}
+
+#follows-modal-following-button {
+  color: #000000;
+  background-color: #EFEFEF;
+  width: 106px;
+}
+
+#follows-modal-following-button:hover {
+  cursor: pointer;
+  background-color: #d0d0d0;
+}
+
+#follows-modal-follow-button {
+  width: 90px;
+  color: #FFFFFF;
+  background-color: #0095F6;
+}
+
+#follows-modal-follow-button:hover {
+  cursor: pointer;
+  background-color: #1677F2;
 }
