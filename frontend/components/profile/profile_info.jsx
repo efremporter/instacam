@@ -21,10 +21,6 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
   }, [profileUser.id]);
 
   useEffect(() => {
-    handleOpenFollowModal('following')
-  }, [follows]);
-
-  useEffect(() => {
     if (follows[followNestedId]) { // if currentUser is following profileUser
       if (isFollowing === false) setIsFollowing(true);
     } else {

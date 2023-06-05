@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import * as userActionCreators from '../../actions/user_actions';
 import * as followActionCreators from '../../actions/follow_actions';
@@ -7,6 +8,7 @@ import * as followActionCreators from '../../actions/follow_actions';
 
 function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const follows = useSelector(state => state.entities.follows);
   const users = useSelector(state => state.entities.users);
   const currentUserId = useSelector(state => state.session.id);
@@ -53,23 +55,32 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
     } else return name;
   };
 
+  const handleFollowButtonClick = (e, type, followingId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (type === 'follow') {
+      createFollow(currentUserId, followingId)
+    } else if (type === 'unfollow') {
+      deleteFollow(
+        follows[`${currentUserId}${followingId}`].id, `${currentUserId}${followingId}`
+      );
+    };
+  };
+
   const getCorrectFollowButton = followingId => {
     if (followType === 'following') {
-      const correctFollow = follows[`${currentUserId}${followingId}`]
-      if (isMyProfile || correctFollow) {
+      if (isMyProfile || follows[`${currentUserId}${followingId}`]) {
         return (
           <button id="follows-modal-following-button"
             className="follows-modal-button"
-            onClick={() => {
-              deleteFollow(correctFollow.id, `${currentUserId}${followingId}`)
-            }}>Following
+            onClick={e => handleFollowButtonClick(e, 'unfollow', followingId)}>Following
           </button>
         );
       } else {
         return (
           <button id="follows-modal-follow-button"
             className="follows-modal-button"
-            onClick={() => createFollow(currentUserId, followingId)}>Follow
+            onClick={e => handleFollowButtonClick(e, 'follow', followingId)}>Follow
           </button>
         );
       }
@@ -82,6 +93,11 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
     };
   };
 
+  const handleModalInfoClick = profileId => {
+    closeModal();
+    history.push(`/profile/${profileId}`)
+  };
+
   const getFollowsModalInfo = () => {
     return (
       Object.values(follows).map(follow => {
@@ -89,7 +105,8 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
         // Return null because this user hasn't been fetched yet.
         if (follow.userId === profileUserId) { // Make sure we show the correct follows
           return (
-            <li key={follow.id} className="follows-modal-info-li">
+            <li key={follow.id} className="follows-modal-info-li" 
+            onClick={() => handleModalInfoClick(follow.followingId)}>
               <div className='follows-modal-info-container'>
                 <div className="follows-modal-info-left">
                   <div className='follows-modal-info-profile-pic-container'>
