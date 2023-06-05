@@ -8,7 +8,6 @@ import * as modalActionCreators from '../../actions/modal_actions';
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
 import * as followActionCreators from '../../actions/follow_actions';
 import PostIndex from "../posts/post_index";
-import FollowsModal from "../profile/follows_modal";
 
 function Home() {
   const dispatch = useDispatch();
@@ -17,11 +16,8 @@ function Home() {
   const { fetchPost, removePostsManually } = bindActionCreators(postActionCreators, dispatch);
   const { openDoubleModal } = bindActionCreators(doubleModalActionCreators, dispatch);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
-  const { fetchFollows } = bindActionCreators(followActionCreators, dispatch);
-  const { currentUserId } = useSelector(state => state.session.id);
   const history = useHistory();
 
-  fetchFollows(currentUserId)
   history.push('/profile/1')
   // fetchPost(1)
   //   .then(() => {

@@ -1,4 +1,6 @@
-import { RECEIVE_FOLLOWS, RECEIVE_FOLLOW, REMOVE_FOLLOW } from '../../actions/follow_actions';
+import { 
+  RECEIVE_FOLLOWS, RECEIVE_FOLLOW, REMOVE_FOLLOWS, REMOVE_FOLLOW 
+} from '../../actions/follow_actions';
 
 const FollowsReducer = (state={}, action) => {
   Object.freeze(state);
@@ -11,6 +13,9 @@ const FollowsReducer = (state={}, action) => {
     case RECEIVE_FOLLOW:
       return Object.assign(nextState, action.data);
     
+    case REMOVE_FOLLOWS:
+      return {};
+
     case REMOVE_FOLLOW:
       delete nextState[action.data];
       return nextState;

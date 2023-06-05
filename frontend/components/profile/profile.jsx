@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as userActionCreators from '../../actions/user_actions';
 import * as postActionCreators from '../../actions/post_actions';
+import * as followActionCreators from '../../actions/follow_actions';
 
 function Profile() {
   const location = useLocation();
@@ -17,6 +18,7 @@ function Profile() {
   const isMyProfile = currentUserId == profileUserId;
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
   const { removePostsManually } = bindActionCreators(postActionCreators, dispatch);
+  const { fetchFollows, clearFollows } = bindActionCreators(followActionCreators, dispatch);
 
   useEffect(() => {
     if (!user) {
@@ -25,9 +27,11 @@ function Profile() {
   });
 
   useEffect(() => {
+    fetchFollows(currentUserId); // Will need this for the followsModal
     return () => {
       removePostsManually();
-    }
+      clearFollows();
+    };
   }, [profileUserId]);
 
   if (!user) return null;
