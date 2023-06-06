@@ -10,7 +10,7 @@ export const fetchFollowers = userId => {
   });
 };
 
-export const fetchFollower = userId => {
+export const fetchFollower = (userId, followerId) => {
   return $.ajax({
     method: 'GET',
     url: `/api/followers`,

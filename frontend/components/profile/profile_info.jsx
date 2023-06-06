@@ -120,18 +120,14 @@ function ProfileInfo({ profileUser, currentUserId, openModal }) {
   };
 
   const handleOpenFollowModal = followType => {
-    if (followType === 'following') {
-      const modal = {
-        type: 'follows',
-        from: 'profile',
-        followType,
-        isMyProfile,
-        profileUserId: profileUser.id
-      }
-      openModal(modal);
-    } else {
-      // Open followers modal once created
-    };
+    const modal = {
+      type: 'follows',
+      from: 'profile',
+      followType,
+      isMyProfile,
+      profileUserId: profileUser.id
+    }
+    openModal(modal);
   };
 
   return (
