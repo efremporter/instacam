@@ -6,7 +6,6 @@ import * as sessionActionCreators from '../../actions/session_actions';
 import * as postActionCreators from '../../actions/post_actions';
 import * as modalActionCreators from '../../actions/modal_actions';
 import * as doubleModalActionCreators from '../../actions/double_modal_actions';
-import * as followActionCreators from '../../actions/follow_actions';
 import PostIndex from "../posts/post_index";
 
 function Home() {
