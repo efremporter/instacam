@@ -6,7 +6,6 @@ import * as userActionCreators from '../../actions/user_actions';
 import * as followActionCreators from '../../actions/follow_actions';
 import * as followerActionCreators from '../../actions/follower_actions';
 
-
 function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
