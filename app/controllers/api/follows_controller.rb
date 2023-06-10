@@ -15,6 +15,19 @@ class Api::FollowsController < ApplicationController
     end
   end
 
+  def show
+    follow_arr = Follow.where(
+      user_id: params[:follow][:user_id], 
+      following_id: params[:follow][:following_id]
+    )
+    if follow_arr.length > 0
+      @follow = follow_arr[0]
+      render :show
+    else
+      render json: ["Follow not found"], status: 404
+    end
+  end
+
   def create
     @follow = Follow.new({
       user_id: params[:follow][:user_id],
@@ -38,7 +51,7 @@ class Api::FollowsController < ApplicationController
   end
 
   def follow_params
-    params.require(:follow).permit(:user_id, :following_id)
+    params.require(:follow).permit(:user_id, :friend_id)
   end
 
 end

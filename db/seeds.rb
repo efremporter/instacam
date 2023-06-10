@@ -130,18 +130,10 @@ while i < users.length - 1
       user_id: users[i].id,
       following_id: users[j].id
     })
-    Follower.create({
-      user_id: users[j].id,
-      follower_id: users[i].id
-    })
     if i % 2 == 0
       Follow.create({
         user_id: users[j].id,
         following_id: users[i].id
-      })
-      Follower.create({
-        user_id: users[i].id,
-        follower_id: users[j].id
       })
     end
     j += 1;
@@ -150,7 +142,6 @@ while i < users.length - 1
 end
 
 Follow.create({user_id: 1, following_id: 2})
-Follower.create({user_id: 2, follower_id: 1})
 
 post_1 = Post.create({author_id: 1,
 caption: 'omg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dog',
