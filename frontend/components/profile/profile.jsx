@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 import * as userActionCreators from '../../actions/user_actions';
 import * as postActionCreators from '../../actions/post_actions';
 import * as followActionCreators from '../../actions/follow_actions';
-import * as followerActionCreators from '../../actions/follower_actions';
 
 function Profile() {
   const location = useLocation();
@@ -20,7 +19,6 @@ function Profile() {
   const { fetchUser } = bindActionCreators(userActionCreators, dispatch);
   const { removePostsManually } = bindActionCreators(postActionCreators, dispatch);
   const { fetchFollows, clearFollows } = bindActionCreators(followActionCreators, dispatch);
-  const { clearFollowers } = bindActionCreators(followerActionCreators, dispatch);
 
   useEffect(() => {
     if (!user) {
@@ -29,12 +27,10 @@ function Profile() {
   });
 
   useEffect(() => {
-    fetchFollows(currentUserId); // Want the initial follow/following button to 
-    // reflect correctly in profile_info onMount
+    fetchFollows(currentUserId); // Will need this for the followsModal
     return () => {
       removePostsManually();
       clearFollows();
-      clearFollowers();
     };
   }, [profileUserId]);
 
