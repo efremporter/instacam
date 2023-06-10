@@ -50,12 +50,6 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
     if (followUsers.length) fetchUsers(followUsers);
   }, [follows, followers]);
 
-  // useEffect(() => {
-  //   if (Object.values(follows).length <= Object.values(users).length) {
-  //     return null;
-  //   };
-  // }, [users])
-
   const capitalize = word => {
     return word.slice(0, 1).toUpperCase() +  word.slice(1).toLowerCase();
   };
@@ -103,6 +97,7 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
   };
 
   const getCorrectFollowButton = followId => {
+    if (followId === currentUserId) return null // Users can't follow themselves
     if (isMyProfile || follows[`${currentUserId}${followId}`]) {
       // If the follow modal is open and we're on the currentUser's profile,
       // we already know that the button should say 'following'
