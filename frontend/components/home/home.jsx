@@ -18,7 +18,7 @@ function Home() {
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
   const history = useHistory();
 
-  // history.push('/profile/3')
+  // history.push('/profile/2')
   // fetchPost(1)
   //   .then(() => {
   //     openModal({
