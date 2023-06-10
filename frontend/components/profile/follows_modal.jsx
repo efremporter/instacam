@@ -103,6 +103,7 @@ function FollowsModal({ followType, isMyProfile, profileUserId, closeModal }) {
   };
 
   const getCorrectFollowButton = followId => {
+    if (followId === currentUserId) return null;
     if (isMyProfile || follows[`${currentUserId}${followId}`]) {
       // If the follow modal is open and we're on the currentUser's profile,
       // we already know that the button should say 'following'
