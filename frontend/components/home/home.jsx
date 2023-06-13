@@ -19,15 +19,15 @@ function Home() {
   const history = useHistory();
 
   // history.push('/profile/2')
-  // fetchPost(1)
-  //   .then(() => {
-  //     openModal({
-  //       postId: 1,
-  //       type: 'postShow',
-  //       from: 'feed',
-  //       isProfile: false
-  //     });
-  //   });
+  fetchPost(1)
+    .then(() => {
+      openModal({
+        postId: 1,
+        type: 'postShow',
+        from: 'feed',
+        isProfile: false
+      });
+    });
 
   useEffect(() => {
     return () => removePostsManually();

@@ -535,12 +535,16 @@
   width: 100%;
   height: 80%;
   display: flex;
+  position: relative;
   justify-content: center;
   border-top: 1px solid #454545;
+  background-color: red;
+  overflow-y: auto;
 }
 
 .post-show-modal-comments {
   width: 95%;
+  height: 100px;
   background-color: #000000;
 }
 
@@ -597,10 +601,11 @@
   width: 95%;
   margin: auto;
   bottom: 0;
-  left: 0;
-  right: 0;
+  // left: 0;
+  // right: 0;
   color: white;
   border-top: 1px solid #454545;
+  background-color: yellow;
 }
 
 .post-show-modal-right-side-bottom-inner-container {

@@ -279,34 +279,34 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
               })}
             </ul>
           </div>
-        </div>
-        <div className='post-show-modal-right-side-bottom-outer-container'>
-          <div className='post-show-modal-right-side-bottom-inner-container'>
-              <div className='post-show-modal-right-side-bottom-icons-container'>
-                <div className='post-show-modal-post-like-icon-container'
-                  onClick={handleToggleLike}
-                >
-                {handleLikeIcon()}
+          <div className='post-show-modal-right-side-bottom-outer-container'>
+            <div className='post-show-modal-right-side-bottom-inner-container'>
+                <div className='post-show-modal-right-side-bottom-icons-container'>
+                  <div className='post-show-modal-post-like-icon-container'
+                    onClick={handleToggleLike}
+                  >
+                  {handleLikeIcon()}
+                  </div>
+                  <div id="post-comment-icon-container"
+                    className='post-show-modal-post-like-icon-container'>
+                    <IoChatbubbleOutline id="post-comment-icon" 
+                      className='post-show-modal-comments-like-icon'
+                      size={30} />
+                  </div>
                 </div>
-                <div id="post-comment-icon-container"
-                  className='post-show-modal-post-like-icon-container'>
-                  <IoChatbubbleOutline id="post-comment-icon" 
-                    className='post-show-modal-comments-like-icon'
-                    size={30} />
+                <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
+                <div className="add-a-comment-container">
+                  <textarea id="post-comment-textarea" className="add-a-comment-textarea"
+                    placeholder="Add a comment..."
+                    value={content}
+                    type="submit"
+                    onChange={e => updateCommentContent(e.target.value)}
+                  />
+                  <div id="post-comment-button" className="add-a-comment-post-button"
+                    onClick={postComment}
+                  >Post</div>
                 </div>
-              </div>
-              <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
-              <div className="add-a-comment-container">
-                <textarea id="post-comment-textarea" className="add-a-comment-textarea"
-                  placeholder="Add a comment..."
-                  value={content}
-                  type="submit"
-                  onChange={e => updateCommentContent(e.target.value)}
-                />
-                <div id="post-comment-button" className="add-a-comment-post-button"
-                  onClick={postComment}
-                >Post</div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
