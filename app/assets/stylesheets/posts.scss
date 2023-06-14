@@ -466,6 +466,7 @@
   width: 43.7%;
   min-width: 400px;
   display: flex;
+  align-items: center;
   flex-direction: column;
   border-bottom: 1px solid #454545;
 };
@@ -538,7 +539,6 @@
   position: relative;
   justify-content: center;
   border-top: 1px solid #454545;
-  background-color: red;
   overflow-y: auto;
 }
 
@@ -596,16 +596,10 @@
 
 .post-show-modal-right-side-bottom-outer-container {
   height: 160px;
-  position: absolute;
   z-index: 10;
   width: 95%;
-  margin: auto;
-  bottom: 0;
-  // left: 0;
-  // right: 0;
   color: white;
   border-top: 1px solid #454545;
-  background-color: yellow;
 }
 
 .post-show-modal-right-side-bottom-inner-container {
