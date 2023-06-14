@@ -251,7 +251,6 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                 </div>
                 <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
               </div>
-              {/* <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} /> */}
             </div>
             <ul className='post-show-comments'>
               {currentComments.map(comment => {

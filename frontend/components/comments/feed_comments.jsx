@@ -15,11 +15,13 @@ function FeedComments({ postId, isProfile, currentUserId }) {
   const { createComment } = bindActionCreators(commentActionCreators, dispatch);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
 
-useEffect(() => {
-  if (commentsCount < comments.length) {
-    setCommentsCount(comments.length);
-  };
-}, [comments.length]);
+  useEffect(() => {
+    let count = 0;
+    comments.forEach(comment => {
+      if (comment.postId === postId) count++;
+    });
+    setCommentsCount(count);
+  }, [comments.length]);
 
 useEffect(() => {
   if (isProfile) {
