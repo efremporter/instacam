@@ -105,7 +105,8 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const getImageArrowsIcon =  () => {
-    if (postPhotoUrls.length > 1 && isProfile) {
+    if (postPhotoUrls.length > 1) {
+      console.log(isProfile)
       return (
         <>
           <IoChevronBackCircle id="post-show-modal-previous-image-icon"
@@ -126,7 +127,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const getPostArrowsIcon = () => {
-    if (postsArray.length > 1) {
+    if (postsArray.length > 1 && isProfile) {
       return (
         <>
           <IoChevronBackCircle id="post-show-modal-previous-post-icon"
