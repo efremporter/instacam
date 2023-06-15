@@ -22,6 +22,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const post = postsObject[currentPostId];
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   const [content, setContent] = useState("");
   const [currentComments, setCurrentComments] = useState(comments);
   
@@ -36,10 +37,15 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   useEffect(() => {
     fetchLikes(null, currentPostId);
     fetchComments(currentPostId)
-    .then(comments => {
-      setCurrentComments(Object.values(comments.data));
-    });
   }, []);
+
+  useEffect(() => {
+    let currentLikeCount = 0;
+    Object.values(likes).forEach(like => {
+      if (like.postId === postId) currentLikeCount++;
+    })
+    setLikeCount(currentLikeCount)
+  }, [Object.values(likes).length])
 
   useEffect(() => {
     setCurrentComments(comments)
@@ -209,6 +215,8 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
       createComment(comment)
         .then(() => {
           setContent('');
+          let commentTextarea = document.getElementById('post-comment-textarea');
+          if (commentTextarea) commentTextarea.focus();
       });
     };
   };
@@ -227,6 +235,19 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const checkForContent = () => {
     if (!content.trim().length) return 'add-comment-content-empty';
     return null;
+  };
+
+  const getLikeCount = () => {
+    if (likeCount === 1) {
+      return `1 like`;
+    } else {
+      return `${likeCount} likes`;
+    };
+  };
+
+  const handleChatBubbleClick = () => {
+      let commentTextarea = document.getElementById('post-comment-textarea');
+      if (commentTextarea) commentTextarea.focus();
   };
 
   return (
@@ -307,13 +328,14 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                 {handleLikeIcon()}
                 </div>
                 <div id="post-comment-icon-container"
-                  className='post-show-modal-post-like-icon-container'>
+                  className='post-show-modal-post-like-icon-container'
+                  onClick={handleChatBubbleClick}>
                   <IoChatbubbleOutline id="post-comment-icon" 
                     className='post-show-modal-comments-like-icon'
                     size={30} />
                 </div>
               </div>
-              <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
+            <div className='post-show-modal-right-side-bottom-likes-container'>{getLikeCount()}</div>
               <div className="add-a-comment-container">
                 <textarea id="post-comment-textarea" className="add-a-comment-textarea"
                   placeholder="Add a comment..."

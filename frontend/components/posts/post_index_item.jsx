@@ -218,7 +218,8 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
             >
               {handleLikeIcon()}
             </div>
-            <div className='feed-post-index-item-icon-container'>
+            <div className='feed-post-index-item-icon-container'
+            onClick={handlePostClick} >
               <IoChatbubbleOutline size={30}
                 className='feed-post-index-item-icon' />
             </div>
