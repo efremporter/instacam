@@ -9,8 +9,10 @@ import * as userActionCreators from '../../actions/user_actions';
 import * as likeActionCreators from '../../actions/like_actions';
 import * as commentActionCreators from '../../actions/comment_actions';
 import getDateDifference from './post_functions';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
+  const history = useHistory();
   const postsObject = useSelector(state => state.entities.posts);
   const likes = useSelector(state => state.entities.likes);
   const comments = Object.values(useSelector(state => state.entities.comments));
@@ -105,7 +107,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const getImageArrowsIcon =  () => {
-    if (postPhotoUrls.length > 1 && isProfile) {
+    if (postPhotoUrls.length > 1) {
       return (
         <>
           <IoChevronBackCircle id="post-show-modal-previous-image-icon"
@@ -126,7 +128,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const getPostArrowsIcon = () => {
-    if (postsArray.length > 1) {
+    if (postsArray.length > 1 && isProfile) {
       return (
         <>
           <IoChevronBackCircle id="post-show-modal-previous-post-icon"
@@ -197,10 +199,15 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const postComment = () => {
+    if (!content.trim().length) return;
     if (content.length <= 2200) {
-      const comment = { post_id: postId, user_id: currentUserId, content }
+      const comment = { 
+        post_id: postId, 
+        user_id: currentUserId, 
+        content: content.trim() 
+      };
       createComment(comment)
-        .then(newComment => {
+        .then(() => {
           setContent('');
       });
     };
@@ -210,6 +217,16 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
     if (commentContent.length < 2200) {
       setContent(commentContent);
     };
+  };
+
+  const handleNavigateToProfile = () => {
+    closeModal();
+    history.push(`/profile/${post.authorId}`)
+  };
+
+  const checkForContent = () => {
+    if (!content.trim().length) return 'add-comment-content-empty';
+    return null;
   };
 
   return (
@@ -228,7 +245,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
             <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
             <div className='post-show-modal-handle-location-container'>
               <div className='post-show-modal-handle'
-                onClick={closeModal}
+                onClick={handleNavigateToProfile}
               >{postAuthor.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
             </div>
@@ -241,17 +258,17 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
         <div className='post-show-modal-comments-container'>
           <div className='post-show-modal-comments'>
             <div className='post-show-modal-comments-caption-container'>
-              <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
+              <img className='post-show-modal-right-side-avatar'
+                onClick={handleNavigateToProfile} src={postAuthor.profilePhotoUrl}/>
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
                   <span className='post-show-modal-handle'
-                    onClick={closeModal}
+                    onClick={handleNavigateToProfile}
                   >{postAuthor.handle}</span>
                   <span className='post-show-modal-caption'>{post.caption}</span>
                 </div>
                 <div className='post-show-modal-created-at'>{getDateDifference(post.createdAt)}</div>
               </div>
-              {/* <AiOutlineHeart className='post-show-modal-comments-like-icon' size={19} /> */}
             </div>
             <ul className='post-show-comments'>
               {currentComments.map(comment => {
@@ -259,11 +276,12 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                   <li key={comment.id}>
                     <div className='post-show-modal-comments-caption-container'>
                       <img className='post-show-modal-right-side-avatar'
-                        src={users[comment.userId].profilePhotoUrl} />
+                        src={users[comment.userId].profilePhotoUrl} 
+                        onClick={handleNavigateToProfile} />
                       <div className='post-show-modal-right-side-caption-date-container'>
                         <div className='post-show-modal-right-side-handle-caption-container'>
                           <span className='post-show-modal-handle'
-                            onClick={closeModal}
+                            onClick={handleNavigateToProfile}
                           >{users[comment.userId].handle}</span>
                           <span className='post-show-modal-caption'>{comment.content}</span>
                         </div>
@@ -303,7 +321,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                   type="submit"
                   onChange={e => updateCommentContent(e.target.value)}
                 />
-                <div id="post-comment-button" className="add-a-comment-post-button"
+                <div id={checkForContent()} className="add-a-comment-post-button"
                   onClick={postComment}
                 >Post</div>
               </div>

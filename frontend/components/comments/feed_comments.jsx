@@ -15,11 +15,13 @@ function FeedComments({ postId, isProfile, currentUserId }) {
   const { createComment } = bindActionCreators(commentActionCreators, dispatch);
   const { openModal } = bindActionCreators(modalActionCreators, dispatch);
 
-useEffect(() => {
-  if (commentsCount < comments.length) {
-    setCommentsCount(comments.length);
-  };
-}, [comments.length]);
+  useEffect(() => {
+    let count = 0;
+    comments.forEach(comment => {
+      if (comment.postId === postId) count++;
+    });
+    setCommentsCount(count);
+  }, [comments.length]);
 
 useEffect(() => {
   if (isProfile) {
@@ -46,6 +48,7 @@ useEffect(() => {
   };
 
   const postComment = () => {
+    if (!content.trim().length) return;
     if (content.length <= 2200) {
       const comment = { post_id: postId, user_id: currentUserId, content }
       createComment(comment)
@@ -65,6 +68,11 @@ useEffect(() => {
       from: "feed"
     };
     openModal(modal);
+  };
+
+  const checkForContent = () => {
+    if (!content.trim().length) return 'add-comment-content-empty';
+    return null;
   };
 
   return (
@@ -114,7 +122,7 @@ useEffect(() => {
           type="submit"
           onChange={e => updateCommentContent(e.target.value)}
         />
-        <div id="post-comment-button" className="add-a-comment-post-button"
+        <div id={checkForContent()} className="add-a-comment-post-button"
           onClick={postComment}
         >Post</div>
       </div>
