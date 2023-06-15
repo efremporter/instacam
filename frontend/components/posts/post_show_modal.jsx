@@ -215,6 +215,8 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
       createComment(comment)
         .then(() => {
           setContent('');
+          let commentTextarea = document.getElementById('post-comment-textarea');
+          if (commentTextarea) commentTextarea.focus();
       });
     };
   };
@@ -241,6 +243,11 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
     } else {
       return `${likeCount} likes`;
     };
+  };
+
+  const handleChatBubbleClick = () => {
+      let commentTextarea = document.getElementById('post-comment-textarea');
+      if (commentTextarea) commentTextarea.focus();
   };
 
   return (
@@ -324,6 +331,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                   className='post-show-modal-post-like-icon-container'>
                   <IoChatbubbleOutline id="post-comment-icon" 
                     className='post-show-modal-comments-like-icon'
+                    onClick={handleChatBubbleClick}
                     size={30} />
                 </div>
               </div>
