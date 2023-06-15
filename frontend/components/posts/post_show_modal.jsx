@@ -24,7 +24,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [content, setContent] = useState("");
-  const [currentComments, setCurrentComments] = useState(comments);
+  const [currentComments, setCurrentComments] = useState([]);
   
   const postPhotoUrls = post.imageUrls;
   const currentUserId = useSelector(state => state.session.id);
@@ -46,10 +46,6 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
     })
     setLikeCount(currentLikeCount)
   }, [Object.values(likes).length])
-
-  useEffect(() => {
-    setCurrentComments(comments)
-  }, [comments.length])
 
   useEffect(() => {
     currentComments.forEach(comment => {
