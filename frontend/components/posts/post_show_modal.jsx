@@ -328,10 +328,10 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                 {handleLikeIcon()}
                 </div>
                 <div id="post-comment-icon-container"
-                  className='post-show-modal-post-like-icon-container'>
+                  className='post-show-modal-post-like-icon-container'
+                  onClick={handleChatBubbleClick}>
                   <IoChatbubbleOutline id="post-comment-icon" 
                     className='post-show-modal-comments-like-icon'
-                    onClick={handleChatBubbleClick}
                     size={30} />
                 </div>
               </div>
