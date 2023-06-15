@@ -22,6 +22,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   const post = postsObject[currentPostId];
   const [postImageIndex, setPostImageIndex] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   const [content, setContent] = useState("");
   const [currentComments, setCurrentComments] = useState(comments);
   
@@ -36,10 +37,15 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   useEffect(() => {
     fetchLikes(null, currentPostId);
     fetchComments(currentPostId)
-    .then(comments => {
-      setCurrentComments(Object.values(comments.data));
-    });
   }, []);
+
+  useEffect(() => {
+    let currentLikeCount = 0;
+    Object.values(likes).forEach(like => {
+      if (like.postId === postId) currentLikeCount++;
+    })
+    setLikeCount(currentLikeCount)
+  }, [Object.values(likes).length])
 
   useEffect(() => {
     setCurrentComments(comments)
@@ -229,6 +235,14 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
     return null;
   };
 
+  const getLikeCount = () => {
+    if (likeCount === 1) {
+      return `1 like`;
+    } else {
+      return `${likeCount} likes`;
+    };
+  };
+
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}
@@ -313,7 +327,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                     size={30} />
                 </div>
               </div>
-              <div className='post-show-modal-right-side-bottom-likes-container'>Like count + avis</div>
+            <div className='post-show-modal-right-side-bottom-likes-container'>{getLikeCount()}</div>
               <div className="add-a-comment-container">
                 <textarea id="post-comment-textarea" className="add-a-comment-textarea"
                   placeholder="Add a comment..."
