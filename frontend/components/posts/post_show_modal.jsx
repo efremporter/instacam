@@ -199,10 +199,15 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const postComment = () => {
+    if (!content.trim().length) return;
     if (content.length <= 2200) {
-      const comment = { post_id: postId, user_id: currentUserId, content }
+      const comment = { 
+        post_id: postId, 
+        user_id: currentUserId, 
+        content: content.trim() 
+      };
       createComment(comment)
-        .then(newComment => {
+        .then(() => {
           setContent('');
       });
     };
@@ -215,9 +220,13 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
   };
 
   const handleNavigateToProfile = () => {
-    console.log(' EHERHER')
     closeModal();
     history.push(`/profile/${post.authorId}`)
+  };
+
+  const checkForContent = () => {
+    if (!content.trim().length) return 'add-comment-content-empty';
+    return null;
   };
 
   return (
@@ -312,7 +321,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                   type="submit"
                   onChange={e => updateCommentContent(e.target.value)}
                 />
-                <div id="post-comment-button" className="add-a-comment-post-button"
+                <div id={checkForContent()} className="add-a-comment-post-button"
                   onClick={postComment}
                 >Post</div>
               </div>

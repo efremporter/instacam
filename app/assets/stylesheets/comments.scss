@@ -46,7 +46,19 @@
   font-size: 16px;
   font-weight: 700;
   padding: 0 8px 0 8px;
+}
+
+.add-a-comment-post-button:hover {
   cursor: pointer;
+  color: #F5F5F5;
+}
+
+#add-comment-content-empty {
+  color: #5A6D80;
+}
+
+#add-comment-content-empty:hover {
+  cursor: default;
 }
 
 .post-show-comments {

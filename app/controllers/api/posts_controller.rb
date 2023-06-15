@@ -57,8 +57,8 @@ class Api::PostsController < ApplicationController
       if post.images.attached?
         post.images.purge
       end
-      # post.likes.each { |like| like.delete}
-      # post.comments.each { |comment| comment.delete}
+      post.likes.each { |like| like.delete}
+      post.comments.each { |comment| comment.delete}
       post.delete
       render json: ["Post deleted"], status: 200
     else
