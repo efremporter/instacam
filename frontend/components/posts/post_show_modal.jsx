@@ -9,8 +9,10 @@ import * as userActionCreators from '../../actions/user_actions';
 import * as likeActionCreators from '../../actions/like_actions';
 import * as commentActionCreators from '../../actions/comment_actions';
 import getDateDifference from './post_functions';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
+  const history = useHistory();
   const postsObject = useSelector(state => state.entities.posts);
   const likes = useSelector(state => state.entities.likes);
   const comments = Object.values(useSelector(state => state.entities.comments));
@@ -106,7 +108,6 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
 
   const getImageArrowsIcon =  () => {
     if (postPhotoUrls.length > 1) {
-      console.log(isProfile)
       return (
         <>
           <IoChevronBackCircle id="post-show-modal-previous-image-icon"
@@ -213,6 +214,12 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
     };
   };
 
+  const handleNavigateToProfile = () => {
+    console.log(' EHERHER')
+    closeModal();
+    history.push(`/profile/${post.authorId}`)
+  };
+
   return (
     <div id="post-show-modal-container" className='post-show-modal-container'>
       {getPostArrowsIcon()}
@@ -229,7 +236,7 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
             <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
             <div className='post-show-modal-handle-location-container'>
               <div className='post-show-modal-handle'
-                onClick={closeModal}
+                onClick={handleNavigateToProfile}
               >{postAuthor.handle}</div>
               <div className='post-show-modal-location'>{post.location}</div>
             </div>
@@ -242,11 +249,12 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
         <div className='post-show-modal-comments-container'>
           <div className='post-show-modal-comments'>
             <div className='post-show-modal-comments-caption-container'>
-              <img className='post-show-modal-right-side-avatar' src={postAuthor.profilePhotoUrl} />
+              <img className='post-show-modal-right-side-avatar'
+                onClick={handleNavigateToProfile} src={postAuthor.profilePhotoUrl}/>
               <div className='post-show-modal-right-side-caption-date-container'>
                 <div className='post-show-modal-right-side-handle-caption-container'>
                   <span className='post-show-modal-handle'
-                    onClick={closeModal}
+                    onClick={handleNavigateToProfile}
                   >{postAuthor.handle}</span>
                   <span className='post-show-modal-caption'>{post.caption}</span>
                 </div>
@@ -259,11 +267,12 @@ function PostShowModal({ postId, closeModal, openDoubleModal, isProfile }) {
                   <li key={comment.id}>
                     <div className='post-show-modal-comments-caption-container'>
                       <img className='post-show-modal-right-side-avatar'
-                        src={users[comment.userId].profilePhotoUrl} />
+                        src={users[comment.userId].profilePhotoUrl} 
+                        onClick={handleNavigateToProfile} />
                       <div className='post-show-modal-right-side-caption-date-container'>
                         <div className='post-show-modal-right-side-handle-caption-container'>
                           <span className='post-show-modal-handle'
-                            onClick={closeModal}
+                            onClick={handleNavigateToProfile}
                           >{users[comment.userId].handle}</span>
                           <span className='post-show-modal-caption'>{comment.content}</span>
                         </div>
