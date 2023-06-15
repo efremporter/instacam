@@ -56,9 +56,12 @@ function NavBar() {
 
   return (
     <div className="nav-bar-container">
-      <div id="nav-bar-logo-full" className="nav-bar-logo">Instacam</div>
-      <div className="nav-bar-logo">
-        <img className="nav-bar-logo-mini" src={window.navBarMiniLogo}/>
+      <div id="nav-bar-logo-full" className="nav-bar-logo"
+        onClick={() => handleReroute('/')}>
+        Instacam</div>
+      <div className="nav-bar-logo" onClick={() => handleReroute('/')}>
+        <img className="nav-bar-logo-mini" src={window.navBarMiniLogo}
+        />
       </div> 
       <ul className="nav-bar-ul">
         <li className={isSelected('/') ? "nav-bar-li-selected" : null}
