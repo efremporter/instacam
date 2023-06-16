@@ -38,8 +38,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-# Aa says add this gem for Heroku deployment, but it breaks my code
-gem 'jquery-rails'
+group :production do
+  # Aa says add this gem for Heroku deployment, but it breaks my code
+  # in dev, however it works on Heroku in prod. Heroku doesn't successfully
+  # deploy without this gem
+  gem 'jquery-rails'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -5,10 +5,8 @@ import { bindActionCreators } from "redux";
 import * as sessionActionCreators from '../../actions/session_actions';
 
 function SignInForm() {
-  // This line below gives me access to the redux store
-  const state = useSelector(state => state);
   const dispatch = useDispatch();
-  const { signUp, signIn } = bindActionCreators(sessionActionCreators, dispatch);
+  const { signIn } = bindActionCreators(sessionActionCreators, dispatch);
   const [handleOrEmail, setHandleOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
