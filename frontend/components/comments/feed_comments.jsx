@@ -6,7 +6,8 @@ import * as modalActionCreators from '../../actions/modal_actions';
 
 function FeedComments({ postId, isProfile, currentUserId }) {
   const dispatch = useDispatch();
-  const comments = useSelector(state => Object.values(state.entities.comments));
+  const commentObj = useSelector(state => state.entities.comments);
+  const comments = Object.values(commentObj);
   const [content, setContent] = useState("");
   const [myComments, setMyComments] = useState([]);
   const [allComments, setAllComments] = useState([]);
