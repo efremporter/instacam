@@ -12,8 +12,8 @@
     "postinstall": "webpack --mode=production"
   },
   "engines": {
-    "npm": "6.9.0",
-    "node": "12.5.0"
+    "npm": "9.4.0",
+    "node": "19.6.0"
   },
   "repository": {
     "type": "git",
