@@ -54,31 +54,26 @@ export const removePostsManually = () => dispatch => {
 export const fetchPosts = (authorId=null, currentUserId=null) => dispatch => {
   return PostAPIUtil.fetchPosts(authorId, currentUserId)
     .then(posts => dispatch(receivePosts(posts)))
-    .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
 };
 
 export const fetchPost = id => dispatch => {
   return PostAPIUtil.fetchPost(id)
     .then(post => dispatch(receivePost(post)))
-    .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
 };
 
 export const createPost = post => dispatch => {
   return PostAPIUtil.createPost(post)
     .then(post => dispatch(receivePost(post)))
-    .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
 };
 
 export const updatePost = post => dispatch => {
   return PostAPIUtil.updatePost(post)
     .then(post => dispatch(receivePost(post)))
-    .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
 };
 
 export const deletePost = id => dispatch => {
   return PostAPIUtil.deletePost(id)
     .then(() => dispatch(removePost(id)))
-    .catch(() => dispatch(receivePostErrors(errors.responseJSON)));
 };
 
 export const clearPosts = () => dispatch => {

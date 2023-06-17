@@ -156,7 +156,6 @@ function CreateAndUpdatePostModal({ postId, closeModal, closeDoubleModal }) {
       .then(() => {
         closeDoubleModal();
       })
-      .catch(() => console.log("Could not update post"));
     } else {
       let postFormData = new FormData();
       postFormData.append("post[author_id]", currentUserId);
@@ -169,7 +168,6 @@ function CreateAndUpdatePostModal({ postId, closeModal, closeDoubleModal }) {
       .then(() => {
         closeModal();
       })
-      .catch(() => console.log('Could not create post'));
     };
   };
 

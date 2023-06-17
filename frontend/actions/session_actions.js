@@ -34,13 +34,11 @@ const removeSessionErrors = () => {
 export const signUp = user => dispatch => {
   return SessionAPIUtil.createUser(user)
     .then(user => dispatch(receiveCurrentUser(user)))
-    .catch(errors => dispatch(receiveSessionErrors(errors.responseJson)));
 };
 
 export const signIn = user => dispatch => {
   return SessionAPIUtil.createSession(user)
     .then(user => dispatch(receiveCurrentUser(user)))
-    .catch(errors => dispatch(receiveSessionErrors(errors.responseJson)));
 };
 
 export const signOut = () => dispatch => {

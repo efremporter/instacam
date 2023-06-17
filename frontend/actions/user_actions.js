@@ -37,19 +37,16 @@ const removeUserErrors = () => {
 export const fetchUsers = (authorIds=null) => dispatch => {
   return UserAPIUtil.fetchUsers(authorIds)
     .then(users => dispatch(receiveUsers(users)))
-    .catch(() => dispatch(receiveUserErrors(errors.responseJSON)));
 };
 
 export const fetchUser = id => dispatch => {
   return UserAPIUtil.fetchUser(id)
     .then(user => dispatch(receiveUser(user)))
-    .catch(() => dispatch(receiveUserErrors(errors.responseJSON)));
 };
 
 export const updateUser = user => dispatch => {
   return UserAPIUtil.updateUser(user)
     .then(user => dispatch(receiveCurrentUser(user)))
-    .catch(errors => dispatch(receiveUserErrors(errors.responseJSON)));
 };
 
 export const deleteUser = id => dispatch => {

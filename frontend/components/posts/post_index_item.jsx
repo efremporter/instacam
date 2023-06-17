@@ -186,10 +186,10 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
               {post.location.length ? post.location : null}
             </div>
           </div>
-          <div className="feed-post-index-more-icon-container">
+          <div className="feed-post-index-more-icon-container"
+            onClick={handlePostIndexItemMore}>
             <BiDotsHorizontalRounded size={24}
               className='feed-post-index-item-more-icon'
-              onClick={handlePostIndexItemMore}
             />
           </div>
         </div>
