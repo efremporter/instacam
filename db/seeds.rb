@@ -11,7 +11,8 @@ Comment.destroy_all
 Follow.destroy_all
 Follower.destroy_all
 Post.destroy_all
-User.destroy_all
+User.all.each { |user| user.destroy}
+# User.destroy_all
 
 users = []
 
@@ -19,16 +20,16 @@ demo_user = User.create({
   email: "demo@user.com",
   name: "Demo User",
   handle: "demouser",
-  bio: "Hey I'm the demo user, welcome to my profile",
+  bio: "Hey I'm the demo user, please keep photos & captions PG",
   password: "password123!"
 })
 
 sample_user_1 = User.create({
   email: "sample1@user.com",
-  name: "Arnold Poole",
-  handle: "ap",
+  name: "Jordan Poole",
+  handle: "jp",
   bio: "Yoooooo go dubs",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_2 = User.create({
@@ -36,7 +37,7 @@ sample_user_2 = User.create({
   name: "Dwayne Johnson",
   handle: "dj",
   bio: "The rock is cookin",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_3 = User.create({
@@ -44,7 +45,7 @@ sample_user_3 = User.create({
   name: "Hello Panda",
   handle: "yumsnack",
   bio: "Mmmmmmm",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_4 = User.create({
@@ -52,15 +53,15 @@ sample_user_4 = User.create({
   name: "Steve Jobs",
   handle: "stevejobs",
   bio: "R.I.P",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_5 = User.create({
   email: "sample5@user.com",
-  name: "Wacka Flacka",
-  handle: "flackaflame",
+  name: "Waka Flocka",
+  handle: "flockaflame",
   bio: "YEAAAAAAAAHHHHHHH",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_6 = User.create({
@@ -68,7 +69,7 @@ sample_user_6 = User.create({
   name: "Grandmother",
   handle: "grammy",
   bio: "Coooookiieeees",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_7 = User.create({
@@ -76,7 +77,7 @@ sample_user_7 = User.create({
   name: "Jimmy Butler",
   handle: "himmybuckets",
   bio: "Will we win game 3?",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_8 = User.create({
@@ -84,7 +85,7 @@ sample_user_8 = User.create({
   name: "greatreggaeband",
   handle: "Groundation",
   bio: "I just found this band recently, great music",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_9 = User.create({
@@ -92,43 +93,27 @@ sample_user_9 = User.create({
   name: "Arnold Palmer",
   handle: "arnoldpalmer",
   bio: "I think this guy was a golfer? Great drink tho",
-  password: "easy123"
+  password: "easy123$%#"
 })
 
 sample_user_10 = User.create({
   email: "sample10@user.com",
-  name: "Water bottle",
-  handle: "crystalgeyser",
-  bio: "A bottle was sitting on my speaker :D",
-  password: "easy123"
+  name: "Jhene Aiko",
+  handle: "jhene",
+  bio: "I make good music",
+  password: "easy123$%#"
 })
 
+users.push(
+  demo_user,  sample_user_1, sample_user_2, sample_user_3, sample_user_4, 
+  sample_user_5, sample_user_6, sample_user_7, sample_user_8,
+  sample_user_9, sample_user_10
+)
+
 default_photo = "app/assets/images/blank_profile_photo.jpg"
-demo_user.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_1.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_2.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_3.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_4.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_5.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_6.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_7.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_8.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_9.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-sample_user_10.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
-
-
-users = [];
-users << sample_user_1
-users << sample_user_2
-users << sample_user_3
-users << sample_user_4
-users << sample_user_5
-users << sample_user_6
-users << sample_user_7
-users << sample_user_8
-users << sample_user_9
-users << sample_user_10
-
+users.each do |user|
+  user.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
+end
 
 i = 0;
 while i < users.length - 1
@@ -160,34 +145,84 @@ end
 Follow.create({user_id: 1, following_id: 2})
 Follower.create({user_id: 2, follower_id: 1})
 
-post_1 = Post.create({author_id: 1,
+1_post_1 = Post.create({author_id: 1,
 caption: 'omg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dogomg look at this hot dog',
 location: 'istanbul'})
-post_1.images.attach(io: File.open("app/assets/images/user_1/post_1_hot_dog.jpg"), filename: "square.webp")
-post_1.images.attach(io: File.open("app/assets/images/user_1/post_2_hey_friends.jpg"), filename: "square.webp")
+1_post_1.images.attach(io: File.open("app/assets/images/demo_user_photos/post_1_hot_dog.jpg"), filename: "square.webp")
+1_post_1.images.attach(io: File.open("app/assets/images/demo_user_photos/post_2_hey_friends.jpg"), filename: "square.webp")
 
-post_2 = Post.create({author_id: 1, caption: 'hey there my friends', location: 'somewhere over the rainbow'})
-post_2.images.attach(io: File.open("app/assets/images/user_1/post_2_hey_friends.jpg"), filename: "square.webp")
+imagePathName = 'app/assets/images'
+user_posts_1 = [
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_1.webp`,
+    caption: 'headshot',
+    location: 'studio'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_2.jpeg`,
+    caption: 'cheeeeeeese',
+    location: 'unis are drriiiip'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_3.webp`,
+    caption: 'I just broke him over there',
+    location: 'Ankles lost'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_4.webp`,
+    caption: 'Call me later',
+    location: 'Hotline bling'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_5.jpeg`,
+    caption: 'flexed on em',
+    location: 'poole party'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_6.webp`,
+    caption: 'Lightskin face',
+    location: 'Chase Center'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_7.webp`,
+    caption: 'JP for threeeeeee',
+    location: 'Giving out buckets 4 free'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_8.jpeg`,
+    caption: 'Lil warmup flick',
+    location: 'Gold blooded'
+  },
+  {
+    imagePath: `#{imagePathName}/user_1_photos/post_9.jpeg`,
+    caption: 'Yeah I can play the piano too',
+    location: 'LA arena logo'
+  }
+]
 
-post_3 = Post.create({author_id: 1, caption: 'check out this melon', location: 'Top Dog'})
-post_3.images.attach(io: File.open("app/assets/images/user_1/post_3_melon.png"), filename: "square.webp")
+{demo_user_img_path = 'app/assets/images/demo_user_photos'
+1_post_2 = Post.create({author_id: 1, caption: 'hey there my friends', location: 'somewhere over the rainbow'})
+1_post_2.images.attach(io: File.open(`#{demo_user_img_path/post_2.jpg}`), filename: "square.webp")
 
-post_4 = Post.create({author_id: 1, caption: 'grandma shoes for the day', location: 'Rome'})
-post_4.images.attach(io: File.open("app/assets/images/user_1/post_4_grandma_shoes.png"), filename: "square.webp")
+1_post_3 = Post.create({author_id: 1, caption: 'check out this melon', location: 'Top Dog'})
+1_post_3.images.attach(io: File.open(`#{demo_user_img_path/post_3.png}`), filename: "square.webp")
 
-post_5 = Post.create({author_id: 1, caption: 'i am looking for a pregnant animal', location: 'urgent'})
-post_5.images.attach(io: File.open("app/assets/images/user_1/post_5_pregnant_animal.jpg"), filename: "square.webp")
+1_post_4 = Post.create({author_id: 1, caption: 'grandma shoes for the day', location: 'Rome'})
+1_post_4.images.attach(io: File.open(`#{demo_user_img_path/post_4.png}`), filename: "square.webp")
 
-post_6 = Post.create({author_id: 1, caption: 'I bet you can not guess where this is', location: 'Unknown'})
-post_6.images.attach(io: File.open("app/assets/images/user_1/post_6_guess_where.jpg"), filename: "square.webp")
+1_post_5 = Post.create({author_id: 1, caption: 'i am looking for a pregnant animal', location: 'urgent'})
+1_post_5.images.attach(io: File.open(`#{demo_user_img_path/post_5.jpg}`), filename: "square.webp")
 
-post_7 = Post.create({author_id: 1, caption: 'lolipop by lil wayne', location: '2006?'})
-post_7.images.attach(io: File.open("app/assets/images/user_1/post_7_lil_wayne.jpg"), filename: "square.webp")
+1_post_6 = Post.create({author_id: 1, caption: 'I bet you can not guess where this is', location: 'Unknown'})
+1_post_6.images.attach(io: File.open(`#{demo_user_img_path/post_6.jpg}`), filename: "square.webp")
 
-post_8 = Post.create({author_id: 1, caption: 'My teacher used to play Party in the USA every morning', location: '4th grade'})
-post_8.images.attach(io: File.open("app/assets/images/user_1/post_8_miley_cyrus.jpg"), filename: "square.webp")
+1_post_7 = Post.create({author_id: 1, caption: 'lolipop by lil wayne', location: '2006?'})
+1_post_7.images.attach(io: File.open(`#{demo_user_img_path/post_7.jpg}`), filename: "square.webp")
 
-post_9 = Post.create({author_id: 1, caption: 'finally we have reached the 9th post', location: 'yay'})
-post_9.images.attach(io: File.open("app/assets/images/user_1/post_9_final_post.jpg"), filename: "square.webp")
+1_post_8 = Post.create({author_id: 1, caption: 'My teacher used to play Party in the USA every morning', location: '4th grade'})
+1_post_8.images.attach(io: File.open(`#{demo_user_img_path/post_8.jpg}`), filename: "square.webp")
 
-post_10 = Post.create({author_id: 2, caption: })
+1_post_9 = Post.create({author_id: 1, caption: 'finally we have reached the 9th post', location: 'yay'})
+1_post_9.images.attach(io: File.open(`#{demo_user_img_path/post_9.jpg}`), filename: "square.webp")
+
+2_post_1 = Post.create({author_id: 2, caption: 'headshot', location: 'studio'})
