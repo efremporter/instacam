@@ -69,9 +69,12 @@ class Api::UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     if user
-      # destroy posts associated with user
-      # destroy follows associated with user
-      # destroy likes associated with user
+      user.posts.each { |post| post.destroy}
+      user.likes.each { |like| like.destroy}
+      user.comments.each { |comment| comment.destroy}
+      user.follows.each { |follow| follow.destroy}
+      user.followers.each { |follower| follower.destroy}
+      user.profile_photo.purge
       sign_out!(user)
       user.delete
       render json: ["User deleted"], status: 200
