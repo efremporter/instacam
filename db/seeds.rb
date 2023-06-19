@@ -147,36 +147,36 @@ Follower.create({user_id: 2, follower_id: 1})
 
 img_path = 'app/assets/images/demo_user_photos'
 demo_post_1 = Post.create({author_id: 1, caption: 'omg look at this hot dog', location: 'istanbul'})
-demo_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpg`), filename: "square.webp")
-demo_post_1.images.attach(io: File.open(`#{img_path}/post_2.jpg`), filename: "square.webp")
+demo_post_1.images.attach(io: File.open(`app/assets/images/demo_user_photos/post_1.jpg`), filename: "square.webp")
+# demo_post_1.images.attach(io: File.open(`#{img_path}/post_2.jpg`), filename: "square.webp")
 
-demo_post_2 = Post.create({author_id: 1, caption: 'hey there my friends', location: 'somewhere over the rainbow'})
-demo_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpg`), filename: "square.webp")
+# demo_post_2 = Post.create({author_id: 1, caption: 'hey there my friends', location: 'somewhere over the rainbow'})
+# demo_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpg`), filename: "square.webp")
 
-demo_post_3 = Post.create({author_id: 1, caption: 'check out this melon', location: 'Top Dog'})
-demo_post_3.images.attach(io: File.open(`#{img_path}/post_3.png`), filename: "square.webp")
+# demo_post_3 = Post.create({author_id: 1, caption: 'check out this melon', location: 'Top Dog'})
+# demo_post_3.images.attach(io: File.open(`#{img_path}/post_3.png`), filename: "square.webp")
 
-demo_post_4 = Post.create({author_id: 1, caption: 'grandma shoes for the day', location: 'Rome'})
-demo_post_4.images.attach(io: File.open(`#{img_path}/post_4.png`), filename: "square.webp")
+# demo_post_4 = Post.create({author_id: 1, caption: 'grandma shoes for the day', location: 'Rome'})
+# demo_post_4.images.attach(io: File.open(`#{img_path}/post_4.png`), filename: "square.webp")
 
-demo_post_5 = Post.create({author_id: 1, caption: 'i am looking for a pregnant animal', location: 'urgent'})
-demo_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpg`), filename: "square.webp")
+# demo_post_5 = Post.create({author_id: 1, caption: 'i am looking for a pregnant animal', location: 'urgent'})
+# demo_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpg`), filename: "square.webp")
 
-demo_post_6 = Post.create({author_id: 1, caption: 'I bet you can not guess where this is', location: 'Unknown'})
-demo_post_6.images.attach(io: File.open(`#{img_path}/post_6.jpg`), filename: "square.webp")
+# demo_post_6 = Post.create({author_id: 1, caption: 'I bet you can not guess where this is', location: 'Unknown'})
+# demo_post_6.images.attach(io: File.open(`#{img_path}/post_6.jpg`), filename: "square.webp")
 
-demo_post_7 = Post.create({author_id: 1, caption: 'lolipop by lil wayne', location: '2006?'})
-demo_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpg`), filename: "square.webp")
+# demo_post_7 = Post.create({author_id: 1, caption: 'lolipop by lil wayne', location: '2006?'})
+# demo_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpg`), filename: "square.webp")
 
-demo_post_8 = Post.create({author_id: 1, caption: 'My teacher used to play Party in the USA every morning', location: '4th grade'})
-demo_post_8.images.attach(io: File.open(`#{img_path}/post_8.jpg`), filename: "square.webp")
+# demo_post_8 = Post.create({author_id: 1, caption: 'My teacher used to play Party in the USA every morning', location: '4th grade'})
+# demo_post_8.images.attach(io: File.open(`#{img_path}/post_8.jpg`), filename: "square.webp")
 
-demo_post_9 = Post.create({author_id: 1, caption: 'finally we have reached the 9th post', location: 'yay'})
-demo_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpg`), filename: "square.webp")
+# demo_post_9 = Post.create({author_id: 1, caption: 'finally we have reached the 9th post', location: 'yay'})
+# demo_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpg`), filename: "square.webp")
 
-img_path = 'app/assets/images/user_1_photos'
-one_post_1 = Post.create({author_id: 2, caption: 'headshot', location: 'studio'})
-one_post_1.images.attach(io: File.open(`#{img_path}/post_1.webp`), filename: "square.webp")
+# img_path = 'app/assets/images/user_1_photos'
+# one_post_1 = Post.create({author_id: 2, caption: 'headshot', location: 'studio'})
+# one_post_1.images.attach(io: File.open(`#{img_path}/post_1.webp`), filename: "square.webp")
 
 # 1_post_2 = Post.create({author_id: 2, caption: 'cheeeeeeese', location: 'unis are drriiiip'})
 # 1_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
