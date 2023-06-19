@@ -103,7 +103,7 @@ sample_user_10 = User.create({
   password: "easy123"
 })
 
-default_photo = "app/assets/images/blank_profile_photo.jpg"
+default_photo = "app/assets/images/user_1/blank_profile_photo.jpg"
 demo_user.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
 sample_user_1.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
 sample_user_2.profile_photo.attach(io: File.open(default_photo), filename: "square.webp")
@@ -190,4 +190,4 @@ post_8.images.attach(io: File.open("app/assets/images/user_1/post_8_miley_cyrus.
 post_9 = Post.create({author_id: 1, caption: 'finally we have reached the 9th post', location: 'yay'})
 post_9.images.attach(io: File.open("app/assets/images/user_1/post_9_final_post.jpg"), filename: "square.webp")
 
-post_10 = Post.create({author_id: 2, caption: })
+# post_10 = Post.create({author_id: 2, caption: })
