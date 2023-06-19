@@ -147,8 +147,8 @@ Follower.create({user_id: 2, follower_id: 1})
 
 img_path = 'app/assets/images/demo_user_photos'
 demo_post_1 = Post.create({author_id: 1, caption: 'omg look at this hot dog', location: 'istanbul'})
-demo_post_1.images.attach(io: File.open(`#{img_path}/post_1_hot_dog.jpg`), filename: "square.webp")
-demo_post_1.images.attach(io: File.open(`#{img_path}/post_2_hey_friends.jpg`), filename: "square.webp")
+demo_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpg`), filename: "square.webp")
+demo_post_1.images.attach(io: File.open(`#{img_path}/post_2.jpg`), filename: "square.webp")
 
 demo_post_2 = Post.create({author_id: 1, caption: 'hey there my friends', location: 'somewhere over the rainbow'})
 demo_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpg`), filename: "square.webp")
@@ -160,7 +160,7 @@ demo_post_4 = Post.create({author_id: 1, caption: 'grandma shoes for the day', l
 demo_post_4.images.attach(io: File.open(`#{img_path}/post_4.png`), filename: "square.webp")
 
 demo_post_5 = Post.create({author_id: 1, caption: 'i am looking for a pregnant animal', location: 'urgent'})
-demo_post_5.images.attach(io: File.open(`#{img_path/}post_5.jpg`), filename: "square.webp")
+demo_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpg`), filename: "square.webp")
 
 demo_post_6 = Post.create({author_id: 1, caption: 'I bet you can not guess where this is', location: 'Unknown'})
 demo_post_6.images.attach(io: File.open(`#{img_path}/post_6.jpg`), filename: "square.webp")
@@ -175,115 +175,144 @@ demo_post_9 = Post.create({author_id: 1, caption: 'finally we have reached the 9
 demo_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpg`), filename: "square.webp")
 
 img_path = 'app/assets/images/user_1_photos'
-1_post_1 = Post.create({author_id: 2, caption: 'headshot', location: 'studio'})
-1_post_1.images.attach(io: File.open(`#{img_path}/post_1.webp`), filename: "square.webp")
+one_post_1 = Post.create({author_id: 2, caption: 'headshot', location: 'studio'})
+one_post_1.images.attach(io: File.open(`#{img_path}/post_1.webp`), filename: "square.webp")
 
-1_post_2 = Post.create({author_id: 2, caption: 'cheeeeeeese', location: 'unis are drriiiip'})
-1_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
+# 1_post_2 = Post.create({author_id: 2, caption: 'cheeeeeeese', location: 'unis are drriiiip'})
+# 1_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
 
-1_post_3 = Post.create({author_id: 2, caption: 'I just broke him over there', location: 'Ankles lost'})
-1_post_3.images.attach(io: File.open(`#{img_path}/post_3.webp`), filename: "square.webp")
+# 1_post_3 = Post.create({author_id: 2, caption: 'I just broke him over there', location: 'Ankles lost'})
+# 1_post_3.images.attach(io: File.open(`#{img_path}/post_3.webp`), filename: "square.webp")
 
-1_post_4 = Post.create({author_id: 2, caption: 'Call me later', location: 'Hotline bling'})
-1_post_4.images.attach(io: File.open(`#{img_path}/post_4.webp`), filename: "square.webp")
+# 1_post_4 = Post.create({author_id: 2, caption: 'Call me later', location: 'Hotline bling'})
+# 1_post_4.images.attach(io: File.open(`#{img_path}/post_4.webp`), filename: "square.webp")
 
-1_post_5 = Post.create({author_id: 2, caption: 'flexed on em', location: 'poole party'})
-1_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpeg`), filename: "square.webp")
+# 1_post_5 = Post.create({author_id: 2, caption: 'flexed on em', location: 'poole party'})
+# 1_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpeg`), filename: "square.webp")
 
-1_post_6 = Post.create({author_id: 2, caption: 'Lightskin face', location: 'Chase Center'})
-1_post_6.images.attach(io: File.open(`#{img_path}/post_6.webp`), filename: "square.webp")
+# 1_post_6 = Post.create({author_id: 2, caption: 'Lightskin face', location: 'Chase Center'})
+# 1_post_6.images.attach(io: File.open(`#{img_path}/post_6.webp`), filename: "square.webp")
 
-1_post_7 = Post.create({author_id: 2, caption: 'JP for threeeeeee', location: 'Giving out buckets 4 free'})
-1_post_7.images.attach(io: File.open(`#{img_path}/post_7.webp`), filename: "square.webp")
+# 1_post_7 = Post.create({author_id: 2, caption: 'JP for threeeeeee', location: 'Giving out buckets 4 free'})
+# 1_post_7.images.attach(io: File.open(`#{img_path}/post_7.webp`), filename: "square.webp")
 
-1_post_8 = Post.create({author_id: 2, caption: 'Lil warmup flick', location: 'Gold blooded'})
-1_post_8.images.attach(io: File.open(`#{img_path}/post_8.jpeg`), filename: "square.webp")
+# 1_post_8 = Post.create({author_id: 2, caption: 'Lil warmup flick', location: 'Gold blooded'})
+# 1_post_8.images.attach(io: File.open(`#{img_path}/post_8.jpeg`), filename: "square.webp")
 
-1_post_9 = Post.create({author_id: 2, caption: 'Yeah I can play the piano too', location: 'LA arena logo'})
-1_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpeg`), filename: "square.webp")
+# 1_post_9 = Post.create({author_id: 2, caption: 'Yeah I can play the piano too', location: 'LA arena logo'})
+# 1_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpeg`), filename: "square.webp")
 
-img_path = 'app/assets/images/user_2_photos'
-2_post_1 = Post.create({author_id: 3, caption: 'Back when I won the title', location: 'WWE champ'})
-2_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpeg`), filename: "square.webp")
+# img_path = 'app/assets/images/user_2_photos'
+# 2_post_1 = Post.create({author_id: 3, caption: 'Back when I won the title', location: 'WWE champ'})
+# 2_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpeg`), filename: "square.webp")
 
-2_post_2 = Post.create({author_id: 3, caption: 'An invisible headlock', location: 'Wrestlemania'})
-2_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
+# 2_post_2 = Post.create({author_id: 3, caption: 'An invisible headlock', location: 'Wrestlemania'})
+# 2_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
 
-2_post_3 = Post.create({author_id: 3, caption: 'Shoulder tat is popping', location: 'Idk'})
-2_post_3.images.attach(io: File.open(`#{img_path}/post_3.jpeg`), filename: "square.webp")
+# 2_post_3 = Post.create({author_id: 3, caption: 'Shoulder tat is popping', location: 'Idk'})
+# 2_post_3.images.attach(io: File.open(`#{img_path}/post_3.jpeg`), filename: "square.webp")
 
-2_post_4 = Post.create({author_id: 3, caption: 'On the hunt', location: 'Ole college days'})
-2_post_4.images.attach(io: File.open(`#{img_path}/post_4.jpeg`), filename: "square.webp")
+# 2_post_4 = Post.create({author_id: 3, caption: 'On the hunt', location: 'Ole college days'})
+# 2_post_4.images.attach(io: File.open(`#{img_path}/post_4.jpeg`), filename: "square.webp")
 
-2_post_5 = Post.create({author_id: 3, caption: 'We boutta win', location: 'Miamiiiii'})
-2_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpeg`), filename: "square.webp")
+# 2_post_5 = Post.create({author_id: 3, caption: 'We boutta win', location: 'Miamiiiii'})
+# 2_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpeg`), filename: "square.webp")
 
-2_post_6 = Post.create({author_id: 3, caption: 'OUCH', location: 'Turf'})
-2_post_6.images.attach(io: File.open(`#{img_path}/post_6.webp`), filename: "square.webp")
+# 2_post_6 = Post.create({author_id: 3, caption: 'OUCH', location: 'Turf'})
+# 2_post_6.images.attach(io: File.open(`#{img_path}/post_6.webp`), filename: "square.webp")
 
-2_post_7 = Post.create({author_id: 3, caption: 'Pink suit poppin', location: "Grammy's?"})
-2_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpeg`), filename: "square.webp")
+# 2_post_7 = Post.create({author_id: 3, caption: 'Pink suit poppin', location: "Grammy's?"})
+# 2_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpeg`), filename: "square.webp")
 
-2_post_8 = Post.create({author_id: 3, caption: 'My model phase', location: "Probably h&m"})
-2_post_8.images.attach(io: File.open(`#{img_path}/post_8.webp`), filename: "square.webp")
+# 2_post_8 = Post.create({author_id: 3, caption: 'My model phase', location: "Probably h&m"})
+# 2_post_8.images.attach(io: File.open(`#{img_path}/post_8.webp`), filename: "square.webp")
 
-2_post_9 = Post.create({author_id: 3, caption: 'Headshot', location: "Disney Awards"})
-2_post_9.images.attach(io: File.open(`#{img_path}/post_9.webp`), filename: "square.webp")
+# 2_post_9 = Post.create({author_id: 3, caption: 'Headshot', location: "Disney Awards"})
+# 2_post_9.images.attach(io: File.open(`#{img_path}/post_9.webp`), filename: "square.webp")
 
-img_path = 'app/assets/images/user_3_photos'
-3_post_1 = Post.create({author_id: 4, caption: 'HelloPandaRed'})
-3_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpeg`), filename: "square.webp")
+# img_path = 'app/assets/images/user_3_photos'
+# 3_post_1 = Post.create({author_id: 4, caption: 'HelloPandaRed'})
+# 3_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpeg`), filename: "square.webp")
 
-3_post_2 = Post.create({author_id: 4, caption: 'HelloPandaMinis'})
-3_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
+# 3_post_2 = Post.create({author_id: 4, caption: 'HelloPandaMinis'})
+# 3_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
 
-3_post_3 = Post.create({author_id: 4, caption: 'HelloPandaChocolate'})
-3_post_3.images.attach(io: File.open(`#{img_path}/post_3.webp`), filename: "square.webp")
+# 3_post_3 = Post.create({author_id: 4, caption: 'HelloPandaChocolate'})
+# 3_post_3.images.attach(io: File.open(`#{img_path}/post_3.webp`), filename: "square.webp")
 
-3_post_4 = Post.create({author_id: 4, caption: 'HelloPandaVanilla'})
-3_post_4.images.attach(io: File.open(`#{img_path}/post_4.jpeg`), filename: "square.webp")
+# 3_post_4 = Post.create({author_id: 4, caption: 'HelloPandaVanilla'})
+# 3_post_4.images.attach(io: File.open(`#{img_path}/post_4.jpeg`), filename: "square.webp")
 
-3_post_5 = Post.create({author_id: 4, caption: 'HelloPandaChocolateBigBag'})
-3_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpeg`), filename: "square.webp")
+# 3_post_5 = Post.create({author_id: 4, caption: 'HelloPandaChocolateBigBag'})
+# 3_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpeg`), filename: "square.webp")
 
-3_post_6 = Post.create({author_id: 4, caption: 'HelloPandaMatcha'})
-3_post_6.images.attach(io: File.open(`#{img_path}/post_6.jpeg`), filename: "square.webp")
+# 3_post_6 = Post.create({author_id: 4, caption: 'HelloPandaMatcha'})
+# 3_post_6.images.attach(io: File.open(`#{img_path}/post_6.jpeg`), filename: "square.webp")
 
-3_post_7 = Post.create({author_id: 4, caption: 'HelloPandaMoreVanilla'})
-3_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpeg`), filename: "square.webp")
+# 3_post_7 = Post.create({author_id: 4, caption: 'HelloPandaMoreVanilla'})
+# 3_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpeg`), filename: "square.webp")
 
-3_post_8 = Post.create({author_id: 4, caption: 'HelloPandaCaramel'})
-3_post_8.images.attach(io: File.open(`#{img_path}/post_8.jpeg`), filename: "square.webp")
+# 3_post_8 = Post.create({author_id: 4, caption: 'HelloPandaCaramel'})
+# 3_post_8.images.attach(io: File.open(`#{img_path}/post_8.jpeg`), filename: "square.webp")
 
-3_post_9 = Post.create({author_id: 4, caption: 'HelloPandaChocoMinis'})
-3_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpeg`), filename: "square.webp")
+# 3_post_9 = Post.create({author_id: 4, caption: 'HelloPandaChocoMinis'})
+# 3_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpeg`), filename: "square.webp")
 
-img_path = 'app/assets/images/user_4_photos'
-4_post_1 = Post.create({author_id: 4, caption: 'iPhone unboxing', location: 'Apple HQ'})
-4_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpeg`), filename: "square.webp")
+# img_path = 'app/assets/images/user_4_photos'
+# 4_post_1 = Post.create({author_id: 4, caption: 'iPhone unboxing', location: 'Apple HQ'})
+# 4_post_1.images.attach(io: File.open(`#{img_path}/post_1.jpeg`), filename: "square.webp")
 
-4_post_2 = Post.create({author_id: 4, caption: 'Baby iPhone reveal', location: 'Apple HQ'})
-4_post_2.images.attach(io: File.open(`#{img_path}/post_2.webp`), filename: "square.webp")
+# 4_post_2 = Post.create({author_id: 4, caption: 'Baby iPhone reveal', location: 'Apple HQ'})
+# 4_post_2.images.attach(io: File.open(`#{img_path}/post_2.webp`), filename: "square.webp")
 
-4_post_3 = Post.create({author_id: 4, caption: 'This one looks powerful', location: 'Apple HQ'})
-4_post_3.images.attach(io: File.open(`#{img_path}/post_3.jpeg`), filename: "square.webp")
+# 4_post_3 = Post.create({author_id: 4, caption: 'This one looks powerful', location: 'Apple HQ'})
+# 4_post_3.images.attach(io: File.open(`#{img_path}/post_3.jpeg`), filename: "square.webp")
 
-4_post_4 = Post.create({author_id: 4, caption: 'Business casual', location: 'Apple HQ'})
-4_post_4.images.attach(io: File.open(`#{img_path}/post_4.jpeg`), filename: "square.webp")
+# 4_post_4 = Post.create({author_id: 4, caption: 'Business casual', location: 'Apple HQ'})
+# 4_post_4.images.attach(io: File.open(`#{img_path}/post_4.jpeg`), filename: "square.webp")
 
-4_post_5 = Post.create({author_id: 4, caption: 'I like this one', location: 'Apple HQ'})
-4_post_5.images.attach(io: File.open(`#{img_path}/post_5.webp`), filename: "square.webp")
+# 4_post_5 = Post.create({author_id: 4, caption: 'I like this one', location: 'Apple HQ'})
+# 4_post_5.images.attach(io: File.open(`#{img_path}/post_5.webp`), filename: "square.webp")
 
-4_post_6 = Post.create({author_id: 4, caption: 'iTouch', location: 'Apple HQ'})
-4_post_6.images.attach(io: File.open(`#{img_path}/post_6.webp`), filename: "square.webp")
+# 4_post_6 = Post.create({author_id: 4, caption: 'iTouch', location: 'Apple HQ'})
+# 4_post_6.images.attach(io: File.open(`#{img_path}/post_6.webp`), filename: "square.webp")
 
-4_post_7 = Post.create({author_id: 4, caption: 'iPod!', location: 'Apple HQ'})
-4_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpeg`), filename: "square.webp")
+# 4_post_7 = Post.create({author_id: 4, caption: 'iPod!', location: 'Apple HQ'})
+# 4_post_7.images.attach(io: File.open(`#{img_path}/post_7.jpeg`), filename: "square.webp")
 
-4_post_8 = Post.create({author_id: 4, caption: 'iPad', location: 'Apple HQ'})
-4_post_8.images.attach(io: File.open(`#{img_path}/post_8.webp`), filename: "square.webp")
+# 4_post_8 = Post.create({author_id: 4, caption: 'iPad', location: 'Apple HQ'})
+# 4_post_8.images.attach(io: File.open(`#{img_path}/post_8.webp`), filename: "square.webp")
 
-4_post_9 = Post.create({author_id: 4, caption: 'Young Steve', location: 'Apple HQ'})
-4_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpeg`), filename: "square.webp")
+# 4_post_9 = Post.create({author_id: 4, caption: 'Young Steve', location: 'Apple HQ'})
+# 4_post_9.images.attach(io: File.open(`#{img_path}/post_9.jpeg`), filename: "square.webp")
+
+# 5_post_1 = Post.create({author_id: 5, caption: 'Professional Flok', location: "Grammy's"})
+# 5_post_1.images.attach(io: File.open(`#{img_path}/post_1.webp`), filename: "square.webp")
+
+# 5_post_2 = Post.create({author_id: 5, caption: 'Artsy Flok', location: "Over the rainbow"})
+# 5_post_2.images.attach(io: File.open(`#{img_path}/post_2.jpeg`), filename: "square.webp")
+
+
+# 5_post_3 = Post.create({author_id: 5, caption: 'Me killing a performance', location: "Showtime"})
+# 5_post_3.images.attach(io: File.open(`#{img_path}/post_3.webp`), filename: "square.webp")
+
+# 5_post_4 = Post.create({author_id: 5, caption: 'Young Flok', location: "Green screen"})
+# 5_post_4.images.attach(io: File.open(`#{img_path}/post_4.webp`), filename: "square.webp")
+
+
+# 5_post_5 = Post.create({author_id: 5, caption: 'Hang loose Flok', location: "Gray screen"})
+# 5_post_5.images.attach(io: File.open(`#{img_path}/post_5.jpeg`), filename: "square.webp")
+
+# 5_post_6 = Post.create({author_id: 5, caption: 'Football Flok', location: "Kentucky U"})
+# 5_post_6.images.attach(io: File.open(`#{img_path}/post_6.jpeg`), filename: "square.webp")
+
+# 5_post_7 = Post.create({author_id: 5, caption: 'Model Flok', location: "BET awards"})
+# 5_post_7.images.attach(io: File.open(`#{img_path}/post_7.webp`), filename: "square.webp")
+
+# 5_post_8 = Post.create({author_id: 5, caption: 'Smiling Flok', location: "Interview of some sort"})
+# 5_post_8.images.attach(io: File.open(`#{img_path}/post_8.jpeg`), filename: "square.webp")
+
+# 5_post_1 = Post.create({author_id: 5, caption: 'Deep Squat Flok', location: "Posted"})
+# 5_post_1.images.attach(io: File.open(`#{img_path}/post_9.jpeg`), filename: "square.webp")
 
 
