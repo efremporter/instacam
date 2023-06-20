@@ -314,8 +314,8 @@ six_post_1.images.attach(io: File.open('app/assets/images/user_6_photos/post_1.p
 six_post_2 = Post.create({author_id: 7, caption: 'Happy Grandma', location: "White room"})
 six_post_2.images.attach(io: File.open('app/assets/images/user_6_photos/post_2.png'), filename: "square.webp")
 
-six_post_3 = Post.create({author_id: 7, caption: 'Duplicate, replace'})
-six_post_3.images.attach(io: File.open('app/assets/images/user_6_photos/post_3.png'), filename: "square.webp")
+six_post_3 = Post.create({author_id: 7, caption: 'Super Grandma', location: "Marvel"})
+six_post_3.images.attach(io: File.open('app/assets/images/user_6_photos/post_3.jpeg'), filename: "square.webp")
 
 six_post_4 = Post.create({author_id: 7, caption: 'Back when I used to turn up', location: "Night club"})
 six_post_4.images.attach(io: File.open('app/assets/images/user_6_photos/post_4.png'), filename: "square.webp")
@@ -386,7 +386,7 @@ eight_post_7.images.attach(io: File.open('app/assets/images/user_8_photos/post_7
 eight_post_8 = Post.create({author_id: 9, caption: 'Performing', location: "Green screen"})
 eight_post_8.images.attach(io: File.open('app/assets/images/user_8_photos/post_8.jpeg'), filename: "square.webp")
 
-eight_post_9 = Post.create({author_id: 9, caption: 'Performing again', location: "Purple screen}"})
+eight_post_9 = Post.create({author_id: 9, caption: 'Performing again', location: "Purple screen"})
 eight_post_9.images.attach(io: File.open('app/assets/images/user_8_photos/post_9.jpeg'), filename: "square.webp")
 
 nine_post_1 = Post.create({author_id: 10, caption: 'Arnold n golf', location: "Advertisement"})
