@@ -183,7 +183,7 @@ function PostIndexItem({ post, currentUserId, isProfile, postAuthor }) {
               </div>
             </div>
             <div className="feed-post-index-location">
-              {post.location.length ? post.location : null}
+              {post.location?.length ? post.location : null}
             </div>
           </div>
           <div className="feed-post-index-more-icon-container"
