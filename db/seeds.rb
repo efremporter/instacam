@@ -104,6 +104,7 @@ sample_user_10 = User.create({
   password: "easy123$%#"
 })
 
+
 users.push(
   demo_user,  sample_user_1, sample_user_2, sample_user_3, sample_user_4, 
   sample_user_5, sample_user_6, sample_user_7, sample_user_8,
@@ -442,5 +443,3 @@ ten_post_8.images.attach(io: File.open('app/assets/images/user_10_photos/post_8.
 
 ten_post_9 = Post.create({author_id: 11, caption: "Me performing", location: "Purple screen"})
 ten_post_9.images.attach(io: File.open('app/assets/images/user_10_photos/post_9.jpeg'), filename: "square.webp")
-
-
