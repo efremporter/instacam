@@ -17,7 +17,8 @@ function EditProfileModal({ profileUser, openDoubleModal, closeModal }) {
   return (
     <div className="edit-profile-modal-outer-container">
       <div className="edit-profile-modal-inner-container">
-        <div className="edit-profile-modal-header">Edit Profile</div>
+        <div>{"Coming soon :)"}</div>
+        {/* <div className="edit-profile-modal-header">Edit Profile</div>
         <div className="edit-profile-modal-change-avatar-container">
           <div className="edit-profile-modal-change-avatar-left">
             <img src={profileUser.profilePhotoUrl} 
@@ -54,7 +55,7 @@ function EditProfileModal({ profileUser, openDoubleModal, closeModal }) {
             value={bio}
             onChange={e => setBio(e.target.value)}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
