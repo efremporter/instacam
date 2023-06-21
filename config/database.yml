@@ -76,10 +76,10 @@ test:
 # You can use this database configuration with:
 #
 #   production:
+#     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
   database: instacam_production
   username: instacam
   password: <%= ENV['INSTACAM_DATABASE_PASSWORD'] %>
